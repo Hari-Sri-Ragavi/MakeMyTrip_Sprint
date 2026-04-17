@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import pages.FlightSearchPage;
 import pages.FlightTrackerPage;
 import pages.HomePage;
+import pages.TrainPNRPage;
 import pages.TrainSearchPage;
 
 public class Pages {
@@ -16,6 +17,9 @@ public class Pages {
 	        // Initialize with null, will be set in loadAllPages
 	        ftp = null;
 	    }
+	public static TrainPNRPage tpnr;
+	
+	
 	
 	public static void loadAllPages(WebDriver driver)
 	{
@@ -23,6 +27,7 @@ public class Pages {
 		tp=new TrainSearchPage(driver);
 		fp = new FlightSearchPage(driver);  // Added
 		 ftp = new FlightTrackerPage(driver);  // Initialize this
+		tpnr=new TrainPNRPage(driver);
 	}
 
 }
