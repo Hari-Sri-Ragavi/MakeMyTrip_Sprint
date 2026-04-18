@@ -37,19 +37,44 @@ public class HotelSearchPage {
 
     public void enterCity(String city) {
 
-        wait.until(ExpectedConditions.visibilityOf(cityInput)).click();
-        cityInput.sendKeys(city);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+
+        WebElement cityContainer = wait.until(
+            ExpectedConditions.elementToBeClickable(
+            org.openqa.selenium.By.xpath("//*[contains(text(),'City, Property name or Location')]"))
+        );
+
+        cityContainer.click();
+
+        WebElement searchBox = wait.until(
+            ExpectedConditions.elementToBeClickable(
+            org.openqa.selenium.By.xpath("//input[@placeholder='Where do you want to stay?']"))
+        );
+
+        searchBox.click();
+        searchBox.clear();
+        searchBox.sendKeys(city);
+
+        try { Thread.sleep(2000); } catch (Exception e) {}
 
         WebElement option = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//ul//li[contains(.,'" + city + "')]"))
+            ExpectedConditions.elementToBeClickable(
+            org.openqa.selenium.By.xpath("//p[text()='Chennai']"))
         );
 
         option.click();
     }
 
     public void clickSearch() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchBtn)).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        WebElement btn = wait.until(
+            ExpectedConditions.elementToBeClickable(
+            org.openqa.selenium.By.xpath("//button[contains(text(),'Search')]"))
+        );
+
+        btn.click();
     }
 
    public void selectDatesAndSearch() {
