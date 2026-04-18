@@ -8,3 +8,4 @@ And the user selects a travel date
 And the user selects a travel class
 And the user clicks on the search button
 Then the system should navigate to the booking page
+
