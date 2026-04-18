@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 public class trainPNRIncorrect {
 	@Given("the user is on the PNR  enquiry page")
 	public void the_user_is_on_the_pnr_enquiry_page() {
-		Pages.tp.clickTrainsMenu();
+		Pages.hp.clickTrainsMenu();
 		Pages.tpnr.clickCheckPnrStatus();
 	   
 	}

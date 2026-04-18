@@ -25,13 +25,13 @@ public class HotelSearchStepDefinition {
     public void the_user_enters_valid_hotel_city() {
 
         System.out.println("Trying city field");
-        Pages.hp.enterCity("Chennai");
+        Pages.hsp.enterCity("Chennai");
     }
 
     @When("the user clicks hotel search button")
     public void the_user_clicks_hotel_search_button() {
 
-        Pages.hp.selectDatesAndSearch();
+        Pages.hsp.selectDatesAndSearch();
     }
    
 

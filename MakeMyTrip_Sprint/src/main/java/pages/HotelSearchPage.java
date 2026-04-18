@@ -51,4 +51,41 @@ public class HotelSearchPage {
     public void clickSearch() {
         wait.until(ExpectedConditions.elementToBeClickable(searchBtn)).click();
     }
+
+   public void selectDatesAndSearch() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        try { Thread.sleep(2000); } catch (Exception e) {}
+
+        // Check-in
+        WebElement checkIn = wait.until(
+            ExpectedConditions.elementToBeClickable(
+            org.openqa.selenium.By.xpath("(//div[@aria-disabled='false'])[1]"))
+        );
+        checkIn.click();
+
+        try { Thread.sleep(1000); } catch (Exception e) {}
+
+        // Check-out
+        WebElement checkOut = wait.until(
+            ExpectedConditions.elementToBeClickable(
+            org.openqa.selenium.By.xpath("(//div[@aria-disabled='false'])[2]"))
+        );
+        checkOut.click();
+
+        try { Thread.sleep(2000); } catch (Exception e) {}
+
+        // Search button
+        WebElement searchBtn = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(
+            org.openqa.selenium.By.xpath("//button[contains(.,'Search')]"))
+        );
+
+        ((org.openqa.selenium.JavascriptExecutor)driver)
+            .executeScript("arguments[0].click();", searchBtn);
+
+        try { Thread.sleep(5000); } catch (Exception e) {}
+    }
 }
+

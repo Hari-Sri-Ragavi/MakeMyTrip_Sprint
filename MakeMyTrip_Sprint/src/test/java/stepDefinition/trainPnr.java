@@ -22,7 +22,7 @@ public class trainPnr {
 	}
 	@Given("the user is on the PNR status enquiry page")
 	public void the_user_is_on_the_pnr_status_enquiry_page() {
-		Pages.tp.clickTrainsMenu();
+		Pages.hp.clickTrainsMenu();
 		Pages.tpnr.clickCheckPnrStatus();
 	    
 	}
