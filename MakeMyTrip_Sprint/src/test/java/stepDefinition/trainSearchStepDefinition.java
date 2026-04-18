@@ -19,7 +19,7 @@ public class trainSearchStepDefinition {
 	@Given("the user is on the train booking page")
 	public void the_user_is_on_the_train_booking_page() {
 		
-		Pages.tp.clickTrainsMenu();
+		Pages.hp.clickTrainsMenu();
 		Pages.tp.clickBookTrainTickets();
 	    
 	}

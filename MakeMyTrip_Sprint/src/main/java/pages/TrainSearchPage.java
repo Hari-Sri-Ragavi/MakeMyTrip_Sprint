@@ -40,16 +40,13 @@ public class TrainSearchPage {
     @FindBy(xpath = "//a[@data-cy='submit']")
     WebElement searchBtn;
     
-    @FindBy(xpath = "//li[@data-cy='menu_Trains']")
-    private WebElement trainsMenu;
+    
 
     @FindBy(xpath = "//span[@data-cy='bookTrainTickets']")
     private WebElement bookTrainTickets;
 
     // Actions (methods)
-    public void clickTrainsMenu() {
-        trainsMenu.click();
-    }
+   
 
     public void clickBookTrainTickets() {
         bookTrainTickets.click();
