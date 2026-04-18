@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Apr 16 20:57:29 IST 2026</td>
+<td>Started on:</td><td>Sat Apr 18 12:56:56 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>11 seconds (11523 ms)</td>
+<tr><td>Total time:</td><td>266 seconds (266714 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,43 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='testRunner.TestRunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.TestRunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify filter and Review Booking page", "MakeMyTrip Cab Booking - Outstation One Way"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //span[text()=&apos;Hatchback&apos;] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 149.0.2, moz:accessibilityChecks: false, moz:buildID: 20260403140140, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 30808, moz:profile: C:\Users\vilva\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Session ID: df061424-8335-4fd8-8aeb-7153559f5ad1
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.SelectCabpage.clickFilter(SelectCabpage.java:27)
+	at stepDefinition.CabBookingSteps.user_filters_cab_type_from_the_filter_panel(CabBookingSteps.java:85)
+	at ✽.user filters cab type from the filter panel(file:///C:/Users/vilva/git/MakeMyTrip_Sprint/MakeMyTrip_Sprint/src/test/resources/features/CabTripDetails.feature:18)
+</pre></div><a href='#' onClick='toggleBox("stack-trace624079697", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace624079697'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //span[text()=&apos;Hatchback&apos;] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 149.0.2, moz:accessibilityChecks: false, moz:buildID: 20260403140140, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 30808, moz:profile: C:\Users\vilva\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Session ID: df061424-8335-4fd8-8aeb-7153559f5ad1
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.SelectCabpage.clickFilter(SelectCabpage.java:27)
+	at stepDefinition.CabBookingSteps.user_filters_cab_type_from_the_filter_panel(CabBookingSteps.java:85)
+	at ✽.user filters cab type from the filter panel(file:///C:/Users/vilva/git/MakeMyTrip_Sprint/MakeMyTrip_Sprint/src/test/resources/features/CabTripDetails.feature:18)
+</pre></div></td>
+<td>195</td>
+<td>testRunner.TestRunnerIO@77f1baf5</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,9 +113,9 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='testRunner.TestRunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.TestRunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify user can search and select a train with valid details", "Train Search and Booking"</td>
+<td title='testRunner.TestRunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.TestRunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Search Outstation One Way cab", "MakeMyTrip Cab Booking - Outstation One Way"</td>
 <td></td>
-<td>11</td>
+<td>70</td>
 <td>testRunner.TestRunnerIO@77f1baf5</td></tr>
 </table><p>
 </body>
