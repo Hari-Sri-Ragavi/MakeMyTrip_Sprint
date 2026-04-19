@@ -1,15 +1,27 @@
 package stepDefinition;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import org.testng.Assert;
+
 import base.Pages;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.FlightTrackerPage;
+import util.ExcelReader;
 
 public class FlightTrackerSteps {
+
+    private FlightTrackerPage flightTrackerPage;
+    private ExcelReader excelReader;
+
+    // ✅ SINGLE PATH (VERY IMPORTANT)
+    private static final String EXCEL_PATH =
+            System.getProperty("user.dir") + "/src/test/resources/testdata/flight_testdata.xlsx";
+
+    public FlightTrackerSteps() {
+        this.excelReader = new ExcelReader();
+    }
 
     @Given("the user is logged in and on the MakeMyTrip home page")
     public void the_user_is_logged_in_and_on_the_make_my_trip_home_page() {
@@ -18,31 +30,54 @@ public class FlightTrackerSteps {
         System.out.println("User on home page");
     }
 
-    @When("the user navigates to the Flights module")
-    public void user_navigates_to_flights_module() {
+    @Given("the user is on the MakeMyTrip homepage")
+    public void theUserIsOnMakeMyTripHomepage() {
+        Assert.assertNotNull(Pages.hp);
+    }
+
+    @When("the user jumps to the Flights module")
+    public void the_user_jumps_to_the_flights_module() {
         Pages.hp.clickFlightsTab();
-        System.out.println("Navigated to Flights");
     }
 
-    @And("the user clicks on Flight Tracker option")
-    public void user_clicks_flight_tracker_option() {
-        Pages.ftp.clickFlightStatusTab();
-        Pages.ftp.clickFlightTrackerOption();
-        System.out.println("Flight Tracker opened");
+    @When("the user clicks on {string} option")
+    public void theUserClicksOnOption(String option) {
+        flightTrackerPage = Pages.ftp;
+
+        if (option.equalsIgnoreCase("Flight Status")) {
+            flightTrackerPage.clickFlightTrackerOption();
+            flightTrackerPage.waitForFlightTrackerPopup();
+        }
     }
 
-    @And("the user tracks flight {string} on date {string}")
-    public void user_tracks_flight(String flightNumber, String date) {
-        Pages.ftp.trackFlight(flightNumber, date);
-        Pages.ftp.waitForFlightStatusToLoad();
-        System.out.println("Flight tracked: " + flightNumber);
-    }
+    @When("the user tracks all flights using flight number and date from Excel sheet {string}")
+    public void theUserTracksAllFlightsFromExcel(String FlightTracker) throws Exception {
 
-    @Then("the flight status should be {string}")
-    public void flight_status_should_be(String expectedStatus) {
-        String actualStatus = Pages.ftp.getFlightStatus();
-        assertEquals(actualStatus, expectedStatus, 
-            "Status mismatch! Expected: " + expectedStatus + ", Actual: " + actualStatus);
-        System.out.println("Status verified: " + actualStatus);
+        // ✅ Load from correct path
+        excelReader.loadExcelFile(EXCEL_PATH, FlightTracker);
+
+        int rowCount = excelReader.getLastRowNum();
+
+        for (int i = 1; i <= rowCount; i++) {
+
+            String flightNumber = excelReader.getDataFromSingleCell(i, 0);
+            String expectedStatus = excelReader.getDataFromSingleCell(i, 1);
+
+            if (flightNumber == null || flightNumber.trim().isEmpty()) continue;
+
+            System.out.println("▶ Tracking Flight: " + flightNumber);
+
+            flightTrackerPage.enterFlightNumber(flightNumber);
+            flightTrackerPage.clickTrackButton();
+
+            String actualStatus = flightTrackerPage.getFlightStatus();
+
+            System.out.println("Expected: " + expectedStatus + " | Actual: " + actualStatus);
+
+            Assert.assertEquals(actualStatus, expectedStatus);
+
+            // ✅ WRITE TO SAME FILE (FIXED)
+            excelReader.writeDataInTheCell(EXCEL_PATH, i, 2, actualStatus);
+        }
     }
 }

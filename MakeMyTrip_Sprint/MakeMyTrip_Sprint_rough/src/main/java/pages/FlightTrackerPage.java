@@ -12,7 +12,7 @@ public class FlightTrackerPage {
 
     public FlightTrackerPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     // Locators
@@ -36,9 +36,6 @@ public class FlightTrackerPage {
     private final By errorMessage = By.xpath("//*[contains(text(),'Invalid') or contains(text(),'No flights')]");
 
     // Click Flight Status Tab
-    
-    
-    
     public void clickFlightStatusTab() {
         try {
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(flightStatusTab));
@@ -48,7 +45,7 @@ public class FlightTrackerPage {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         }
         System.out.println("Flight Status tab clicked");
-        sleep(1000);
+     
     }
 
     // Click Flight Tracker Option - Multiple attempts with different locators
@@ -78,7 +75,7 @@ public class FlightTrackerPage {
                 }
             }
         }
-        sleep(2000);
+        
     }
 
     public void waitForFlightTrackerPopup() {
@@ -97,11 +94,11 @@ public class FlightTrackerPage {
 
         for (char c : flightNumber.toCharArray()) {
             input.sendKeys(String.valueOf(c));
-            sleep(100);
+           
         }
 
         System.out.println("Flight entered");
-        sleep(500);
+       
     }
 
     // Enter Date
@@ -115,7 +112,7 @@ public class FlightTrackerPage {
         input.sendKeys(date);
 
         System.out.println("Date entered");
-        sleep(500);
+        
     }
 
     // Click Search
@@ -123,14 +120,14 @@ public class FlightTrackerPage {
         try {
             WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(searchButton));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
-            sleep(500);
+            
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         } catch (Exception e) {
             WebElement btn = driver.findElement(searchButton);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         }
         System.out.println("Search clicked");
-        sleep(3000);
+        
     }
 
     // Complete track flight method
@@ -170,12 +167,6 @@ public class FlightTrackerPage {
         }
     }
 
-    // Sleep method
-    private void sleep(int milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
+    
 }

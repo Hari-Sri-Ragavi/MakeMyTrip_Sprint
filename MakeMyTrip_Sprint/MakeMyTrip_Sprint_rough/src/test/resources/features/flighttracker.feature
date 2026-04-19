@@ -10,7 +10,7 @@ Feature: MakeMyTrip Flight Tracker
 
   @FlightTracker_Excel
   Scenario: Track all flights loaded from Excel test data
-    When the user jumps to the Flights module
+    When the user navigates to the Flights module
     And the user clicks on "Flight Status" option
     And the user tracks all flights using flight number and date from Excel sheet "FlightTracker"
     Then each flight status should be displayed correctly as per Excel

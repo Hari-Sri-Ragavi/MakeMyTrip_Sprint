@@ -35,10 +35,6 @@ public class ExcelReader {
         DataFormatter formatter = new DataFormatter();
         return formatter.formatCellValue(cell);
     }
-    public int getLastRowNum() {
-        return sheet.getLastRowNum();
-    }
-
 
     // Write Data
     public void writeDataInTheCell(String filePath, int rowNo, int cellNo, String data)
@@ -59,5 +55,9 @@ public class ExcelReader {
         FileOutputStream fos = new FileOutputStream(filePath);
         wb.write(fos);
         fos.close();
+    }
+ // Add this method to ExcelReader.java
+    public int getLastRowNumber() {
+        return sheet.getLastRowNum();
     }
 }

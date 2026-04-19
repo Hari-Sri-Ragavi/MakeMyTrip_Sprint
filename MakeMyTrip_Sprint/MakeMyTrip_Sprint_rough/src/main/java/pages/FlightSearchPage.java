@@ -53,13 +53,7 @@ public class FlightSearchPage {
             wait.until(ExpectedConditions.elementToBeClickable(flightsMenu)).click();
         } catch (Exception e) {
             System.out.println("Flights menu click failed, trying fallback...");
-            try {
-                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.spa-classic-peek__back-to-classic-search"))).click();
-            } catch (Exception e1) {
-                System.out.println("Flights menu click failed, trying fallback...");
-                // Try these instead:
-                driver.findElement(By.xpath("//button[contains(@class, 'back-to-classic-search')]")).click();
-            }
+            driver.findElement(By.xpath("//span[text()='Back to Classic Search']")).click();
         }
     }
     
