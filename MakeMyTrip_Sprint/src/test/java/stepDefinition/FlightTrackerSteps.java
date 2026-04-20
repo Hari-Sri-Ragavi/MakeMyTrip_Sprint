@@ -1,3 +1,4 @@
+
 package stepDefinition;
 
 import static org.testng.Assert.assertTrue;
@@ -6,6 +7,7 @@ import base.BaseClass;
 import base.Pages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import pages.FlightTrackerPage;
 import util.ExcelReader;
 
@@ -20,10 +22,12 @@ public class FlightTrackerSteps {
 
     private FlightTrackerPage flightTrackerPage;
     private ExcelReader excelReader;
+    private static int rowCounter = 1;
+    private static String currentFlightNumber;
+    private static String expectedStatus;
 
-    // ✅ SINGLE PATH (VERY IMPORTANT)
     private static final String EXCEL_PATH =
-            System.getProperty("user.dir") + "/src/test/resources/testdata/flight_testdata.xlsx";
+            System.getProperty("user.dir") + "/src/test/resources/testdata/make_my_trip_Excel.xlsx";
 
     public FlightTrackerSteps() {
         this.excelReader = new ExcelReader();
