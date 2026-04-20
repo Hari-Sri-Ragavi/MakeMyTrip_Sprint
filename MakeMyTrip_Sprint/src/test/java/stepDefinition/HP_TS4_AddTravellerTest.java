@@ -159,7 +159,7 @@ public class HP_TS4_AddTravellerTest {
 
 	@When("User adds traveller details from Excel")
 	public void user_adds_traveller_details_from_excel() throws EncryptedDocumentException, IOException {
-		eu.loadExcelFile("./src/test/resources/testdata/HPDetails.xlsx", "HPTravelerDetail");
+		eu.loadExcelFile("./src/test/resources/testdata/MakeMyTripExcelData.xlsx", "HPTravellerDetail");
 
 		Object[][] travellers = eu.getDataFromTheExcelSheet();
 
