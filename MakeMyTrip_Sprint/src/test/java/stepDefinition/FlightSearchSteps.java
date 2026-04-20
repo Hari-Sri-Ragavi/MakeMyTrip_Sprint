@@ -12,6 +12,7 @@ public class FlightSearchSteps {
 
     String originalPrice;
     String priceAfterBaggage;
+   
     private BaseClass b;
     private Pages pages;
 
