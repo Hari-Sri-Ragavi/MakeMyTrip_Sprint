@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-
 import base.BaseClass;
 import base.Pages;
 import io.cucumber.java.After;
@@ -55,7 +54,6 @@ public class hook {
             b.driver = new ChromeDriver();
         }
 
-        // Browser setup
         b.driver.manage().window().maximize();
         b.driver.manage().timeouts()
                 .implicitlyWait(Duration.ofSeconds(timeout));
@@ -63,10 +61,7 @@ public class hook {
         // Open URL
         b.driver.get(url + "/flights");
 
-        // Launch URL
-        String workingUrl=url+"/flights";
-        b.driver.get(workingUrl);
-        
+        // Load pages
         Pages.loadAllPages(b.driver);
         Pages.hp.closeModalIfPresent();
 
