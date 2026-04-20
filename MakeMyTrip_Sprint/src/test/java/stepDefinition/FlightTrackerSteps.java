@@ -1,3 +1,4 @@
+
 package stepDefinition;
 
 import static org.testng.Assert.assertTrue;
@@ -7,6 +8,7 @@ import org.testng.Assert;
 import base.Pages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import pages.FlightTrackerPage;
 import util.ExcelReader;
 
@@ -14,10 +16,12 @@ public class FlightTrackerSteps {
 
     private FlightTrackerPage flightTrackerPage;
     private ExcelReader excelReader;
+    private static int rowCounter = 1;
+    private static String currentFlightNumber;
+    private static String expectedStatus;
 
-    // ✅ SINGLE PATH (VERY IMPORTANT)
     private static final String EXCEL_PATH =
-            System.getProperty("user.dir") + "/src/test/resources/testdata/flight_testdata.xlsx";
+            System.getProperty("user.dir") + "/src/test/resources/testdata/make_my_trip_Excel.xlsx";
 
     public FlightTrackerSteps() {
         this.excelReader = new ExcelReader();
@@ -51,33 +55,38 @@ public class FlightTrackerSteps {
     }
 
     @When("the user tracks all flights using flight number and date from Excel sheet {string}")
-    public void theUserTracksAllFlightsFromExcel(String FlightTracker) throws Exception {
+    public void theUserTracksAllFlightsFromExcel(String sheetName) throws Exception {
 
-        // ✅ Load from correct path
-        excelReader.loadExcelFile(EXCEL_PATH, FlightTracker);
+        excelReader.loadExcelFile(EXCEL_PATH, sheetName);
 
-        int rowCount = excelReader.getLastRowNum();
+        String flightNumber = excelReader.getDataFromSingleCell(rowCounter, 0);
+        String flightDate = excelReader.getDataFromSingleCell(rowCounter, 1);
+        expectedStatus = excelReader.getDataFromSingleCell(rowCounter, 2);
 
-        for (int i = 1; i <= rowCount; i++) {
-
-            String flightNumber = excelReader.getDataFromSingleCell(i, 0);
-            String expectedStatus = excelReader.getDataFromSingleCell(i, 1);
-
-            if (flightNumber == null || flightNumber.trim().isEmpty()) continue;
-
-            System.out.println("▶ Tracking Flight: " + flightNumber);
-
-            flightTrackerPage.enterFlightNumber(flightNumber);
-            flightTrackerPage.clickTrackButton();
-
-            String actualStatus = flightTrackerPage.getFlightStatus();
-
-            System.out.println("Expected: " + expectedStatus + " | Actual: " + actualStatus);
-
-            Assert.assertEquals(actualStatus, expectedStatus);
-
-            // ✅ WRITE TO SAME FILE (FIXED)
-            excelReader.writeDataInTheCell(EXCEL_PATH, i, 2, actualStatus);
+        if (flightNumber == null || flightNumber.trim().isEmpty()) {
+            System.out.println("Flight number is empty at row " + rowCounter);
+            return;
         }
+
+        currentFlightNumber = flightNumber;
+        System.out.println("Tracking Flight: " + currentFlightNumber + " from row " + rowCounter);
+        System.out.println("Expected Status: " + expectedStatus);
+
+        flightTrackerPage.enterFlightNumber(currentFlightNumber);
+        flightTrackerPage.clickTrackButton();
+        
+        rowCounter++;
+    }
+
+    @Then("each flight status should be displayed correctly as per Excel")
+    public void each_flight_status_should_be_displayed_correctly_as_per_excel() {
+        String actualStatus = flightTrackerPage.getFlightStatus();
+        
+        System.out.println("Actual Status: " + actualStatus);
+        
+        Assert.assertEquals(actualStatus, expectedStatus, 
+            "Flight " + currentFlightNumber + " status mismatch. Expected: " + expectedStatus + ", Actual: " + actualStatus);
+        
+        System.out.println("✓ Flight " + currentFlightNumber + " verified successfully");
     }
 }

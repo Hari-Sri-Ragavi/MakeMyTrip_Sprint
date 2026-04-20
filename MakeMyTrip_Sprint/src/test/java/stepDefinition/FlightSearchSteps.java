@@ -11,7 +11,7 @@ public class FlightSearchSteps {
 
     String originalPrice;
     String priceAfterBaggage;
-    boolean baggageAdded = false;
+   
 
     @When("the user clicks on {string}")
     public void the_user_clicks_on(String value) {
