@@ -248,16 +248,12 @@ public class FlightSearchPage {
 
     // ===== BAGGAGE =====
     public void clickAddBaggage() {
-        try {
+       try {
             WebElement ele = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//button[contains(@data-test,'component-add_btn')]")));
             
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
-            Thread.sleep(1000);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ele);
-            System.out.println("Add Baggage clicked");
-            Thread.sleep(2000);
-            
+          
         } catch (Exception e) {
             System.out.println("Error clicking add baggage: " + e.getMessage());
         }

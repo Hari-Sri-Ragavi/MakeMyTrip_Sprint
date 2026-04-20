@@ -1,8 +1,6 @@
 
 Feature:Flight Search, Booking and Status Tracker on MakeMyTrip
 
-  Background:
-    Given the user is logged in and on the MakeMyTrip home page
 
   @Positive @High @TS-01
   Scenario Outline: Search flights with valid source and destination
