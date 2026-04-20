@@ -16,7 +16,7 @@ public class FlightSearchPage {
 
     public FlightSearchPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
@@ -49,32 +49,75 @@ public class FlightSearchPage {
     // ===== ACTIONS =====
 
     public void clickFlightsMenu() {
-        wait.until(ExpectedConditions.elementToBeClickable(flightsMenu)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(flightsMenu)).click();
+        } catch (Exception e) {
+            System.out.println("Flights menu click failed, trying fallback...");
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.spa-classic-peek__back-to-classic-search"))).click();
+            } catch (Exception e1) {
+                System.out.println("Flights menu click failed, trying fallback...");
+                // Try these instead:
+                driver.findElement(By.xpath("//button[contains(@class, 'back-to-classic-search')]")).click();
+            }
+        }
     }
-
-    public void enterSource(String city) {
+    
+    // UPDATED: Works for ANY city with auto-suggestion
+    public void enterSource(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(fromCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(fromInput));
         input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         input.sendKeys(city);
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')]")))
-                .click();
+        
+        // Wait for suggestions and click the matching one
+        Thread.sleep(1500); // Small delay for suggestions to load
+        
+        List<WebElement> suggestions = driver.findElements(
+            By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')] | " +
+                     "//li[contains(@role,'option')]//span[contains(text(),'" + city + "')] | " +
+                     "//li[contains(@class,'suggestion')]//*[contains(text(),'" + city + "')]")
+        );
+        
+        if(suggestions.size() > 0) {
+            wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(0))).click();
+        } else {
+            // Fallback: Press Enter if no suggestion found
+            input.sendKeys(Keys.ENTER);
+        }
+        
+        System.out.println("Source entered: " + city);
     }
 
-    public void enterDestination(String city) {
+    // UPDATED: Works for ANY city with auto-suggestion
+    public void enterDestination(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(toCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(toInput));
         input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         input.sendKeys(city);
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')]")))
-                .click();
+        
+        // Wait for suggestions and click the matching one
+        Thread.sleep(1500);
+        
+        List<WebElement> suggestions = driver.findElements(
+            By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')] | " +
+                     "//li[contains(@role,'option')]//span[contains(text(),'" + city + "')] | " +
+                     "//li[contains(@class,'suggestion')]//*[contains(text(),'" + city + "')]")
+        );
+        
+        if(suggestions.size() > 0) {
+            wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(0))).click();
+        } else {
+            input.sendKeys(Keys.ENTER);
+        }
+        
+        System.out.println("Destination entered: " + city);
     }
 
+    // Enhanced date selection with better month handling
     public void selectDate(String month, String day) {
         wait.until(ExpectedConditions.elementToBeClickable(departureField)).click();
-
+        
         while (true) {
             List<WebElement> months = wait.until(
                     ExpectedConditions.visibilityOfAllElementsLocatedBy(
@@ -85,8 +128,10 @@ public class FlightSearchPage {
 
                 if (title.toLowerCase().contains(month.toLowerCase())) {
                     WebElement date = m.findElement(
-                            By.xpath(".//div[contains(@class,'dateInnerCell')]/p[text()='" + day + "']"));
+                            By.xpath(".//div[contains(@class,'dateInnerCell')]/p[text()='" + day + "'] | " +
+                                     ".//div[contains(@class,'dateInnerCell')]/p[contains(text(),'" + day + "')]"));
                     date.click();
+                    System.out.println("Date selected: " + month + " " + day);
                     return;
                 }
             }
@@ -108,21 +153,40 @@ public class FlightSearchPage {
         }
     }
 
-    // Select Airline (optional - skip if not needed)
+    // Updated selectAirline with better error handling
     public void selectAirline() {
         try {
-            // Scroll to see filters
-            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -300);");
-            Thread.sleep(1000);
+            Thread.sleep(5000);
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 400);");
+            Thread.sleep(2000);
             
-            List<WebElement> airlineCheckboxes = driver.findElements(By.xpath("//div[@class='filter-option']//input[@type='checkbox']"));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
             
-            if (airlineCheckboxes.size() > 0) {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", airlineCheckboxes.get(0));
-                System.out.println("Airline checkbox clicked");
-                Thread.sleep(2000);
+            // Try multiple airline names in sequence
+            String[] airlines = {"Air India", "Akasa Air", "IndiGo"};
+            
+            for(String airline : airlines) {
+                try {
+                    js.executeScript(
+                        "var labels = document.querySelectorAll('label, span, div, p');" +
+                        "for(var i=0; i<labels.length; i++) {" +
+                        "   if(labels[i].innerText && labels[i].innerText.trim() === '" + airline + "') {" +
+                        "       var checkbox = labels[i].querySelector('input[type=\"checkbox\"]') || " +
+                        "                      labels[i].previousElementSibling?.querySelector('input[type=\"checkbox\"]') || " +
+                        "                      labels[i].parentElement?.querySelector('input[type=\"checkbox\"]') || " +
+                        "                      labels[i].nextElementSibling?.querySelector('input[type=\"checkbox\"]');" +
+                        "       if(checkbox) { checkbox.click(); console.log('Clicked: " + airline + "'); break; }" +
+                        "   }" +
+                        "}"
+                    );
+                    Thread.sleep(500);
+                } catch(Exception e) {
+                    // Continue to next airline
+                }
             }
-        } catch (Exception e) {
+            System.out.println("Airline selection attempted");
+            
+        } catch(Exception e) {
             System.out.println("Error selecting airline: " + e.getMessage());
         }
     }
@@ -144,48 +208,8 @@ public class FlightSearchPage {
         }
     }
 
-    // NEW METHOD: Select a fare option (SAVER, FLEXI PLUS, etc.)
-    public void selectFareOption(String fareType) {
-        try {
-            // Wait for fare options to load
-            Thread.sleep(2000);
-            
-            // Click on the fare option based on type
-            String fareXpath = "//div[contains(@class,'fare-card') and contains(.,'" + fareType + "')]";
-            WebElement fareOption = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(fareXpath)));
-            
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", fareOption);
-            Thread.sleep(500);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", fareOption);
-            System.out.println("Selected fare: " + fareType);
-            Thread.sleep(2000);
-            
-        } catch (Exception e) {
-            System.out.println("Error selecting fare option: " + e.getMessage());
-            
-            // Alternative: Click the first available fare option
-            try {
-                List<WebElement> fareOptions = driver.findElements(By.xpath("//div[contains(@class,'fare-card')]"));
-                if (fareOptions.size() > 0) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", fareOptions.get(0));
-                    System.out.println("Selected first available fare");
-                    Thread.sleep(2000);
-                }
-            } catch (Exception e2) {
-                System.out.println("No fare options found");
-            }
-        }
-    }
-
-    // UPDATED: Click Book Now - First select fare, then click book button
     public void clickBookNow() {
         try {
-            // First, select the SAVER fare (or any available fare)
-            selectFareOption("SAVER");
-            
-            // Then click the Book Now button
-            Thread.sleep(2000);
-            
             String[] bookNowLocators = {
                 "//button[text()='BOOK NOW']",
                 "//button[contains(text(),'Book Now')]",
@@ -198,8 +222,7 @@ public class FlightSearchPage {
             for (String locator : bookNowLocators) {
                 try {
                     btn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
-                    if (btn != null && btn.isDisplayed()) {
-                        System.out.println("Found Book Now button with: " + locator);
+                    if (btn != null) {
                         break;
                     }
                 } catch (Exception e) {
@@ -223,31 +246,11 @@ public class FlightSearchPage {
         }
     }
 
-    // Alternative: Click Book Now for specific fare type
-//    public void clickBookNowForFare(String fareType) {
-//        try {
-//            // Find the fare section and click its Book Now button
-//            String fareSectionXpath = "//div[contains(@class,'fare-card') and contains(.,'" + fareType + "')]";
-//            WebElement fareSection = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(fareSectionXpath)));
-//            
-//            WebElement bookNowBtn = fareSection.findElement(By.xpath(".//button[text()='BOOK NOW']"));
-//            
-//            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", bookNowBtn);
-//            Thread.sleep(1000);
-//            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", bookNowBtn);
-//            System.out.println("Book Now clicked for fare: " + fareType);
-//            Thread.sleep(3000);
-//            
-//        } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
-
     // ===== BAGGAGE =====
     public void clickAddBaggage() {
         try {
             WebElement ele = wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//button[contains(@data-test,\"component-add_btn\")]")));
+                    By.xpath("//button[contains(@data-test,'component-add_btn')]")));
             
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
             Thread.sleep(1000);

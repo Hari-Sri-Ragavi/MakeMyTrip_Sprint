@@ -36,6 +36,9 @@ public class FlightTrackerPage {
     private final By errorMessage = By.xpath("//*[contains(text(),'Invalid') or contains(text(),'No flights')]");
 
     // Click Flight Status Tab
+    
+    
+    
     public void clickFlightStatusTab() {
         try {
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(flightStatusTab));

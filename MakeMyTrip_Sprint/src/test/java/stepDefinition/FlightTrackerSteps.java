@@ -1,14 +1,13 @@
 package stepDefinition;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import base.BaseClass;
 import base.Pages;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.FlightTrackerPage;
+import util.ExcelReader;
 
 public class FlightTrackerSteps {
 	private BaseClass b;
@@ -17,6 +16,17 @@ public class FlightTrackerSteps {
      public FlightTrackerSteps(BaseClass b, Pages pages) {
         this.b = b;
         this.pages = pages;
+    }
+
+    private FlightTrackerPage flightTrackerPage;
+    private ExcelReader excelReader;
+
+    // ✅ SINGLE PATH (VERY IMPORTANT)
+    private static final String EXCEL_PATH =
+            System.getProperty("user.dir") + "/src/test/resources/testdata/flight_testdata.xlsx";
+
+    public FlightTrackerSteps() {
+        this.excelReader = new ExcelReader();
     }
 
     @Given("the user is logged in and on the MakeMyTrip home page")
