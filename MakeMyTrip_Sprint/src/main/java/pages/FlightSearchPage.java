@@ -63,15 +63,15 @@ public class FlightSearchPage {
         }
     }
     
-  
+    // UPDATED: Works for ANY city with auto-suggestion
     public void enterSource(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(fromCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(fromInput));
         input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         input.sendKeys(city);
         
-        
-        Thread.sleep(1500);
+        // Wait for suggestions and click the matching one
+        Thread.sleep(1500); // Small delay for suggestions to load
         
         List<WebElement> suggestions = driver.findElements(
             By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')] | " +
@@ -82,13 +82,14 @@ public class FlightSearchPage {
         if(suggestions.size() > 0) {
             wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(0))).click();
         } else {
-          
+            // Fallback: Press Enter if no suggestion found
             input.sendKeys(Keys.ENTER);
         }
         
         System.out.println("Source entered: " + city);
     }
 
+    // UPDATED: Works for ANY city with auto-suggestion
     public void enterDestination(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(toCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(toInput));
@@ -113,6 +114,7 @@ public class FlightSearchPage {
         System.out.println("Destination entered: " + city);
     }
 
+    // Enhanced date selection with better month handling
     public void selectDate(String month, String day) {
         wait.until(ExpectedConditions.elementToBeClickable(departureField)).click();
         
@@ -151,6 +153,7 @@ public class FlightSearchPage {
         }
     }
 
+    // Updated selectAirline with better error handling
     public void selectAirline() {
         try {
             Thread.sleep(5000);
@@ -159,6 +162,7 @@ public class FlightSearchPage {
             
             JavascriptExecutor js = (JavascriptExecutor) driver;
             
+            // Try multiple airline names in sequence
             String[] airlines = {"Air India", "Akasa Air", "IndiGo"};
             
             for(String airline : airlines) {
@@ -177,7 +181,7 @@ public class FlightSearchPage {
                     );
                     Thread.sleep(500);
                 } catch(Exception e) {
-           
+                    // Continue to next airline
                 }
             }
             System.out.println("Airline selection attempted");
@@ -186,7 +190,8 @@ public class FlightSearchPage {
             System.out.println("Error selecting airline: " + e.getMessage());
         }
     }
- 
+    
+    // Click View Prices
     public void clickViewPrices() {
         try {
             WebElement btn = wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -241,6 +246,7 @@ public class FlightSearchPage {
         }
     }
 
+    // ===== BAGGAGE =====
     public void clickAddBaggage() {
         try {
             WebElement ele = wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -257,6 +263,7 @@ public class FlightSearchPage {
         }
     }
 
+    // ===== PRICE =====
     public String getTotalPrice() {
         try {
             WebElement priceElement = wait.until(ExpectedConditions.visibilityOfElementLocated(

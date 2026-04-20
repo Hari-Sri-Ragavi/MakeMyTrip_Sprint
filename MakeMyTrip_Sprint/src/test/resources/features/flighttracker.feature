@@ -1,5 +1,5 @@
 @FlightTracker
-Feature: MakeMyTrip Flight Tracker
+Feature:MakeMyTrip Flight Tracker
 
   As a user of MakeMyTrip
   I want to track a flight using the Flight Tracker module
