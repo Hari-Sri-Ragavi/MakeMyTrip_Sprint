@@ -1,63 +1,69 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HPHomePage {
-	
-	//FromCity Field
+
+	WebDriver driver;
+
+	public HPHomePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	// FromCity Field
 	@FindBy(id = "fromCity")
 	private WebElement fromCityField;
-	
-	//FromCity TextField -> Chennai
+
+	// FromCity TextField -> Chennai
 	@FindBy(css = "[placeholder='Enter City']")
-	 WebElement fromCityTextField;
-	
-	//FromCity Click -> Chennai
-	@FindBy(xpath = "//p[contains(. , 'Chennai')]")
-	private WebElement fromCity;
-	
-	//ToCity Field
+	WebElement fromCityTextField;
+
+//	FromCity Click -> Chennai
+
+	// ToCity Field
 	@FindBy(id = "toCity")
 	private WebElement toCityField;
-	
-	//ToCity TextField -> Kerala
+
+	// ToCity TextField -> Kerala
 	@FindBy(css = "[placeholder = 'To']")
 	private WebElement toCityTextField;
-	
-	//ToCity Click -> Kerala
-	@FindBy(xpath = "//div[. = 'Kerala']")
-	private WebElement toCity;
-	
-	//Departure Field
+
+//   ToCity Click -> Kerala
+
+	// Departure Field
 	@FindBy(id = "departure")
 	private WebElement departureField;
-	
-	//Departure Click -> May 7,2026 
-	@FindBy(xpath = "//div[@aria-label='Thu May 07 2026']")
-	private WebElement departure;
-	
-	//Room & Guests Field
+
+//	Departure Click -> May 7,2026
+
+	// Room & Guests Field
 	@FindBy(xpath = "//div[. = '1 Room']")
 	private WebElement RoomField;
-	
-	//Room & Guests Increment -> 3
+
+	// Room & Guests Increment -> 3
 	@FindBy(xpath = "//div[@data-testid= 'adult-increment-counter']")
 	private WebElement RoomIncr;
-	
-	//Room & Guests Apply
+
+	// Room & Guests Apply
 	@FindBy(xpath = "//button[. = 'APPLY']")
 	private WebElement RoomApplyBtn;
-	
-	//Filters Apply
+
+	// Filters Apply
 	@FindBy(xpath = "//button[text()='APPLY']")
 	private WebElement FilterApplyBtn;
-	
-	//Search Button
+
+	// Search Button
 	@FindBy(xpath = "//button[text() = 'Search']")
 	private WebElement SearchBtn;
 
-	//Getters and setters of From city Field
+	
+	
+	// Getters and setters of From city Field
 	public WebElement getFromCityField() {
 		return fromCityField;
 	}
@@ -66,7 +72,7 @@ public class HPHomePage {
 		getFromCityField().click();
 	}
 
-	//Getters and setters of From City Text Field
+	// Getters and setters of From City Text Field
 	public WebElement getFromCityTextField() {
 		return fromCityTextField;
 	}
@@ -75,16 +81,17 @@ public class HPHomePage {
 		getFromCityTextField().sendKeys(From);
 	}
 
-	//Getters and setters of From City 
-	public WebElement getFromCity() {
+	// Getters and setters of From City
+	public WebElement getFromCity(String from) {
+		WebElement fromCity = driver.findElement(By.xpath("//p[contains(. , '" + from + "')]"));
 		return fromCity;
 	}
 
-	public void clickFromCity() {
-		getFromCity().click();
+	public void clickFromCity(String from) {
+		getFromCity(from).click();
 	}
 
-	//Getters and setters of to City Field
+	// Getters and setters of to City Field
 	public WebElement getToCityField() {
 		return toCityField;
 	}
@@ -93,7 +100,7 @@ public class HPHomePage {
 		getToCityField().click();
 	}
 
-	//Getters and Setters of to City TextField
+	// Getters and Setters of to City TextField
 	public WebElement getToCityTextField() {
 		return toCityTextField;
 	}
@@ -102,16 +109,17 @@ public class HPHomePage {
 		getToCityTextField().sendKeys(To);
 	}
 
-	//Getters and setters of To City
-	public WebElement getToCity() {
+	// Getters and setters of To City
+	public WebElement getToCity(String to) {
+		WebElement toCity = driver.findElement(By.xpath("//div[. = '" + to + "']"));
 		return toCity;
 	}
 
-	public void clickToCity() {
-		getToCity().click();
+	public void clickToCity(String to) {
+		getToCity(to).click();
 	}
 
-	//Getters and setters of Departure Click
+	// Getters and setters of Departure Click
 	public WebElement getDepartureField() {
 		return departureField;
 	}
@@ -120,16 +128,17 @@ public class HPHomePage {
 		getDepartureField().click();
 	}
 
-	//Getters and setters of Departure -> Date
-	public WebElement getDeparture() {
+	// Getters and setters of Departure -> Date
+	public WebElement getDeparture(String date) {
+		WebElement departure = driver.findElement(By.xpath("//div[@aria-label='" + date + "']"));
 		return departure;
 	}
 
-	public void clickDeparture() {
-		getDeparture().click();
+	public void clickDeparture(String date) {
+		getDeparture(date).click();
 	}
 
-	//Getters and setters of Room & guest Field
+	// Getters and setters of Room & guest Field
 	public WebElement getRoomField() {
 		return RoomField;
 	}
@@ -138,7 +147,7 @@ public class HPHomePage {
 		getRoomField().click();
 	}
 
-	//Getters and setters of Increment No. of Rooms 
+	// Getters and setters of Increment No. of Rooms
 	public WebElement getRoomIncr() {
 		return RoomIncr;
 	}
@@ -147,7 +156,7 @@ public class HPHomePage {
 		getRoomIncr().click();
 	}
 
-	//Getters and setters of Apply No. of Rooms & Guests
+	// Getters and setters of Apply No. of Rooms & Guests
 	public WebElement getRoomApplyBtn() {
 		return RoomApplyBtn;
 	}
@@ -156,7 +165,7 @@ public class HPHomePage {
 		getRoomApplyBtn().click();
 	}
 
-	//Getters and setters of Filter Apply
+	// Getters and setters of Filter Apply
 	public WebElement getFilterApplyBtn() {
 		return FilterApplyBtn;
 	}
@@ -165,7 +174,7 @@ public class HPHomePage {
 		getFilterApplyBtn().click();
 	}
 
-	//Getters and setters of Search btn
+	// Getters and setters of Search btn
 	public WebElement getSearchBtn() {
 		return SearchBtn;
 	}
@@ -173,23 +182,21 @@ public class HPHomePage {
 	public void clickSearchBtn() {
 		getSearchBtn().click();
 	}
-	
-	//Methods --> (Chennai, Kerala, May 22,2026, 2)
-	public void SearchInfo() {
+
+	// Methods --> (src, dest, date , 2rooms)
+	public void SearchInfo(String from, String to, String date) {
 		clickFromCityField();
-		configFromCityTextField("Chennai");
-		clickFromCity();
+		configFromCityTextField(from);
+		clickFromCity(from);
 //		clickToCityField();
-		configToCityTextField("Kerala");
-		clickToCity();
+		configToCityTextField(to);
+		clickToCity(to);
 //		clickDepartureField();
-		clickDeparture();
+		clickDeparture(date);
 //		clickRoomField();
 //		clickRoomIncr();
 		clickRoomApplyBtn();
 		clickSearchBtn();
 	}
-	
-	
 
 }

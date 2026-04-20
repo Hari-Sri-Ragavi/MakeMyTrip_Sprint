@@ -2,6 +2,7 @@ package stepDefinition;
 
 import static org.testng.Assert.assertTrue;
 
+import base.BaseClass;
 import base.Pages;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -12,29 +13,37 @@ public class FlightSearchSteps {
     String originalPrice;
     String priceAfterBaggage;
    
+    private BaseClass b;
+    private Pages pages;
+
+    public FlightSearchSteps(BaseClass b, Pages pages) {
+        this.b = b;
+        this.pages = pages;
+    }
+    
 
     @When("the user clicks on {string}")
     public void the_user_clicks_on(String value) {
         if (value.equalsIgnoreCase("Flights")) {
-            Pages.fp.clickFlightsMenu();
+            pages.fp.clickFlightsMenu();
         } else if (value.equalsIgnoreCase("Search")) {
-            Pages.fp.clickSearch();
+            pages.fp.clickSearch();
         }
     }
 
     @When("the user enters source as {string}")
-    public void source(String value) throws InterruptedException {
-        Pages.fp.enterSource(value);
+    public void source(String value) {
+        pages.fp.enterSource("Mumbai");
     }
 
     @When("the user enters destination as {string}")
-    public void destination(String value) throws InterruptedException {
-        Pages.fp.enterDestination(value);
+    public void destination(String value) {
+        pages.fp.enterDestination("Chennai");
     }
 
     @When("the user selects a valid travel date")
     public void select_date() {
-        Pages.fp.selectDate("June", "4");
+        pages.fp.selectDate("June", "2");
     }
 
     @Then("the user should see search results for the selected route")
@@ -45,18 +54,19 @@ public class FlightSearchSteps {
 
     @When("the user selects a specific airline from the search results")
     public void airline() {
-        Pages.fp.selectAirline();
+        pages.fp.selectAirline();
     }
 
     @When("the user views the price details for the selected flight")
     public void price() {
-        Pages.fp.clickViewPrices();
+        pages.fp.clickViewPrices();
+        originalPrice = pages.fp.getTotalPrice();
     }
 
     @When("the user clicks on {string} button")
     public void button(String value) {
         if (value.equalsIgnoreCase("Book Now")) {
-            Pages.fp.clickBookNow();
+            pages.fp.clickBookNow();
         }
     }
 
@@ -66,4 +76,15 @@ public class FlightSearchSteps {
         System.out.println("On booking page");
     }
 
+    @When("the user clicks on {string} option")
+    public void baggage(String value) {
+        pages.fp.clickAddBaggage();
+    }
+
+    @Then("the fare summary should show increased total amount reflecting baggage charges")
+    public void validate_price() {
+        priceAfterBaggage = pages.fp.getTotalPrice();
+        assertTrue(!priceAfterBaggage.equals(originalPrice));
+        System.out.println("Price increased");
+    }
 }

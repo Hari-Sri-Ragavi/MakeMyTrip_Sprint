@@ -1,12 +1,29 @@
 package pages;
 
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import util.Actions_Helper;
 
 public class HPReviewPage {
 
+	WebDriver driver;
+
+	public HPReviewPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		// this.ahh = new Actions_Helper(driver);
+	}
+
+	// Verify the Review Page
+	@FindBy(className = "reviewHead")
+	private WebElement verifyReview;
+
 	// Add Traveller -> Click
-	@FindBy(xpath = "//p[. ='Add Traveller']")
+	@FindBy(xpath = "//p[@data-testid='add-traveller-btn-1']")
 	private WebElement addTravellerBtn;
 
 	// First Name
@@ -34,11 +51,11 @@ public class HPReviewPage {
 	private WebElement selectGender;
 
 	// Select the Gender Male adult 1
-	@FindBy(id = "react-select-7-option-0")
+	@FindBy(xpath = "//div[contains(@id , 'option-0')]")
 	private WebElement selectMaleAdult1;
 
 	// Select the Gender Male adult 2
-	@FindBy(id = "react-select-11-option-0")
+	@FindBy(xpath = "//div[contains(@id , 'option-0')]")
 	private WebElement selectMaleAdult2;
 
 	// Click Confirm btn
@@ -49,6 +66,10 @@ public class HPReviewPage {
 	@FindBy(xpath = "//span[.='ADULT - 2']")
 	private WebElement selectAdult2;
 
+	//Click on Cancel btn
+	@FindBy(xpath = "//span[@class = 'closeTravellerIcon']")
+	private WebElement cancelAddDetail;
+	
 	// Enter Mail id
 	@FindBy(xpath = "//label[.='email']/../..//input")
 	private WebElement emailId;
@@ -66,7 +87,7 @@ public class HPReviewPage {
 	private WebElement mobileNo;
 
 	// Select the Gst Code Checkbox
-	@FindBy(xpath = "react-select-3-input")
+	@FindBy(id = "react-select-3-input")
 	private WebElement gstCodeClick;
 
 	// Enter the Gst code
@@ -76,6 +97,36 @@ public class HPReviewPage {
 	// Click on Proceed to Payment
 	@FindBy(xpath = "//span[.='Proceed To Payments']")
 	private WebElement paymentProceed;
+
+	//Verify the traveller added
+	@FindBy(xpath = "//p[.= 'Profile Completed']")
+	private WebElement verifyAddedTraveller;
+	
+	@FindBy(xpath = "//div[.='Add Insurance']")
+	private WebElement verifyInsPage;
+	
+	@FindBy(xpath = "//span[@class ='reviewSprite BlueArrow pointer appendLeft40 down']")
+	private WebElement clickAddOns;
+	
+	@FindBy(xpath = "//button[.='SELECT']")
+	private WebElement selectAddOns;
+	
+	@FindBy(xpath = "//span[@class = 'font30 latoBlack appendRight5']")
+	private WebElement oldPrice;
+	
+	@FindBy(xpath = "//span[@class = 'addonPriceDiff']")
+	private WebElement insurancePrice;
+	
+	
+	
+	// Getters and setters of Verify Review
+	public WebElement getVerifyReview() {
+		return verifyReview;
+	}
+
+	public void clickVerifyReview() {
+		getVerifyReview().click();
+	}
 
 	// Getters and setters of Add Traveller -> Click
 	public WebElement getAddTravellerBtn() {
@@ -136,8 +187,8 @@ public class HPReviewPage {
 		return selectGender;
 	}
 
-	public void clickSelectGender() {
-		getSelectGender().click();
+	public void configSelectGender(String gender) {
+		getSelectGender().sendKeys(gender);
 	}
 
 	// Getters and setters of Select the Gender -> Male Adult 1
@@ -218,7 +269,7 @@ public class HPReviewPage {
 	}
 
 	public void configGstCodeClick(String gst) {
-		getGstCodeCheckbox().sendKeys(gst);
+		getGstCodeClick().sendKeys(gst);
 	}
 
 	// Getters and setters of Enter the Gst code
@@ -239,31 +290,72 @@ public class HPReviewPage {
 		getPaymentProceed().click();
 	}
 
+	//Getters of Verify the traveller details added
+	public WebElement getVerifyAddedTraveller() {
+		return verifyAddedTraveller;
+	}
+	
+	//Getters and setters of Cancel Add detail 
+	public WebElement getCancelAddDetail() {
+		return cancelAddDetail;
+	}
+
+	public void clickCancelAddDetail() {
+		getCancelAddDetail().click();
+	}
+
+	//Getters and setters of verify Proceed payment
+	public WebElement getVerifyInsPage() {
+		return verifyInsPage;
+	}
+
+	public void clickVerifyInsPage() {
+		getVerifyInsPage().click();
+	}
+
+	//Getters and setters of clicking addons
+	public WebElement getClickAddOns() {
+		return clickAddOns;
+	}
+
+	public void clickClickAddOns() {
+		getClickAddOns().click();
+	}
+
+	//Getters and setters of selecting the addons
+	public WebElement getSelectAddOns() {
+		return selectAddOns;
+	}
+
+	public void clickSelectAddOns() {
+		getSelectAddOns().click();
+	}
+
+	//Getters of OldPrice 
+	public WebElement getOldPrice() {
+		return oldPrice;
+	}
+
+	//Getters of addOns Price
+	public WebElement getInsurancePrice() {
+		return insurancePrice;
+	}
+
 	// Methods -> Add Traveller
-	public void travelerDetials() {
-		clickAddTravellerBtn();
-		configFirstName("Arun");
-		configLastName("Kumar");
-		configSelectDate("11");
-		configSelectMonth("May");
-		configSelectYear("2005");
-		clickSelectGender();
+	public void travelerDetials(String fname, String lname, String day, String month, String year, String gender) {
+		configFirstName(fname);
+		configLastName(lname);
+		configSelectDate(day);
+//		ahh.navigateDownDropdown(getSelectDate(), 5, 1);
+		configSelectMonth(month);
+		configSelectYear(year);
+		configSelectGender(gender);
 		clickSelectMaleAdult1();
-		clickSelectConfirmBtn();
-		clickSelectAdult2();
-		configFirstName("Arun");
-		configLastName("Kumar");
-		configSelectDate("11");
-		configSelectMonth("May");
-		configSelectYear("2005");
-		clickSelectGender();
-		clickSelectMaleAdult2();
 		clickSelectConfirmBtn();
 	}
 
 	// Add all the details and proceed to payment
 	public void travelerAddInfo() {
-		travelerDetials();
 		configEmailId("arun@gmail.com");
 		clickMobileCodeClick();
 		clickMobileCodeCheckbox();
@@ -272,5 +364,14 @@ public class HPReviewPage {
 		clickGstCodeCheckbox();
 		clickPaymentProceed();
 	}
+	
+	public boolean isCheckStatusButtonClickable() {
+		String classAttribute = getPaymentProceed().getAttribute("class");
+        if (classAttribute.contains("disabled") || classAttribute.contains("not-allowed")) {
+            return false;
+        }
+        return true;
+	}
+
 
 }

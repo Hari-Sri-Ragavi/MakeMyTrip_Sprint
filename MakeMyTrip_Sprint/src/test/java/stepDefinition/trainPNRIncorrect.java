@@ -3,21 +3,30 @@ package stepDefinition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import base.BaseClass;
 import base.Pages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class trainPNRIncorrect {
+	
+	private BaseClass b;
+    private Pages pages;
+
+    public trainPNRIncorrect(BaseClass b, Pages pages) {
+        this.b = b;
+        this.pages = pages;
+    }
 	@Given("the user is on the PNR  enquiry page")
 	public void the_user_is_on_the_pnr_enquiry_page() {
-		Pages.hp.clickTrainsMenu();
-		Pages.tpnr.clickCheckPnrStatus();
+		pages.hp.clickTrainsMenu();
+		pages.tpnr.clickCheckPnrStatus();
 	   
 	}
 	@When("the user enters an invalid or incorrect PNR number")
 	public void the_user_enters_an_invalid_or_incorrect_pnr_number() {
-		Pages.tpnr.setPnrInput("475602209A");
+		pages.tpnr.setPnrInput("475602209A");
 	    
 	}
 	@When("clicks on the Check")
@@ -26,10 +35,10 @@ public class trainPNRIncorrect {
 	}
 	@Then("the system should display an appropriate error message")
 	public void the_system_should_display_an_appropriate_error_message() {
-		System.out.println(Pages.tpnr.isCheckStatusButtonDisabled());
-		System.out.print(Pages.tpnr.isCheckStatusButtonClickable());
+		System.out.println(pages.tpnr.isCheckStatusButtonDisabled());
+		System.out.print(pages.tpnr.isCheckStatusButtonClickable());
 		
-		Assert.assertEquals(false,Pages.tpnr.isCheckStatusButtonClickable());
+		Assert.assertEquals(false,pages.tpnr.isCheckStatusButtonClickable());
 	}
 
 
