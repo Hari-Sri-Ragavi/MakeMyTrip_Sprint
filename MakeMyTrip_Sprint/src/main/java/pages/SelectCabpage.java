@@ -1,12 +1,13 @@
+
 package pages;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SelectCabpage {
@@ -19,44 +20,35 @@ public class SelectCabpage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    // ================= COMMON FILTER CLICK =================
-    public void clickFilter(String value) {
+    // CLICK FIRST CAB TYPE (Hatchback)
+    public void clickFirstCabType() {
 
-        By filter = By.xpath("//span[text()='" + value + "']");
-
-        WebElement el = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(filter)
+        List<WebElement> checkboxes = driver.findElements(
+                By.xpath("//div[contains(@class,'checkbox-module')]")
         );
 
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView(true);", el
-        );
+        checkboxes.get(0).click();   // first checkbox
 
-        wait.until(ExpectedConditions.elementToBeClickable(el)).click();
-
-        System.out.println("✔ Filter clicked: " + value);
-
-        // wait for results to load
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//span[text()='SELECT CAB']")
-        ));
+        System.out.println("First cab type selected");
     }
 
-    // ================= SELECT CAB =================
+    // CLICK FIRST FUEL TYPE (CNG)
+    public void clickFirstFuelType() {
+
+        List<WebElement> checkboxes = driver.findElements(
+                By.xpath("//div[contains(@class,'checkbox-module')]")
+        );
+
+        checkboxes.get(4).click();   // fuel section index (adjust if needed)
+
+        System.out.println("Fuel type selected");
+    }
+
+    // SELECT CAB
     public void clickSelectCab() {
 
-        By btn = By.xpath("(//span[text()='SELECT CAB'])[1]");
+        driver.findElements(By.xpath("//span[text()='SELECT CAB']")).get(0).click();
 
-        WebElement el = wait.until(
-                ExpectedConditions.elementToBeClickable(btn)
-        );
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView(true);", el
-        );
-
-        el.click();
-
-        System.out.println("✔ SELECT CAB clicked");
+        System.out.println("SELECT CAB clicked");
     }
 }
