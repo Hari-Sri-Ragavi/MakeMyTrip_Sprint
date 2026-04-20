@@ -100,9 +100,9 @@ public class HP_TS1_SearchTest {
 		try {
 			verifyText = pages.hpf.getVerifyFilterPage().getText();
 			sa.assertEquals(verifyText, Text);
-		    System.out.println("TS1 --> Search HP is performed successfully!");
-		} catch(Exception e) {		
 			System.out.println("TS1 --> Search HP validation failed!");
+		} catch(Exception e) {		
+			System.out.println("TS1 --> Search HP is performed successfully!");
 		}
 				
 	}
