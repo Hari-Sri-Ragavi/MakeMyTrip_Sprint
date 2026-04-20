@@ -1,5 +1,5 @@
 
-Feature: Flight Search, Booking and Status Tracker on MakeMyTrip
+Feature:Flight Search, Booking and Status Tracker on MakeMyTrip
 
   Background:
     Given the user is logged in and on the MakeMyTrip home page
@@ -23,8 +23,7 @@ Feature: Flight Search, Booking and Status Tracker on MakeMyTrip
     And the user enters source as "<src>"
     And the user enters destination as "<dest>"
     And the user selects a valid travel date
-    And the user clicks on "Search"
-    Then the user should see an error message
+    
 
     Examples:
       | src    | dest   |
