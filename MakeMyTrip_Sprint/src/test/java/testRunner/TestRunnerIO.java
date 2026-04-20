@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = {"src/test/resources/features/trainAddPassenger.feature"}, 
+@CucumberOptions(features = {"src/test/resources/features/HP_TS6_HPBooking.feature"}, 
 glue={"stepDefinition", "hooks"},
 dryRun=false)
 public class TestRunnerIO extends AbstractTestNGCucumberTests {

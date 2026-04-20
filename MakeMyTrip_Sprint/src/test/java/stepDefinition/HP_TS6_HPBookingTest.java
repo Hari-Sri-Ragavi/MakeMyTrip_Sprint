@@ -121,7 +121,10 @@ public class HP_TS6_HPBookingTest {
 		b.getDriver().switchTo().window(childWindowHandle);
 
 		wbu.waitForElementload(3);
+		try {
 		pages.hpa.clickSkipGuide();
+		} catch(Exception e) {
+		}
 		wbu.waitTillElementIsClckable(pages.hpa.getCloseQuote(), 20);
 		jsu.clickForceTheElement(pages.hpa.getCloseQuote());
 	}
@@ -158,7 +161,7 @@ public class HP_TS6_HPBookingTest {
 		wbu.waitTillElementIsClckable(pages.hpr.getAddTravellerBtn(), 5);
 		pages.hpr.getAddTravellerBtn().click();
 
-		eu.loadExcelFile("./src/test/resources/TestData/HPDetails.xlsx", "HPTravelerDetail");
+		eu.loadExcelFile("./src/test/resources/testdata/MakeMyTripExcelData.xlsx", "HPTravellerDetail");
 
 		Object[][] travellers = eu.getDataFromTheExcelSheet();
 
@@ -168,7 +171,6 @@ public class HP_TS6_HPBookingTest {
 			String day = row[3].toString();
 			String month = row[4].toString();
 			String year = row[5].toString();
-			String gender = row[6].toString();
 
 			pages.hpr.clickSelectConfirmBtn();
 			pages.hpr.configFirstName(fname);
