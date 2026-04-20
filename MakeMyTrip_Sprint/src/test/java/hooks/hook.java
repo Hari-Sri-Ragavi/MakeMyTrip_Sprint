@@ -19,9 +19,11 @@ import util.ScreenshotUtility;
 public class hook {
 
     private BaseClass b;
+    private Pages p;
 
-    public hook(BaseClass b) {
+    public hook(BaseClass b, Pages p) {
         this.b = b;
+        this.p = p;
     }
 
     @Before
@@ -35,35 +37,36 @@ public class hook {
         String tester = config.getProperty("tester");
         String env = config.getProperty("env");
 
-        // Initialize report once
         ExtentReportUtility.initReport(tester, browser, env);
 
-        // Create test entry for scenario
         ExtentReportUtility.test.set(
                 ExtentReportUtility.extent.createTest(scenario.getName())
         );
 
-        // Launch browser
+        // Launch Browser
         if (browser.equalsIgnoreCase("chrome")) {
-            b.driver = new ChromeDriver();
-        } else if (browser.equalsIgnoreCase("edge")) {
-            b.driver = new EdgeDriver();
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            b.driver = new FirefoxDriver();
-        } else {
-            b.driver = new ChromeDriver();
+            b.setDriver(new ChromeDriver());
+        } 
+        else if (browser.equalsIgnoreCase("edge")) {
+            b.setDriver(new EdgeDriver());
+        } 
+        else if (browser.equalsIgnoreCase("firefox")) {
+            b.setDriver(new FirefoxDriver());
+        } 
+        else {
+            b.setDriver(new ChromeDriver());
         }
 
-        b.driver.manage().window().maximize();
-        b.driver.manage().timeouts()
+        b.getDriver().manage().window().maximize();
+
+        b.getDriver().manage().timeouts()
                 .implicitlyWait(Duration.ofSeconds(timeout));
 
-        // Open URL
-        b.driver.get(url + "/flights");
+        b.getDriver().get(url + "/flights");
 
-        // Load pages
-        Pages.loadAllPages(b.driver);
-        Pages.hp.closeModalIfPresent();
+        // Load Pages
+        p.loadAllPages(b.getDriver());
+        p.hp.closeModalIfPresent();
 
         ExtentReportUtility.test.get()
                 .info("Browser launched and application opened");
@@ -77,7 +80,7 @@ public class hook {
             if (scenario.isFailed()) {
 
                 String path = new ScreenshotUtility()
-                        .capture(b.driver, scenario.getName());
+                        .capture(b.getDriver(), scenario.getName());
 
                 ExtentReportUtility.test.get()
                         .fail("Scenario Failed")
@@ -91,12 +94,9 @@ public class hook {
 
         } catch (Exception e) {
             e.printStackTrace();
+
         } finally {
-
-            if (b.driver != null) {
-                b.driver.quit();
-            }
-
+        		b.quitDriver();
             ExtentReportUtility.extent.flush();
         }
     }

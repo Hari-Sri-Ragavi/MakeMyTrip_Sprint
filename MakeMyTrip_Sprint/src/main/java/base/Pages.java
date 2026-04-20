@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import pages.CABS_SearchPage;
 import pages.HomePage;
 import pages.SelectCabpage;
+import pages.TrainAddPassengerPage;
+import pages.TrainFilterPage;
 import pages.FlightSearchPage;
 import pages.FlightTrackerPage;
 import pages.HomePage;
@@ -13,22 +15,20 @@ import pages.TrainPNRPage;
 import pages.TrainSearchPage;
 
 public class Pages {
-	public static HomePage hp;
-	public static TrainSearchPage tp;
-	public static CABS_SearchPage csp;
-	public static SelectCabpage scp;
-	public static HotelSearchPage hsp;
-	 public static FlightSearchPage fp;  // Added
-	 public static FlightTrackerPage ftp;  // Add this
-	 static {
-	        // Initialize with null, will be set in loadAllPages
-	        ftp = null;
-	    }
-	public static TrainPNRPage tpnr;
+	public HomePage hp;
+	public TrainSearchPage tp;
+	public CABS_SearchPage csp;
+	public SelectCabpage scp;
+	public HotelSearchPage hsp;
+	 public FlightSearchPage fp;  // Added
+	 public FlightTrackerPage ftp;  // Add this
+	 public TrainPNRPage tpnr;
+	 public TrainAddPassengerPage tap;
+	  public TrainFilterPage tfp;
 	
 	
 	
-	public static void loadAllPages(WebDriver driver)
+	public  void loadAllPages(WebDriver driver)
 	{
 		hp=new HomePage(driver);
 		tp=new TrainSearchPage(driver);
@@ -38,6 +38,8 @@ public class Pages {
 		fp = new FlightSearchPage(driver);  // Added
 		 ftp = new FlightTrackerPage(driver);  // Initialize this
 		tpnr=new TrainPNRPage(driver);
+		 tap = new TrainAddPassengerPage(driver);
+		 tfp = new TrainFilterPage(driver);
 	}
 	
 	
