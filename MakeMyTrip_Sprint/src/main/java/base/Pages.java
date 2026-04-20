@@ -31,10 +31,10 @@ public class Pages {
 	public TrainFilterPage tfp;
 
 	// Holiday Package
-	public static HPHomePage home;
-	public static HPFilterPage hpf;
-	public static HPActivityInfoPage hpa;
-	public static HPReviewPage hpr;
+	public  HPHomePage home;
+	public HPFilterPage hpf;
+	public  HPActivityInfoPage hpa;
+	public  HPReviewPage hpr;
 
 	public void loadAllPages(WebDriver driver) {
 		hp = new HomePage(driver);
