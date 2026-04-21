@@ -3,6 +3,8 @@ package stepDefinition;
 import static org.testng.Assert.assertTrue;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +15,7 @@ import org.testng.Assert;
 
 import base.BaseClass;
 import base.Pages;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -20,7 +23,7 @@ public class FlightSearchSteps {
 
 	String originalPrice;
 	String priceAfterBaggage;
-	boolean baggageAdded = false;
+
 
 	String selectedAirline;
 
@@ -51,6 +54,29 @@ public class FlightSearchSteps {
 		pages.fp.enterDestination(value);
 	}
 
+	
+
+	@When("the user enters source and destination")
+	public void enterSourceAndDestination(DataTable dataTable) throws InterruptedException {
+
+	    List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+
+	    for (Map<String, String> row : data) {
+
+	        String src = row.get("src");
+	        
+	        String dest = row.get("dest");
+
+	        pages.fp.enterSource(src);
+	       
+	        pages.fp.enterDestination(dest);
+
+	        b.getDriver().navigate().refresh();
+	        pages.loadAllPages(b.getDriver());
+	        pages.hp.closeModalIfPresent();
+	        
+	    }
+	}
 	@When("the user selects a valid travel date")
 	public void select_date() {
 		pages.fp.selectDate("June", "4");
@@ -120,12 +146,22 @@ public class FlightSearchSteps {
 		        text.replaceAll("\\s+", " ").trim()
 		);
 	}
+	@Then("the system should show an error message")
+	public void the_system_should_show_an_error_message() {
 
-@Then("the system should show an error message")
-public void the_system_should_show_an_error_message() {
- String errorText ="From & To airports cannot be the same";
- String text =b.getDriver().findElement(By.xpath("//span[@class=\"redText fltErrorMsgText\"]")).getText();
- Assert.assertEquals(errorText, text);
-}
+	    WebDriverWait wait = new WebDriverWait(b.getDriver(), Duration.ofSeconds(15));
 
+	    WebElement error = wait.until(
+	        ExpectedConditions.visibilityOfElementLocated(
+	            By.xpath("//span[contains(@class,'fltErrorMsgText')]")
+	        )
+	    );
+
+	    String actual = error.getText();
+	    String expected = "From & To airports cannot be the same";
+
+	    System.out.println("Error text: " + actual);
+
+	    Assert.assertEquals(actual.trim(), expected.trim());
+	}
 }
