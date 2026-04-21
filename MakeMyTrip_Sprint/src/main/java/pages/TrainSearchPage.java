@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,18 +12,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import base.BaseClass;
-
 public class TrainSearchPage {
-	WebDriver driver;
-	WebDriverWait wait;
-	public TrainSearchPage(WebDriver driver) {
-	    this.driver = driver;
-	    this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    PageFactory.initElements(driver, this);
-	}
-	
-	@FindBy(xpath = "//span[@data-cy='bookTrainTickets']")
+
+    WebDriver driver;
+    WebDriverWait wait;
+
+    public TrainSearchPage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        PageFactory.initElements(driver, this);
+    }
+
+    @FindBy(xpath = "//span[@data-cy='bookTrainTickets']")
     WebElement bookTrain;
 
     @FindBy(css = "label[for='fromCity']")
@@ -39,43 +40,54 @@ public class TrainSearchPage {
 
     @FindBy(xpath = "//a[@data-cy='submit']")
     WebElement searchBtn;
-    
-    
+
+    @FindBy(xpath = "//li[@data-cy='menu_Trains']")
+    private WebElement trainsMenu;
 
     @FindBy(xpath = "//span[@data-cy='bookTrainTickets']")
     private WebElement bookTrainTickets;
 
-    // Actions (methods)
-   
+    public void clickTrainsMenu() {
+        trainsMenu.click();
+    }
 
     public void clickBookTrainTickets() {
         bookTrainTickets.click();
     }
-	
-   
 
     public void selectFromCity(String city) {
         fromCityLabel.click();
-
         wait.until(ExpectedConditions.visibilityOf(fromInput));
+        fromInput.clear();
         fromInput.sendKeys(city);
 
-        WebElement option = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//ul[@role='listbox']//li[contains(.,'" + city + "')]"))
-        );
-        option.click();
+        String xpath = "//ul[@role='listbox']//li[contains(.,'" + city + "')]";
+        
+        for (int attempt = 0; attempt < 3; attempt++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
+                return; // success
+            } catch (StaleElementReferenceException e) {
+                // dropdown re-rendered, retry
+            }
+        }
     }
 
     public void selectToCity(String city) {
         wait.until(ExpectedConditions.visibilityOf(toInput));
+        toInput.clear();
         toInput.sendKeys(city);
 
-        WebElement option = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//ul[@role='listbox']//li[contains(.,'" + city + "')]"))
-        );
-        option.click();
+        String xpath = "//ul[@role='listbox']//li[contains(.,'" + city + "')]";
+
+        for (int attempt = 0; attempt < 3; attempt++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
+                return;
+            } catch (StaleElementReferenceException e) {
+                // retry
+            }
+        }
     }
 
     public void selectDate(String month, String day) {
@@ -110,7 +122,7 @@ public class TrainSearchPage {
     public void selectClass(String className) {
 
         WebElement classOption = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
+                ExpectedConditions.elementToBeClickable(
                         By.xpath("//ul[@class='travelForPopup']//li[contains(.,'" + className + "')]"))
         );
 
@@ -121,8 +133,3 @@ public class TrainSearchPage {
         wait.until(ExpectedConditions.elementToBeClickable(searchBtn)).click();
     }
 }
-    
-	
-	
-	
-	

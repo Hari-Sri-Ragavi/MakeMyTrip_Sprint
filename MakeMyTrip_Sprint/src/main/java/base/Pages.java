@@ -23,26 +23,34 @@ import pages.HomePage;
 import pages.HotelSearchPage;
 import pages.ReviewBookingPage;
 import pages.TrainPNRPage;
+import pages.TrainPaymentPage;
 import pages.TrainSearchPage;
 import util.AllFunctionalities;
 
 public class Pages {
+	
 	public HomePage hp;
-	public TrainSearchPage tp;
+	
 	public HotelSearchPage hsp;
+	
+	//Flight Module
 	public FlightSearchPage fp; // Added
 	public FlightTrackerPage ftp; // Add this
+	
+	//Train Module
+	public TrainSearchPage tp;
 	public TrainPNRPage tpnr;
 	public TrainAddPassengerPage tap;
 	public TrainFilterPage tfp;
+	public TrainPaymentPage tpp;
 
-	// Holiday Package
+	// Holiday Package Module
 	public  HPHomePage home;
 	public HPFilterPage hpf;
 	public  HPActivityInfoPage hpa;
 	public  HPReviewPage hpr;
 	
-	//Cab
+	//Cab Module
 	public  Homepagecab hpc;
 	public  CabPage cp;
 	public CABS_SearchPage csp;
@@ -56,20 +64,24 @@ public class Pages {
 	
 
 	public void loadAllPages(WebDriver driver) {
+		
+		//home
 		hp = new HomePage(driver);
-		tp = new TrainSearchPage(driver);
+		
+		//hotel
 		hsp = new HotelSearchPage(driver);
+		
+		//flight
 		fp = new FlightSearchPage(driver); // Added
 		ftp = new FlightTrackerPage(driver); // Initialize this
-		tpnr = new TrainPNRPage(driver);
-		tap = new TrainAddPassengerPage(driver);
-		tfp = new TrainFilterPage(driver);
+		
 
 		// Holiday Package
 		home = new HPHomePage(driver);
 		hpf = new HPFilterPage(driver);
 		hpa = new HPActivityInfoPage(driver);
 		hpr = new HPReviewPage(driver);
+		
 		//cab
 		hpc=new Homepagecab(driver);
 		cp=new CabPage(driver);
@@ -81,6 +93,13 @@ public class Pages {
 		gbp=new GiftCardBookingPage(driver);
 		all=new AllFunctionalities(driver);
 		cap=new CabAirportPage(driver);
+		
+		//train
+		tp = new TrainSearchPage(driver);
+		tpnr = new TrainPNRPage(driver);
+		tap = new TrainAddPassengerPage(driver);
+		tfp = new TrainFilterPage(driver);
+		tpp=new TrainPaymentPage(driver);
 		
 	}
 

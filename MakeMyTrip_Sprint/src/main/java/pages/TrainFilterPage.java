@@ -48,8 +48,24 @@ public class TrainFilterPage {
 
     // Select Train Type dynamically
     public void selectTrainType(String trainType) {
-        By type = By.xpath("//span[contains(text(),'Train Types')]/../..//ul//li//p[contains(text(),'" + trainType + "')]");
-        wait.until(ExpectedConditions.elementToBeClickable(type)).click();
+
+        By requestedType = By.xpath(
+            "//span[contains(text(),'Train Types')]/../..//ul//li//p[contains(text(),'" 
+            + trainType + "')]"
+        );
+
+        By defaultType = By.xpath(
+            "//span[contains(text(),'Train Types')]/../..//ul//li//p[contains(text(),'Others')]"
+        );
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(requestedType)).click();
+            System.out.println(trainType + " selected.");
+        } 
+        catch (Exception e) {
+            System.out.println(trainType + " not available. Selecting Others.");
+            wait.until(ExpectedConditions.elementToBeClickable(defaultType)).click();
+        }
     }
 
     // Always select first displayed train

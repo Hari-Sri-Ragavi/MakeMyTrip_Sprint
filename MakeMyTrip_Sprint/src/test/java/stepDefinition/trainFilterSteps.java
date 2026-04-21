@@ -1,10 +1,16 @@
 package stepDefinition;
 
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.testng.Assert;
+
 import base.BaseClass;
 import base.Pages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import util.ExcelReader;
 
 public class trainFilterSteps {
 
@@ -15,33 +21,45 @@ public class trainFilterSteps {
         this.b = b;
         this.pages = pages;
     }
+    ExcelReader excel=new ExcelReader();
+	
 
     @Given("the user accesses the train reservation section")
     public void the_user_accesses_the_train_reservation_section() {
-        pages.hp.clickTrainsMenu();
+        pages.tp.clickTrainsMenu();
         pages.tp.clickBookTrainTickets();
     }
-
-    @When("the user provides departure station details")
-    public void the_user_provides_departure_station_details() {
-        pages.tp.selectFromCity("Chennai");
+    @When("the user provides departure station details from excel")
+    public void the_user_provides_departure_station_details_from_excel() throws EncryptedDocumentException, IOException {
+    	excel.loadExcelFile("./src/test/resources/testdata/MakeMyTripExcelData.xlsx", "Train");
+    	 String fromStation = excel.getDataFromSingleCell(1, 0) ; // Row 1 Col 0
+         pages.tp.selectFromCity(fromStation);
+    	
+       
     }
-
-    @When("the user provides arrival station details")
-    public void the_user_provides_arrival_station_details() {
-        pages.tp.selectToCity("Salem");
+    @When("the user provides arrival station details from excel")
+    public void the_user_provides_arrival_station_details_from_excel() {
+    	String toStation=excel.getDataFromSingleCell(1, 1);
+    	pages.tp.selectToCity(toStation);
+        
     }
+    @When("the user chooses a journey schedule date from excel")
+    public void the_user_chooses_a_journey_schedule_date_from_excel() {
 
-    @When("the user chooses a journey schedule date")
-    public void the_user_chooses_a_journey_schedule_date() {
-        pages.tp.selectDate("May", "9");
+    	String day = excel.getDataFromSingleCell(1, 3).trim();      
+	    String month = excel.getDataFromSingleCell(1, 2).trim(); 
+	    pages.tp.selectDate(month, day);
+    	}
+    	
+        
+    
+    @When("the user picks a preferred coach category from excel")
+    public void the_user_picks_a_preferred_coach_category_from_excel() {
+    	String coach=excel.getDataFromSingleCell(1, 4);
+    	pages.tp.selectClass(coach);
+        
     }
-
-    @When("the user picks a preferred coach category")
-    public void the_user_picks_a_preferred_coach_category() {
-        pages.tp.selectClass("First Class");
-    }
-
+    
     @When("the user initiates the train lookup")
     public void the_user_initiates_the_train_lookup() {
         pages.tp.clickSearch();
@@ -49,29 +67,49 @@ public class trainFilterSteps {
 
     @Then("the available train options should be listed")
     public void the_available_train_options_should_be_listed() {
-        System.out.println("Trains are displayed");
+       Assert.assertTrue(pages.tfp.getHeaderSearchBar().isDisplayed());
     }
+    @When("the user sets an arrival timing filter from excel")
+    public void the_user_sets_an_arrival_timing_filter_from_excel() {
+    	 String arrivalTime = excel.getDataFromSingleCell(1, 5);   // 12 AM - 6 AM
 
-    @When("the user sets an arrival timing filter")
-    public void the_user_sets_an_arrival_timing_filter() {
-        pages.tfp.selectArrivalTime("12am - 6am");
+        arrivalTime = arrivalTime
+                        .replace(" AM", "am")
+                        .replace(" PM", "pm")
+                        .replace(" ", "");
+
+        arrivalTime = arrivalTime.substring(0, arrivalTime.indexOf("-"))
+                     + " - " +
+                     arrivalTime.substring(arrivalTime.indexOf("-") + 1);
+
+        pages.tfp.selectArrivalTime(arrivalTime);
+       
     }
+    @When("the user sets a departure timing filter from excel")
+    public void the_user_sets_a_departure_timing_filter_from_excel() {
+    	String departureTime = excel.getDataFromSingleCell(1, 6);   // 12 AM - 6 AM
 
-    @When("the user sets a departure timing filter")
-    public void the_user_sets_a_departure_timing_filter() {
-        pages.tfp.selectDepartureTime("6am - 12pm");
+        departureTime = departureTime
+                        .replace(" AM", "am")
+                        .replace(" PM", "pm")
+                        .replace(" ", "");
+
+        departureTime = departureTime.substring(0, departureTime.indexOf("-"))
+                     + " - " +
+                    departureTime.substring(departureTime.indexOf("-") + 1);
+
+        pages.tfp.selectDepartureTime(departureTime);
+    	
+        
     }
-
-    @When("the user applies a train type preference")
-    public void the_user_applies_a_train_type_preference() {
-        pages.tfp.selectTrainType("Others - O");
+    @When("the user applies a train type preference from excel")
+    public void the_user_applies_a_train_type_preference_from_excel() {
+    	String trainType=excel.getDataFromSingleCell(1, 7);
+  
+    	pages.tfp.selectTrainType(trainType);
+        
     }
-
-    @Then("only trains matching the selected filters should remain visible")
-    public void only_trains_matching_the_selected_filters_should_remain_visible() {
-        System.out.println("Filtered trains are shown");
-    }
-
+    
     @When("the user selects the first train from the filtered list")
     public void the_user_selects_the_first_train_from_the_filtered_list() {
         pages.tfp.selectFirstTrain();
@@ -79,6 +117,6 @@ public class trainFilterSteps {
 
     @Then("the train information and booking continuation page should open")
     public void the_train_information_and_booking_continuation_page_should_open() {
-        System.out.println("The train is displayed");
+       Assert.assertTrue(pages.tap.verifyTravellerPage().isDisplayed());
     }
 }

@@ -9,21 +9,23 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 public class ExtentReportUtility {
 
     public static ExtentReports extent;
+
+    // Parent Node = Scenario
     public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
-    public static void initReport(String tester, String browser, String env) {
+    // Child Node = Step
+    public static ThreadLocal<ExtentTest> step = new ThreadLocal<>();
+
+    public static synchronized void initReport(String tester, String browser, String env) {
 
         if (extent == null) {
 
-            String time =
-                    new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+            String time = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
                     .format(new Date());
 
-            String path =
-                    "./target/Reports/MMT_Report_" + time + ".html";
+            String path = "./target/Reports/MMT_Report_" + time + ".html";
 
-            ExtentSparkReporter spark =
-                    new ExtentSparkReporter(path);
+            ExtentSparkReporter spark = new ExtentSparkReporter(path);
 
             spark.config().setReportName("MakeMyTrip Automation Report");
             spark.config().setDocumentTitle("BDD Execution Report");
@@ -34,7 +36,13 @@ public class ExtentReportUtility {
             extent.setSystemInfo("Tester", tester);
             extent.setSystemInfo("Browser", browser);
             extent.setSystemInfo("Environment", env);
-            extent.setSystemInfo("Framework", "Selenium + Cucumber");
+            extent.setSystemInfo("Framework", "Selenium + Cucumber + TestNG");
+        }
+    }
+
+    public static synchronized void flushReport() {
+        if (extent != null) {
+            extent.flush();
         }
     }
 }

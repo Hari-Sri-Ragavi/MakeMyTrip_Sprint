@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import util.AllFunctionalities;
 
-
 public class TrainAddPassengerPage {
 
     WebDriver driver;
@@ -89,8 +88,8 @@ public class TrainAddPassengerPage {
     // Methods
     // ===========================
 
-    public void verifyTravellerPage() {
-        wait.until(ExpectedConditions.visibilityOf(travellerHeader));
+    public WebElement verifyTravellerPage() {
+       return  wait.until(ExpectedConditions.visibilityOf(travellerHeader));
     }
 
     public void selectRefundOption() {
