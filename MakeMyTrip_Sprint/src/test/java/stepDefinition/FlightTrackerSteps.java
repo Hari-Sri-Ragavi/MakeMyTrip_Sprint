@@ -1,70 +1,84 @@
-
 package stepDefinition;
 
 import static org.testng.Assert.assertTrue;
 
+import org.testng.Assert;
+
 import base.BaseClass;
 import base.Pages;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-import io.cucumber.java.en.Then;
+import io.cucumber.java.en.*;
 import pages.FlightTrackerPage;
 import util.ExcelReader;
 
 public class FlightTrackerSteps {
-	private BaseClass b;
-    private Pages pages;
-
-     public FlightTrackerSteps(BaseClass b, Pages pages) {
-        this.b = b;
-        this.pages = pages;
-    }
 
     private FlightTrackerPage flightTrackerPage;
     private ExcelReader excelReader;
-    private static int rowCounter = 1;
-    private static String currentFlightNumber;
-    private static String expectedStatus;
 
-    private static final String EXCEL_PATH =
-            System.getProperty("user.dir") + "/src/test/resources/testdata/make_my_trip_Excel.xlsx";
+    private String currentFlightNumber;
+    private String expectedStatus;
 
-    public FlightTrackerSteps() {
+    private BaseClass b;
+    private Pages pages;
+
+    public FlightTrackerSteps(BaseClass b, Pages pages) {
+        this.b = b;
+        this.pages = pages;
         this.excelReader = new ExcelReader();
     }
 
-    @Given("the user is logged in and on the MakeMyTrip home page")
-    public void the_user_is_logged_in_and_on_the_make_my_trip_home_page() {
+    private static final String EXCEL_PATH =
+            System.getProperty("user.dir") + "/src/test/resources/testdata/MakeMyTripExcelData.xlsx";
+
+    @Given("the user is on the MakeMyTrip homepage")
+    public void the_user_is_on_the_make_my_trip_homepage() {
         pages.hp.closeModalIfPresent();
         assertTrue(true);
-        System.out.println("User on home page");
+        System.out.println("User on homepage");
     }
 
-    @When("the user navigates to the Flights module")
-    public void user_navigates_to_flights_module() {
+    @When("the user jumps to the Flights module")
+    public void the_user_jumps_to_the_flights_module() {
         pages.hp.clickFlightsTab();
-        System.out.println("Navigated to Flights");
     }
 
-    @And("the user clicks on Flight Tracker option")
-    public void user_clicks_flight_tracker_option() {
-        pages.ftp.clickFlightStatusTab();
-        pages.ftp.clickFlightTrackerOption();
-        System.out.println("Flight Tracker opened");
+    @When("the user clicks on {string} option")
+    public void theUserClicksOnOption(String option) {
+        flightTrackerPage = pages.ftp;
+
+        if (option.equalsIgnoreCase("Flight Status")) {
+            flightTrackerPage.clickFlightTrackerOption();
+            flightTrackerPage.waitForFlightTrackerPopup();
+        }
     }
 
-    @And("the user tracks flight {string} on date {string}")
-    public void user_tracks_flight(String flightNumber, String date) {
-        pages.ftp.trackFlight(flightNumber, date);
-        pages.ftp.waitForFlightStatusToLoad();
-        System.out.println("Flight tracked: " + flightNumber);
+    @When("the user tracks flight using row {int} from Excel sheet {string}")
+    public void the_user_tracks_flight_using_row_from_excel(int rowNumber, String sheetName) throws Exception {
+
+        excelReader.loadExcelFile(EXCEL_PATH, sheetName);
+
+        currentFlightNumber = excelReader.getDataFromSingleCell(rowNumber, 0);
+        expectedStatus = excelReader.getDataFromSingleCell(rowNumber, 1);
+
+        System.out.println("Row: " + rowNumber);
+        System.out.println("Flight: " + currentFlightNumber);
+        System.out.println("Expected: " + expectedStatus);
+
+        flightTrackerPage.enterFlightNumber(currentFlightNumber);
+        flightTrackerPage.clickTrackButton();
     }
 
-    @Then("the flight status should be {string}")
-    public void flight_status_should_be(String expectedStatus) {
-        String actualStatus = pages.ftp.getFlightStatus();
-        assertEquals(actualStatus, expectedStatus, 
-            "Status mismatch! Expected: " + expectedStatus + ", Actual: " + actualStatus);
-        System.out.println("Status verified: " + actualStatus);
+
+    @Then("each flight status should be displayed correctly as per Excel")
+    public void each_flight_status_should_be_displayed_correctly_as_per_excel() {
+
+        String actualStatus = flightTrackerPage.getDerivedFlightStatus();
+
+        System.out.println("Actual: " + actualStatus);
+
+        Assert.assertEquals(actualStatus, expectedStatus,
+                "Flight " + currentFlightNumber + " status mismatch.");
+        
+        System.out.println("Verified: " + currentFlightNumber);
     }
 }

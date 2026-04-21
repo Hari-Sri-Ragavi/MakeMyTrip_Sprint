@@ -10,7 +10,13 @@ public class BaseClass {
         driver.set(d);
     }
 
+    // Existing instance method (keep this)
     public WebDriver getDriver() {
+        return driver.get();
+    }
+
+    // NEW static method for listeners/utilities
+    public static WebDriver getCurrentDriver() {
         return driver.get();
     }
 
