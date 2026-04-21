@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -14,7 +15,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import util.ConfigReader;
 import util.ExtentReportUtility;
-import util.ScreenshotUtility;
 
 public class hook {
 
@@ -39,13 +39,18 @@ public class hook {
 
         ExtentReportUtility.initReport(tester, browser, env);
 
+        // Create Parent Scenario Node
         ExtentReportUtility.test.set(
                 ExtentReportUtility.extent.createTest(scenario.getName())
         );
 
         // Launch Browser
         if (browser.equalsIgnoreCase("chrome")) {
-            b.setDriver(new ChromeDriver());
+        	ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-blink-features=AutomationControlled");
+			options.addArguments("--incognito");
+			b.setDriver(new ChromeDriver(options));
+           
         } 
         else if (browser.equalsIgnoreCase("edge")) {
             b.setDriver(new EdgeDriver());
@@ -78,26 +83,17 @@ public class hook {
         try {
 
             if (scenario.isFailed()) {
-
-                String path = new ScreenshotUtility()
-                        .capture(b.getDriver(), scenario.getName());
-
-                ExtentReportUtility.test.get()
-                        .fail("Scenario Failed")
-                        .addScreenCaptureFromPath(path);
-
+                ExtentReportUtility.test.get().fail("Scenario Failed");
             } else {
-
-                ExtentReportUtility.test.get()
-                        .pass("Scenario Passed");
+                ExtentReportUtility.test.get().pass("Scenario Passed");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
 
         } finally {
-        		b.quitDriver();
-            ExtentReportUtility.extent.flush();
+            // b.quitDriver();
+            ExtentReportUtility.flushReport();
         }
     }
 }

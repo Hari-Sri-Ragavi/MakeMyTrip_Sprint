@@ -19,7 +19,7 @@ public class trainPassengerDetails {
 
     @Given("the user opens the train booking portal")
     public void the_user_opens_the_train_booking_portal() {
-        pages.hp.clickTrainsMenu();
+        pages.tp.clickTrainsMenu();
         pages.tp.clickBookTrainTickets();
     }
 
@@ -68,10 +68,6 @@ public class trainPassengerDetails {
         pages.tfp.selectTrainType("Others - O");
     }
 
-    @Then("only relevant train options should be shown")
-    public void only_relevant_train_options_should_be_shown() {
-        System.out.println("The available trains are displayed");
-    }
 
     @When("the user picks the first available train")
     public void the_user_picks_the_first_available_train() {
@@ -84,33 +80,31 @@ public class trainPassengerDetails {
         pages.tap.selectRefundOption();
     }
 
-    @When("the user enters passenger full name")
-    public void the_user_enters_passenger_full_name() {
-        pages.tap.addPassenger("Hari", "21", "Female", "Upper");
-    }
 
-    @When("the user enters passenger age details")
-    public void the_user_enters_passenger_age_details() {
-        pages.tap.enterIRCTCUsername("Hari_Sri_Ragavi");
+    @When("the user enters passenger details")
+    public void the_user_enters_passenger_details() {
+    		pages.tap.addPassenger("Hari", "21", "Female", "Side Upper");
+       
     }
-
-    @When("the user selects the passenger gender")
-    public void the_user_selects_the_passenger_gender() {
-        pages.tap.selectState("Andhra Pradesh");
+    @When("the user enters valid IRCTC username")
+    public void the_user_enters_valid_irctc_username() {
+    	pages.tap.enterIRCTCUsername("Hari_Sri_Ragavi");
+       
     }
-
-    @When("the user provides a valid mobile number")
-    public void the_user_provides_a_valid_mobile_number() {
-        pages.tap.enterContactDetails("abc@gmail.com", "1112345678");
+    @When("the user provides a valid mobile number and vaild email")
+    public void the_user_provides_a_valid_mobile_number_and_vaild_email() {
+    	pages.tap.enterContactDetails("abc@gmail.com", "1234555789");
+        
     }
-
-    @When("the user provides a valid email id")
-    public void the_user_provides_a_valid_email_id() {
-        pages.tap.clickBookNow();
+    @When("the selects all the other additional options")
+    public void the_selects_all_the_other_additional_options() {
+    	pages.tap.selectState("Kerala");
+    	
+       
     }
-
     @Then("the passenger information should be submitted successfully")
     public void the_passenger_information_should_be_submitted_successfully() {
-        System.out.println("The user is taken to the booking page");
+    	pages.tap.clickBookNow();
+Assert.assertTrue(pages.tpp.getScanToPayHeader().isDisplayed());
     }
 }
