@@ -2,35 +2,13 @@ package base;
 
 import org.openqa.selenium.WebDriver;
 
-import pages.CABS_SearchPage;
-import pages.CabAirportPage;
-import pages.CabPage;
-import pages.HomePage;
-import pages.Homepagecab;
-import pages.SelectCabpage;
-import pages.SelectGiftCardPage;
-import pages.SelectOccasionPage;
-import pages.TrainAddPassengerPage;
-import pages.TrainFilterPage;
-import pages.FlightSearchPage;
-import pages.FlightTrackerPage;
-import pages.GiftCardBookingPage;
-import pages.HPActivityInfoPage;
-import pages.HPFilterPage;
-import pages.HPHomePage;
-import pages.HPReviewPage;
-import pages.HomePage;
-import pages.HotelSearchPage;
-import pages.ReviewBookingPage;
-import pages.TrainPNRPage;
-import pages.TrainPaymentPage;
-import pages.TrainSearchPage;
+import pages.*;
 import util.AllFunctionalities;
 
 public class Pages {
 	
 	public HomePage hp;
-	
+	public LoginPage lp;
 	public HotelSearchPage hsp;
 	
 	//Flight Module
@@ -65,6 +43,7 @@ public class Pages {
 
 	public void loadAllPages(WebDriver driver) {
 		
+		lp = new LoginPage(driver);
 		//home
 		hp = new HomePage(driver);
 		
