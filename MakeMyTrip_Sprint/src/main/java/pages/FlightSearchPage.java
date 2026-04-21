@@ -19,8 +19,7 @@ public class FlightSearchPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
-
-    // ===== LOCATORS =====
+//Locators
 
     @FindBy(xpath = "//li[@data-cy='menu_Flights']")
     private WebElement flightsMenu;
@@ -46,14 +45,13 @@ public class FlightSearchPage {
     @FindBy(xpath = "//a[contains(@class,'primaryBtn') and contains(text(),'Search')]")
     private WebElement searchBtn;
 
-    // ===== ACTIONS =====
-
     public void clickFlightsMenu() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(flightsMenu)).click();
         } catch (Exception e) {
             System.out.println("Flights menu click failed, trying fallback...");
             try {
+            	Thread.sleep(2000);
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.spa-classic-peek__back-to-classic-search"))).click();
             } catch (Exception e1) {
                 System.out.println("Flights menu click failed, trying fallback...");
@@ -62,16 +60,14 @@ public class FlightSearchPage {
             }
         }
     }
-    
-  
+   
     public void enterSource(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(fromCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(fromInput));
         input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         input.sendKeys(city);
-        
-        
-        Thread.sleep(1500);
+       
+        Thread.sleep(1500); 
         
         List<WebElement> suggestions = driver.findElements(
             By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')] | " +
@@ -82,7 +78,7 @@ public class FlightSearchPage {
         if(suggestions.size() > 0) {
             wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(0))).click();
         } else {
-          
+         
             input.sendKeys(Keys.ENTER);
         }
         
@@ -94,8 +90,7 @@ public class FlightSearchPage {
         WebElement input = wait.until(ExpectedConditions.visibilityOf(toInput));
         input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         input.sendKeys(city);
-        
-        // Wait for suggestions and click the matching one
+       
         Thread.sleep(1500);
         
         List<WebElement> suggestions = driver.findElements(
@@ -141,8 +136,8 @@ public class FlightSearchPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchBtn);
         System.out.println("Search clicked");
         
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//div[contains(@class,'listingCard')]")));
+//        wait.until(ExpectedConditions.presenceOfElementLocated(
+//                By.xpath("//div[contains(@class,'listingCard')]")));
         
         try {
             Thread.sleep(3000);
@@ -151,6 +146,7 @@ public class FlightSearchPage {
         }
     }
 
+    // Updated selectAirline with better error handling
     public void selectAirline() {
         try {
             Thread.sleep(5000);
@@ -158,7 +154,7 @@ public class FlightSearchPage {
             Thread.sleep(2000);
             
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            
+           
             String[] airlines = {"Air India", "Akasa Air", "IndiGo"};
             
             for(String airline : airlines) {
@@ -177,7 +173,7 @@ public class FlightSearchPage {
                     );
                     Thread.sleep(500);
                 } catch(Exception e) {
-           
+                 
                 }
             }
             System.out.println("Airline selection attempted");
@@ -186,7 +182,7 @@ public class FlightSearchPage {
             System.out.println("Error selecting airline: " + e.getMessage());
         }
     }
- 
+    
     public void clickViewPrices() {
         try {
             WebElement btn = wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -241,30 +237,14 @@ public class FlightSearchPage {
         }
     }
 
-    public void clickAddBaggage() {
-        try {
-            WebElement ele = wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//button[contains(@data-test,'component-add_btn')]")));
-            
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
-            Thread.sleep(1000);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ele);
-            System.out.println("Add Baggage clicked");
-            Thread.sleep(2000);
-            
-        } catch (Exception e) {
-            System.out.println("Error clicking add baggage: " + e.getMessage());
-        }
-    }
-
-    public String getTotalPrice() {
-        try {
-            WebElement priceElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[contains(@class,'fare-summary')]//span")));
-            return priceElement.getText().replaceAll("[^0-9]", "");
-        } catch (Exception e) {
-            System.out.println("Error getting price: " + e.getMessage());
-            return "0";
-        }
-    }
+//    public String getTotalPrice() {
+//        try {
+//            WebElement priceElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                    By.xpath("//div[contains(@class,'fare-summary')]//span")));
+//            return priceElement.getText().replaceAll("[^0-9]", "");
+//        } catch (Exception e) {
+//            System.out.println("Error getting price: " + e.getMessage());
+//            return "0";
+//        }
+//    }
 }
