@@ -1,4 +1,6 @@
 Feature:Update the Package Activity
+ 
+ @HP
  Scenario: View and edit Activity Info
  Given User launches Holiday Package application
  When User searches holiday package with valid details as "Chennai" "Dubai" "Thu Apr 23 2026"
@@ -11,6 +13,7 @@ Feature:Update the Package Activity
  And User clicks on Update button
  Then User proceeds to payment page
  
+ @HP
  Scenario:Remove and Update Activity
  Given User launches Holiday Package application
  When User searches holiday package with valid details as "Chennai" "Dubai" "Thu Apr 23 2026"

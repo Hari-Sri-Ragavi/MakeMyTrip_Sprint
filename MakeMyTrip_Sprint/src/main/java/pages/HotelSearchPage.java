@@ -1,116 +1,366 @@
 package pages;
 
 import java.time.Duration;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HotelSearchPage {
 
-    WebDriver driver;
-    WebDriverWait wait;
+	WebDriver driver;
+	WebDriverWait wait;
 
-    public HotelSearchPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        PageFactory.initElements(driver, this);
-    }
+	public HotelSearchPage(WebDriver driver) {
+		this.driver = driver;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		PageFactory.initElements(driver, this);
+	}
 
-    @FindBy(xpath = "//li[@data-cy='menu_Hotels']")
-    WebElement hotelsMenu;
+	public void clickHotelsMenu() {
 
-    @FindBy(xpath = "//input[@placeholder='Where do you want to stay?']")
-    WebElement cityInput;
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@data-cy='menu_Hotels']"))).click();
+	}
 
-    @FindBy(xpath = "//button[contains(text(),'Search')]")
-    WebElement searchBtn;
+	public void enterCity(String city) throws InterruptedException {
 
-    public void clickHotelsMenu() {
-        wait.until(ExpectedConditions.elementToBeClickable(hotelsMenu)).click();
-    }
+		Thread.sleep(3000);
 
-    public void enterCity(String city) {
+		// Click city box
+		wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//*[contains(text(),'City, Property name or Location')]"))).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+		// Enter city
+		WebElement cityBox = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//input[@placeholder='Where do you want to stay?']")));
 
-        WebElement cityContainer = wait.until(
-            ExpectedConditions.elementToBeClickable(
-            org.openqa.selenium.By.xpath("//*[contains(text(),'City, Property name or Location')]"))
-        );
+		cityBox.clear();
+		cityBox.sendKeys(city);
+	}
+	public void enterCitySelectDatesAndSearch(String city, String checkIn, String checkOut) {
 
-        cityContainer.click();
+		try {
 
-        WebElement searchBox = wait.until(
-            ExpectedConditions.elementToBeClickable(
-            org.openqa.selenium.By.xpath("//input[@placeholder='Where do you want to stay?']"))
-        );
+			Thread.sleep(3000);
 
-        searchBox.click();
-        searchBox.clear();
-        searchBox.sendKeys(city);
+			// Click city box
+			wait.until(ExpectedConditions
+					.elementToBeClickable(By.xpath("//*[contains(text(),'City, Property name or Location')]"))).click();
 
-        try { Thread.sleep(2000); } catch (Exception e) {}
+			// Enter city
+			WebElement cityBox = wait.until(ExpectedConditions
+					.elementToBeClickable(By.xpath("//input[@placeholder='Where do you want to stay?']")));
 
-        WebElement option = wait.until(
-            ExpectedConditions.elementToBeClickable(
-            org.openqa.selenium.By.xpath("//p[text()='Chennai']"))
-        );
+			cityBox.clear();
+			cityBox.sendKeys(city);
 
-        option.click();
-    }
+			Thread.sleep(2000);
 
-    public void clickSearch() {
+			// Select city suggestion
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[text()='" + city + "']"))).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			Thread.sleep(5000);
 
-        WebElement btn = wait.until(
-            ExpectedConditions.elementToBeClickable(
-            org.openqa.selenium.By.xpath("//button[contains(text(),'Search')]"))
-        );
+			// Check-In Date
+			wait.until(ExpectedConditions
+					.elementToBeClickable(By.xpath("//div[contains(@aria-label,' May " + checkIn + " 2026')]")))
+					.click();
 
-        btn.click();
-    }
+			Thread.sleep(5000);
 
-   public void selectDatesAndSearch() {
+			// Check-Out Date
+			wait.until(ExpectedConditions
+					.elementToBeClickable(By.xpath("//div[contains(@aria-label,' May " + checkOut + " 2026')]")))
+					.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			Thread.sleep(5000);
 
-        try { Thread.sleep(2000); } catch (Exception e) {}
+			// Search Button
+			WebElement searchBtn = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(.,'Search')]")));
 
-        // Check-in
-        WebElement checkIn = wait.until(
-            ExpectedConditions.elementToBeClickable(
-            org.openqa.selenium.By.xpath("(//div[@aria-disabled='false'])[1]"))
-        );
-        checkIn.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", searchBtn);
 
-        try { Thread.sleep(1000); } catch (Exception e) {}
+			Thread.sleep(1000);
 
-        // Check-out
-        WebElement checkOut = wait.until(
-            ExpectedConditions.elementToBeClickable(
-            org.openqa.selenium.By.xpath("(//div[@aria-disabled='false'])[2]"))
-        );
-        checkOut.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchBtn);
 
-        try { Thread.sleep(2000); } catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-        // Search button
-        WebElement searchBtn = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(
-            org.openqa.selenium.By.xpath("//button[contains(.,'Search')]"))
-        );
+	public void selectDates(String checkIn, String checkOut) throws Exception {
 
-        ((org.openqa.selenium.JavascriptExecutor)driver)
-            .executeScript("arguments[0].click();", searchBtn);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        try { Thread.sleep(5000); } catch (Exception e) {}
-    }
+		String checkInXpath = "//div[@role='gridcell' and contains(@aria-label,'Apr " + checkIn
+				+ " 2026') and @aria-disabled='false']";
+
+		String checkOutXpath = "//div[@role='gridcell' and contains(@aria-label,'Apr " + checkOut
+				+ " 2026') and @aria-disabled='false']";
+
+		WebElement inDate = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(checkInXpath)));
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", inDate);
+
+		Thread.sleep(1000);
+
+		WebElement outDate = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(checkOutXpath)));
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", outDate);
+	}
+
+	public void clickSearch() throws Exception {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+		WebElement searchBtn = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(.,'Search')]")));
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", searchBtn);
+
+		Thread.sleep(1000);
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchBtn);
+	}
+	// Add below methods inside HotelSearchPage.java
+
+	// Replace old methods inside HotelSearchPage.java
+
+	// Replace only applyPriceFilter() method
+
+	public void applyPriceFilter(String range) throws Exception {
+
+	    Thread.sleep(4000);
+
+	    WebElement priceFilter =
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(
+	    By.xpath("//label[contains(text(),'₹ 0 - ₹ 2500')]")));
+
+	    // Scroll till element visible in center
+	    ((JavascriptExecutor)driver).executeScript(
+	    "arguments[0].scrollIntoView({block:'center'});", priceFilter);
+
+	    Thread.sleep(2000);
+
+	    // Use JS click (fix intercept issue)
+	    ((JavascriptExecutor)driver).executeScript(
+	    "arguments[0].click();", priceFilter);
+
+	    Thread.sleep(3000);
+	}
+
+	// Replace only sortHotels() method
+
+	// FINAL WORKING sortHotels() based on your screenshot
+
+	public void sortHotels(String sortType) throws Exception {
+
+	    Thread.sleep(4000);
+
+	    if(sortType.equalsIgnoreCase("Low to High")) {
+
+	        WebElement sort =
+	        wait.until(ExpectedConditions.elementToBeClickable(
+	        By.xpath("//span[contains(text(),'Price (Low to High)')]")));
+
+	        ((JavascriptExecutor)driver)
+	        .executeScript("arguments[0].scrollIntoView(true);", sort);
+
+	        Thread.sleep(1000);
+
+	        ((JavascriptExecutor)driver)
+	        .executeScript("arguments[0].click();", sort);
+	    }
+
+	    Thread.sleep(5000);
+	}
+	public void selectHotelFromResults() throws Exception {
+
+	    Thread.sleep(6000);
+
+	    WebElement firstHotel =
+	    wait.until(ExpectedConditions.presenceOfElementLocated(
+	    By.xpath("(//p[@id='hlistpg_hotel_name']//span[@class='wordBreak appendRight10'])[1]")));
+
+	    ((JavascriptExecutor)driver).executeScript(
+	    "arguments[0].scrollIntoView({block:'center'});", firstHotel);
+
+	    Thread.sleep(2000);
+
+	    ((JavascriptExecutor)driver).executeScript(
+	    "arguments[0].click();", firstHotel);
+
+	    Thread.sleep(5000);
+	}
+	public void clickFirstHotel() {
+
+	    try {
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+	        String oldWindow = driver.getWindowHandle();
+
+	        // First hotel name click
+	        WebElement firstHotel = wait.until(ExpectedConditions.elementToBeClickable(
+	            By.xpath("(//p[@id='hlistpg_hotel_name'])[1]")));
+
+	        ((JavascriptExecutor) driver)
+	            .executeScript("arguments[0].scrollIntoView(true);", firstHotel);
+
+	        Thread.sleep(1000);
+
+	        ((JavascriptExecutor) driver)
+	            .executeScript("arguments[0].click();", firstHotel);
+
+	        Thread.sleep(4000);
+
+	        // Switch to new tab
+	        for (String windowHandle : driver.getWindowHandles()) {
+	            if (!windowHandle.equals(oldWindow)) {
+	                driver.switchTo().window(windowHandle);
+	                break;
+	            }
+	        }
+
+	        System.out.println("Switched to hotel details tab");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	public void clickViewThisCombo() {
+
+	    try {
+
+	        // wait for hotel details page to fully load
+	        Thread.sleep(6000);
+
+	        // switch to newly opened tab
+	        java.util.Set<String> windows = driver.getWindowHandles();
+	        java.util.Iterator<String> it = windows.iterator();
+
+	        String parent = it.next();
+	        String child = parent;
+
+	        while(it.hasNext()) {
+	            child = it.next();
+	        }
+
+	        driver.switchTo().window(child);
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+	        // locate button
+	        WebElement btn = wait.until(ExpectedConditions.presenceOfElementLocated(
+	            By.xpath("//button[contains(text(),'VIEW THIS COMBO')]")
+	        ));
+
+	        // scroll till visible
+	        ((JavascriptExecutor)driver).executeScript(
+	            "arguments[0].scrollIntoView({block:'center'});", btn);
+
+	        Thread.sleep(3000);
+
+	        // direct JS click
+	        ((JavascriptExecutor)driver).executeScript(
+	            "arguments[0].click();", btn);
+
+	        System.out.println("VIEW THIS COMBO clicked");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	public void clickSelectCombo() {
+
+	    try {
+
+	        Thread.sleep(5000);
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+	        // Correct locator: Select Combo is <a> with span text
+	        WebElement comboBtn = wait.until(
+	            ExpectedConditions.elementToBeClickable(
+	                By.xpath("//a[contains(@class,'rmPayable__dtl--cta')]//span[contains(text(),'Select Combo')]"))
+	        );
+
+	        ((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].scrollIntoView({block:'center'});", comboBtn);
+
+	        Thread.sleep(2000);
+
+	        ((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].click();", comboBtn);
+
+	        System.out.println("Select Combo clicked");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	public void enterGuestDetails(String fname, String lname, String email, String mobile) {
+
+	    try {
+
+	        Thread.sleep(4000);
+
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("window.scrollBy(0,700)");
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+	        WebElement firstName = wait.until(
+	                ExpectedConditions.visibilityOfElementLocated(By.id("fName")));
+	        firstName.clear();
+	        firstName.sendKeys(fname);
+
+	        WebElement lastName = driver.findElement(By.id("lName"));
+	        lastName.clear();
+	        lastName.sendKeys(lname);
+
+	        WebElement emailBox = driver.findElement(By.id("email"));
+	        emailBox.clear();
+	        emailBox.sendKeys(email);
+
+	        WebElement mobileBox = driver.findElement(By.id("mNo"));
+	        mobileBox.clear();
+	        mobileBox.sendKeys(mobile);
+
+	        System.out.println("Guest details entered successfully");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public void clickPayNow() {
+
+	    try {
+
+	        Thread.sleep(3000);
+
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+	        WebElement payNow = wait.until(
+	                ExpectedConditions.elementToBeClickable(
+	                By.xpath("//a[contains(@class,'btnContinuePayment') and contains(text(),'Pay Now')]")));
+
+	        js.executeScript("arguments[0].click();", payNow);
+
+	        System.out.println("Pay Now clicked successfully");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }
-

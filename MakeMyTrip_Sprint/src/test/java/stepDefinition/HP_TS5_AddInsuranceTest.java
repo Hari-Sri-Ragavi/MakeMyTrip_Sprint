@@ -5,6 +5,7 @@ import java.util.Set;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import base.BaseClass;
@@ -153,15 +154,7 @@ public class HP_TS5_AddInsuranceTest {
 
 	@Then("Verify it is added")
 	public void verify_it_is_added() {
-		if(updatedTotal > oldTotal + addOnPrice)
-			System.out.println("TS5 ->  Add-on applied correctly. --- Validation Successful!");
-		else
-			System.out.println("TS5 -> Add-on Not still added --- Validation Failed!");
-			
-//	    try {
-//	    	sa.assertTrue(updatedTotal > oldTotal + addOnPrice, "TS5 -> Prices aren't updated --- Validation Failed!");
-//	    } catch (AssertionError e) {
-//	    }
+		Assert.assertTrue(updatedTotal > oldTotal + addOnPrice);
 	}
 
 

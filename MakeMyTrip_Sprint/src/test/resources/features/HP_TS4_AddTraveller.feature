@@ -1,5 +1,6 @@
 Feature: Add Traveller Details  in HP
 
+@HP
    Scenario: Traveller for the HolidayPackage with empty fields
     Given Application is launched
     When User searches HP for Package ideas as "Chennai" "Goa" "Thu Apr 23 2026"
@@ -8,7 +9,7 @@ Feature: Add Traveller Details  in HP
     Then User proceeds to Booking page
     When User click add Traveller details
     Then Verify the Traveller details added
-    
+  @HP  
    Scenario: Add all the Traveller with valid fields
     Given Application is launched
     When User searches HP for Package ideas as "Chennai" "Goa" "Thu Apr 23 2026"

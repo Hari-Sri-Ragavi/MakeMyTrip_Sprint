@@ -1,5 +1,6 @@
  Feature:AddOns For the Package HP
  
+ @HP
  Scenario: Add Insurance for the HP is added
    Given User launches HP application
    When User searches available HP as "Chennai" "Goa" "Thu Apr 23 2026"
@@ -10,6 +11,7 @@
    And add the insurance
    Then Verify it is added
    
+   @HP
   Scenario: Verify Insurance for the HP is'nt added
    Given User launches HP application
    When User searches available HP as "Chennai" "Goa" "Thu Apr 23 2026"

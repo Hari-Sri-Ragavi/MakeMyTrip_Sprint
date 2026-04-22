@@ -32,7 +32,7 @@ public class SelectOccasionPage {
         System.out.println("Occasion selected");
     }
 
-    // select 2nd gift card
+    // -----------------select gift card----------------------------
     public void selectGiftCard() {
 
         WebDriverWait localWait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -43,7 +43,7 @@ public class SelectOccasionPage {
 
         System.out.println("Total gift cards found: " + cards.size());
 
-        // click FIRST card (safe)
+        // click FIRST card 
         cards.get(0).click();
 
         System.out.println("Gift card selected");

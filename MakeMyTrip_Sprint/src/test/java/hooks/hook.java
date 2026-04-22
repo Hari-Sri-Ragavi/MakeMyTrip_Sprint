@@ -29,13 +29,12 @@ public class hook {
     @Before
     public void setUp(Scenario scenario) throws IOException {
 
-        ConfigReader config = new ConfigReader();
 
-        String browser = config.getProperty("browser");
-        String url = config.getProperty("url");
-        int timeout = Integer.parseInt(config.getProperty("timeout"));
-        String tester = config.getProperty("tester");
-        String env = config.getProperty("env");
+        String browser = ConfigReader.getProperty("browser");
+        String url = ConfigReader.getProperty("url");
+        int timeout = Integer.parseInt(ConfigReader.getProperty("timeout"));
+        String tester = ConfigReader.getProperty("tester");
+        String env = ConfigReader.getProperty("env");
 
         ExtentReportUtility.initReport(tester, browser, env);
 
