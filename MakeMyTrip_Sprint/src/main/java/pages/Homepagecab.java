@@ -17,6 +17,7 @@
 	        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 	        PageFactory.initElements(driver, this);
 	    }
+	    //To select the cab menu and close hte popup
 
 	    @FindBy(xpath = "//span[@data-cy='closeModal']")
 	    WebElement popupClose;
@@ -27,7 +28,7 @@
 	    public void closePopup() {
 	        try {
 	            wait.until(ExpectedConditions.elementToBeClickable(popupClose)).click();
-	            System.out.println("✔ Popup closed");
+	            System.out.println(" Popup closed");
 	        } catch (Exception e) {
 	            System.out.println("No popup");
 	        }
@@ -35,7 +36,7 @@
 
 	    public void clickCabs() {
 	        wait.until(ExpectedConditions.elementToBeClickable(cabsMenu)).click();
-	        System.out.println("✔ Cabs clicked");
+	        System.out.println("Cabs clicked");
 	    }
 	}
 

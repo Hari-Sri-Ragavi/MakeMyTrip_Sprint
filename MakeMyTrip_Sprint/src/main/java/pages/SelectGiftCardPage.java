@@ -23,7 +23,7 @@ public class SelectGiftCardPage {
     @FindBy(xpath = "//a[@data-cy='submenu_Giftcards']")
     WebElement giftCards;
 
-    // HOVER (MANDATORY for MMT UI)
+    // ----------HOVER (MANDATORY for MMT UI)-------------
     public void hoverMoreMenu() {
 
         Actions actions = new Actions(driver);
@@ -36,7 +36,7 @@ public class SelectGiftCardPage {
 
         System.out.println("More menu hovered");
     }
-
+//----------To click the giftcard---------------------------
     public void clickGiftCards() {
 
         WebElement gift = wait.until(

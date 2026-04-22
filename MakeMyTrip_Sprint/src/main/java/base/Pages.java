@@ -30,16 +30,16 @@ public class Pages {
 	public  HPReviewPage hpr;
 	
 	//Cab Module
-	public  Homepagecab hpc;
-	public  CabPage cp;
-	public CABS_SearchPage csp;
-	public SelectCabpage scp;
+	 public  Homepagecab hpc;
+	 public  CabPage cp;
+	 public CABS_SearchPage csp;
+	 public SelectCabpage scp;
 	 public  ReviewBookingPage rbp;
 	 public SelectGiftCardPage sgcp;
 	 public  SelectOccasionPage sop;
 	 public  GiftCardBookingPage gbp;
 	 public AllFunctionalities all;
-	public static CabAirportPage cap;
+	 
 	
 
 	public void loadAllPages(WebDriver driver) {
@@ -72,7 +72,6 @@ public class Pages {
 		sop=new SelectOccasionPage(driver);
 		gbp=new GiftCardBookingPage(driver);
 		all=new AllFunctionalities(driver);
-		cap=new CabAirportPage(driver);
 		
 		//train
 		tp = new TrainSearchPage(driver);

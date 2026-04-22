@@ -20,7 +20,7 @@ public class SelectCabpage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    // CLICK FIRST CAB TYPE (Hatchback)
+    // CLICK FIRST CAB TYPE
     public void clickFirstCabType() {
 
         List<WebElement> checkboxes = driver.findElements(
