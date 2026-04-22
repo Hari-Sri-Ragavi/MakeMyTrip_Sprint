@@ -78,7 +78,7 @@ public class FlightTrackerSteps {
 
         Assert.assertEquals(actualStatus, expectedStatus,
                 "Flight " + currentFlightNumber + " status mismatch.");
-        
+
         System.out.println("Verified: " + currentFlightNumber);
     }
 }

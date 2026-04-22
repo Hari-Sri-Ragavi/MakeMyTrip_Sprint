@@ -20,8 +20,6 @@ public class FlightTrackerPage {
     private final By searchButton = By.xpath("//button[contains(@class,'search')]");
 
 
-//    private final By flightDetailsHeader =
-//            By.xpath("//h1[contains(text(),'Flight Status for')]");
 
     private final By noFlightMessage =
             By.xpath("//*[contains(text(),'Flights could not be found')]");

@@ -12,16 +12,15 @@ Feature:Flight Search, Booking and Status Tracker on MakeMyTrip
 
     Examples:
       | src    | dest    |
-      | Mumbai | Chennai |
+      | Salem | Chennai |
       
       @Negative @High @TS-02
-  Scenario Outline: Search flights with same source and destination
+  Scenario: Search flights with same source and destination
     When the user clicks on "Flights"
-    And the user enters source as "<src>"
-    And the user enters destination as "<dest>"
+    And the user enters source and destination
+      | src    | dest    |
+      | Mumbai | Mumbai  |
+      | Chennai| Chennai |
     And the user selects a valid travel date
     Then the system should show an error message
-    
-     Examples:
-      | src    | dest    |
-      | Mumbai | Mumbai |
+     
