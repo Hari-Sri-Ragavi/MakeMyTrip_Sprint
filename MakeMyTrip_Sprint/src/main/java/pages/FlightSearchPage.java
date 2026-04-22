@@ -28,7 +28,7 @@ public class FlightSearchPage {
     private WebElement fromCity;
 
     @FindBy(xpath = "//input[@placeholder='From']")
-    private WebElement fromInput;
+	public WebElement fromInput;
 
     @FindBy(id = "toCity")
     private WebElement toCity;
@@ -136,8 +136,7 @@ public class FlightSearchPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchBtn);
         System.out.println("Search clicked");
         
-//        wait.until(ExpectedConditions.presenceOfElementLocated(
-//                By.xpath("//div[contains(@class,'listingCard')]")));
+
         
         try {
             Thread.sleep(3000);
@@ -146,7 +145,6 @@ public class FlightSearchPage {
         }
     }
 
-    // Updated selectAirline with better error handling
     public void selectAirline() {
         try {
             Thread.sleep(5000);
@@ -236,15 +234,28 @@ public class FlightSearchPage {
             System.out.println("Error clicking book now: " + e.getMessage());
         }
     }
+    
+    public void validateError() {
 
-//    public String getTotalPrice() {
-//        try {
-//            WebElement priceElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                    By.xpath("//div[contains(@class,'fare-summary')]//span")));
-//            return priceElement.getText().replaceAll("[^0-9]", "");
-//        } catch (Exception e) {
-//            System.out.println("Error getting price: " + e.getMessage());
-//            return "0";
-//        }
-//    }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        try {
+            WebElement errorMsg = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//span[contains(@class,'fltErrorMsgText')]")
+                )
+            );
+
+            String msg = errorMsg.getText();
+            System.out.println("Error Message: " + msg);
+
+            if (!msg.toLowerCase().contains("same")) {
+                throw new AssertionError("Expected error message not shown!");
+            }
+
+        } catch (TimeoutException e) {
+            throw new AssertionError("Error message not displayed on UI!");
+        }
+    }
+
 }
