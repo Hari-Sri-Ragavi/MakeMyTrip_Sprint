@@ -1,5 +1,6 @@
 Feature:Booking HP for the vacation 
   
+  @HP
  Scenario Outline: Book for the HP with invalid details
   Given User launches & navigates to HP
   When User searches HP activities as "Chennai" "Goa" "Thu Apr 30 2026"
@@ -13,7 +14,7 @@ Feature:Booking HP for the vacation
 #  | ValidUser2 | jane.smith@email.com | +44        | 7712345678 | Karnataka  |
   
   
- 
+ @HP
  Scenario: Book for the HP with valid details
   Given User launches & navigates to HP
   When User searches HP activities as "Chennai" "Goa" "Thu Apr 30 2026"

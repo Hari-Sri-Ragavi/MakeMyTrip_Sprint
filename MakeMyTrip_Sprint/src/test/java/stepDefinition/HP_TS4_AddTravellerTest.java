@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.Set;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.asserts.SoftAssert;
+import org.testng.Assert;
 
 import base.BaseClass;
 import io.cucumber.java.en.Given;
@@ -38,7 +36,6 @@ public class HP_TS4_AddTravellerTest {
 		eu = new Excel_Utility();
 	}
 
-	SoftAssert sa = new SoftAssert();
 
 	@Given("Application is launched")
 	public void application_is_launched() {
@@ -188,22 +185,14 @@ public class HP_TS4_AddTravellerTest {
 
 	@Then("Verify the Traveller details added")
 	public void verify_the_traveller_details_added() {
-
-//			Pages.hpr.clickCancelAddDetail();
 		try {
 			wbu.waitTillElementIsClckable(pages.hpr.getCancelAddDetail(), 2);
 			pages.hpr.clickCancelAddDetail();
 		} catch(Exception e) {
 		}
 		
-
-		try {
-			String verifyText = pages.hpr.getVerifyAddedTraveller().getText();
-			String text = "Profile Completed";
-			sa.assertEquals(verifyText, text);
-			System.out.println("TS3 --> Traveller details added --- Validation successfull!");
-		} catch (Exception e) {
-			System.out.println("TS3 --> Traveller detials is not yet added --- Validation Failed!");
-		}
+		wbu.waitForElementload(2);
+		
+		Assert.assertTrue(pages.hpr.getVerifyAddedTraveller().isDisplayed());
 	}
 }

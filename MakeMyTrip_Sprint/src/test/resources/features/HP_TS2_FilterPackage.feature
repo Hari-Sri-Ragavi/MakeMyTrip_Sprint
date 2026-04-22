@@ -1,4 +1,5 @@
  Feature: Filter and Select HPs
+ @HP
  Scenario: Apply filters and select HoneyMoon package without flight
  Given Open the browser and Navigate to Application
  When Enter search details in HP as "Chennai" "Dubai" "Thu Apr 23 2026"

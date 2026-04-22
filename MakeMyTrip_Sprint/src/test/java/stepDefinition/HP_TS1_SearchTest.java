@@ -1,5 +1,6 @@
 package stepDefinition;
 
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import base.BaseClass;
@@ -19,7 +20,6 @@ public class HP_TS1_SearchTest {
 	WebDriver_Utility wbu;
 	Actions_Helper ah;
 	JavaScriptExceutor_Utility jsu;
-	SoftAssert sa = new SoftAssert();
 
 	public HP_TS1_SearchTest(BaseClass b, Pages pages) {
 		this.b = b;
@@ -99,11 +99,11 @@ public class HP_TS1_SearchTest {
 		String verifyText = "";
 		try {
 			verifyText = pages.hpf.getVerifyFilterPage().getText();
-			sa.assertEquals(verifyText, Text);
-			System.out.println("TS1 --> Search HP validation failed!");
+//			System.out.println("TS1 --> Search HP validation failed!");
 		} catch(Exception e) {		
-			System.out.println("TS1 --> Search HP is performed successfully!");
+//			System.out.println("TS1 --> Search HP is performed successfully!");
 		}
+		Assert.assertEquals(verifyText, Text);
 				
 	}
 
