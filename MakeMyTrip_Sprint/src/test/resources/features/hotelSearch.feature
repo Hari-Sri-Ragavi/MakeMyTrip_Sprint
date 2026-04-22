@@ -1,7 +1,7 @@
 Feature: Hotel Search
 
-Scenario: Verify user can search hotel with valid city
+Scenario Outline: Verify hotel booking with multiple data
+
 Given the user is on the hotel booking page
-When the user enters valid hotel city
-And the user clicks hotel search button
+When finds for a hotel using excel sheet
 Then the system should navigate to hotel results page
