@@ -39,7 +39,7 @@ public class GiftCardBookingPage {
             System.getProperty("user.dir")
             + "/src/test/resources/testdata/MakeMyTripExcelData.xlsx";
 
-    String sheetName = "sheet1";
+    String sheetName = "Cab";
 
     // ================= AMOUNT =================
     public void selectAmount() {

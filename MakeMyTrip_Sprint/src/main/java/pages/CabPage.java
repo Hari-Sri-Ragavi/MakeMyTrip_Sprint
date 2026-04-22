@@ -21,6 +21,6 @@ public class CabPage {
                 By.xpath("//li[contains(text(),'Outstation One-Way')]")));
 
         outstation.click();
-        System.out.println("✔ Outstation selected");
+        System.out.println("Outstation selected");
     }
 }

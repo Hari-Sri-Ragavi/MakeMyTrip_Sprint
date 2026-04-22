@@ -16,11 +16,13 @@ public class ReviewBookingPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(driver, this);
     }
-
+//------------------WebElements----------------
     // Mobile field (simple locator)
     @FindBy(xpath = "//input[@type='number']")
     WebElement mobile;
-
+    @FindBy(xpath = "//input[@type='email']")
+    WebElement emailid;
+   
     // Pay Now button
     @FindBy(xpath = "//button[contains(.,'PAY NOW')]")
     WebElement payNow;
@@ -34,12 +36,18 @@ public class ReviewBookingPage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
-
+//Mobile and email 
     public void enterMobile(String num) {
         scrollDown();
         wait.until(ExpectedConditions.visibilityOf(mobile));
         mobile.clear();
         mobile.sendKeys(num);
+    }
+    public void enterEmail(String email) {
+        scrollDown();
+        wait.until(ExpectedConditions.visibilityOf(emailid));
+        emailid.clear();
+        emailid.sendKeys(email);
     }
 
     public void clickPayNow() {
@@ -47,7 +55,8 @@ public class ReviewBookingPage {
         wait.until(ExpectedConditions.elementToBeClickable(payNow));
         payNow.click();
     }
-
+ // -----------
+//Suppose popup means call the method
     public void closePopupIfPresent() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
