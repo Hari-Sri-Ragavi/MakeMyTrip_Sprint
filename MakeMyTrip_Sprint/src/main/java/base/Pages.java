@@ -21,6 +21,7 @@ public class Pages {
 	public TrainAddPassengerPage tap;
 	public TrainFilterPage tfp;
 	public TrainPaymentPage tpp;
+	public TrainLiveStatusCheckerPage tlscp;
 
 	// Holiday Package Module
 	public  HPHomePage home;
@@ -79,6 +80,7 @@ public class Pages {
 		tap = new TrainAddPassengerPage(driver);
 		tfp = new TrainFilterPage(driver);
 		tpp=new TrainPaymentPage(driver);
+		tlscp=new TrainLiveStatusCheckerPage(driver);
 		
 	}
 
