@@ -32,6 +32,25 @@ public class TrainFilterPage {
 		return headerSearchBar;
 	}
 
+    public WebElement getArrivalTimeSlot(String timeSlot) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[contains(text(),'Arrival')]/../..//p[contains(text(),'" + timeSlot + "')]")));
+    }
+     
+    public WebElement getDepartureTimeSlot(String timeSlot) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[contains(text(),'Departure')]/../..//p[contains(text(),'" + timeSlot + "')]")));
+    }
+     
+    public WebElement getTrainTypeOption(String trainType) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[contains(text(),'Train Types')]/../..//ul//li//p[contains(text(),'" + trainType + "')]")));
+    }
+     
+    public WebElement getFirstTrain() {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("(//section[@aria-label='Train Listings']//div[@data-testid='listing-card'])[1]")));
+    }
 	
 
 	// Select Arrival Time dynamically

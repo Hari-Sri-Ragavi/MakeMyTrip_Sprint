@@ -57,6 +57,22 @@ public class TrainLiveStatusCheckerPage {
     public WebElement getTrackerSection() {
         return trackerSection;
     }
+    
+    public WebElement getTrainSuggestion(String trainNo) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[text()='" + trainNo + "']")));
+    }
+     
+    public WebElement getStopOption(String stop) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//ul[@class='travelForPopup']//span[contains(text(),'" + stop + "')]")));
+    }
+     
+    public WebElement getDayOption(String day) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//ul[@class='travelForPopup dateSel']//span[contains(.,'" + day + "')]")));
+    }
+     
 
     // Action Methods
 
