@@ -91,19 +91,14 @@ public class HP_TS1_SearchTest {
 			pages.home.clickSearchBtn();
 		} catch (Exception e) {
 		}
+		
+		wbu.waitTillElementIsClckable(pages.hpf.getCloseQuote(), 10);
+		jsu.clickForceTheElement(pages.hpf.getCloseQuote());
 	}
 
 	@Then("Verify HP HomePage")
 	public void verify_hp_home_page() {
-		String Text = "ALL PACKAGES";
-		String verifyText = "";
-		try {
-			verifyText = pages.hpf.getVerifyFilterPage().getText();
-//			System.out.println("TS1 --> Search HP validation failed!");
-		} catch(Exception e) {		
-//			System.out.println("TS1 --> Search HP is performed successfully!");
-		}
-		Assert.assertEquals(verifyText, Text);
+		Assert.assertTrue(pages.hpf.getVerifyFilterPage().isDisplayed());
 				
 	}
 

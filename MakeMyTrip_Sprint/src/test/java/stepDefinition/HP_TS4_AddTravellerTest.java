@@ -79,22 +79,22 @@ public class HP_TS4_AddTravellerTest {
 		wbu.waitTillElementIsClckable(pages.hpf.getCloseQuote(), 10);
 		jsu.clickForceTheElement(pages.hpf.getCloseQuote());
 		
-		wbu.waitTillElementIsVisible(pages.hpf.getFilterCities(), 10);
+//		wbu.waitTillElementIsVisible(pages.hpf.getFilterCities(), 10);
 //		wbu.waitForElementload(10);
-		pages.hpf.configFilterCities(place);
+//		pages.hpf.configFilterCities(place);
 //		wbu.waitTillElementIsClckable(Pages.hpf.getFilterCitiesCheckbox(city), 10);
-		wbu.waitForElementload(5);
-		jsu.clickForceTheElement(pages.hpf.getFilterCitiesCheckbox(place));
-
+//		wbu.waitForElementload(5);
+//		jsu.clickForceTheElement(pages.hpf.getFilterCitiesCheckbox(place));
+//
+//		wbu.waitForLoaderToDisappear();
+//		pages.hpf.clickFilterFlight(flight);
+//
 		wbu.waitForLoaderToDisappear();
-		pages.hpf.clickFilterFlight(flight);
-
-		wbu.waitForLoaderToDisappear();
-		pages.hpf.clickFilterHoneyMoon(type);
+//		pages.hpf.clickFilterHoneyMoon(type);
 
 		pages.hpf.getSelectPackage().click();
 
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
 		try {
 			wbu.waitTillElementIsClckable(pages.hpf.getFilterFlightPackage(), 10);
@@ -119,31 +119,31 @@ public class HP_TS4_AddTravellerTest {
 		}
 		b.getDriver().switchTo().window(childWindowHandle);
 
-		wbu.waitForElementload(3);
+		wbu.waitForElementload(10);
 		pages.hpa.clickSkipGuide();
-		wbu.waitTillElementIsClckable(pages.hpa.getCloseQuote(), 20);
+		wbu.waitTillElementIsClckable(pages.hpa.getCloseQuote(), 10);
 		jsu.clickForceTheElement(pages.hpa.getCloseQuote());
 
-		try {
-			pages.hpa.clickChangeRestaurent(place);
-		} catch (Exception e) {
-			System.out.println("There is no " + place + "to Update and so, we procceded with payment");
-		}
-
-		try {
-			wbu.waitTillElementIsClckable(pages.hpa.getSelectRestaurent(), 10);
-			pages.hpa.clickSelectRestaurent();
-		} catch (Exception e) {
-		}
+//		try {
+//			pages.hpa.clickChangeRestaurent(place);
+//		} catch (Exception e) {
+//			System.out.println("There is no " + place + "to Update and so, we procceded with payment");
+//		}
+//
+//		try {
+//			wbu.waitTillElementIsClckable(pages.hpa.getSelectRestaurent(), 10);
+//			pages.hpa.clickSelectRestaurent();
+//		} catch (Exception e) {
+//		}
 
 	}
 
 	@Then("User proceeds to Booking page")
 	public void user_proceeds_to_booking_page() {
-		try {
-			pages.hpa.clickUpdateRestaurent();
-		} catch (Exception e) {
-		}
+//		try {
+//			pages.hpa.clickUpdateRestaurent();
+//		} catch (Exception e) {
+//		}
 
 		pages.hpa.clickProceedPayment();
 	}

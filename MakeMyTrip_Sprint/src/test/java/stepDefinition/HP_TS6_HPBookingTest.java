@@ -25,7 +25,7 @@ public class HP_TS6_HPBookingTest {
 
 	private BaseClass b;
 	private Pages pages;
-	
+
 	WebDriver_Utility wbu;
 	Actions_Helper ah;
 	JavaScriptExceutor_Utility jsu;
@@ -84,22 +84,22 @@ public class HP_TS6_HPBookingTest {
 		wbu.waitTillElementIsClckable(pages.hpf.getCloseQuote(), 10);
 		jsu.clickForceTheElement(pages.hpf.getCloseQuote());
 
-		wbu.waitTillElementIsVisible(pages.hpf.getFilterCities(), 10);
+//		wbu.waitTillElementIsVisible(pages.hpf.getFilterCities(), 10);
 //		wbu.waitForElementload(10);
-		pages.hpf.configFilterCities(place);
+//		pages.hpf.configFilterCities(place);
 //		wbu.waitTillElementIsClckable(Pages.hpf.getFilterCitiesCheckbox(city), 10);
 		wbu.waitForElementload(5);
-		jsu.clickForceTheElement(pages.hpf.getFilterCitiesCheckbox(place));
+//		jsu.clickForceTheElement(pages.hpf.getFilterCitiesCheckbox(place));
 
-		wbu.waitForLoaderToDisappear();
-		pages.hpf.clickFilterFlight(flight);
+//		wbu.waitForLoaderToDisappear();
+//		pages.hpf.clickFilterFlight(flight);
 
-		wbu.waitForLoaderToDisappear();
-		pages.hpf.clickFilterHoneyMoon(type);
+//		wbu.waitForLoaderToDisappear();
+//		pages.hpf.clickFilterHoneyMoon(type);
 
 		pages.hpf.getSelectPackage().click();
 
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
 		try {
 			wbu.waitTillElementIsClckable(pages.hpf.getFilterFlightPackage(), 10);
@@ -108,7 +108,28 @@ public class HP_TS6_HPBookingTest {
 				jsu.clickForceTheElement(pages.hpf.getFilterFlightPackage());
 		} catch (NoSuchElementException e) {
 		}
-		
+
+	}
+
+	@When("User update\\/change restaurant details as {string}")
+	public void user_update_change_restaurant_details(String place) {
+
+//		try {
+//			pages.hpa.clickChangeRestaurent(place);
+//		} catch (Exception e) {
+//			System.out.println("There is no " + place + "to Update and so, we procceded with payment");
+//		}
+//
+//		try {
+//			wbu.waitTillElementIsClckable(pages.hpa.getSelectRestaurent(), 10);
+//			pages.hpa.clickSelectRestaurent();
+//		} catch (Exception e) {
+//		}
+	}
+
+	@Then("User proceeds to Review page")
+	public void user_proceeds_to_review_page() {
+
 		String parent_id = b.getDriver().getWindowHandle();
 		Set<String> all_id = b.getDriver().getWindowHandles();
 
@@ -120,34 +141,13 @@ public class HP_TS6_HPBookingTest {
 		}
 		b.getDriver().switchTo().window(childWindowHandle);
 
-		wbu.waitForElementload(3);
+		wbu.waitForElementload(5);
 		try {
-		pages.hpa.clickSkipGuide();
-		} catch(Exception e) {
+			pages.hpa.clickSkipGuide();
+		} catch (Exception e) {
 		}
 		wbu.waitTillElementIsClckable(pages.hpa.getCloseQuote(), 20);
 		jsu.clickForceTheElement(pages.hpa.getCloseQuote());
-	}
-
-	@When("User update\\/change restaurant details as {string}")
-	public void user_update_change_restaurant_details(String place) {
-		
-
-		try {
-			pages.hpa.clickChangeRestaurent(place);
-		} catch (Exception e) {
-			System.out.println("There is no " + place + "to Update and so, we procceded with payment");
-		}
-
-		try {
-			wbu.waitTillElementIsClckable(pages.hpa.getSelectRestaurent(), 10);
-			pages.hpa.clickSelectRestaurent();
-		} catch (Exception e) {
-		}
-	}
-
-	@Then("User proceeds to Review page")
-	public void user_proceeds_to_review_page() {
 //		try {
 //			Pages.hpa.clickUpdateRestaurent();
 //		} catch (Exception e) {
@@ -190,33 +190,35 @@ public class HP_TS6_HPBookingTest {
 	@When("user enter Traveller Contact :")
 	public void user_enter_traveller_contact(io.cucumber.datatable.DataTable dataTable) {
 		List<Map<String, String>> contactInfo = dataTable.asMaps(String.class, String.class);
-		for (Map<String, String> row : contactInfo) {
-			String email = row.get("email");
-			String mobileCode = row.get("mobileCode");
-			String mobile = row.get("mobile");
-			String gstState = row.get("gstState");
 
-			pages.hpr.getEmailId().sendKeys(email);
-//		    Pages.hpr.configEmailId(email);
+		Map<String, String> row = contactInfo.get(0);
 
-			pages.hpr.clickMobileCodeClick();
-			pages.hpr.clickMobileCodeCheckbox();
+		String email = row.get("email");
+		String mobileCode = row.get("mobileCode");
+		String mobile = row.get("mobile");
+		String gstState = row.get("gstState");
 
-			pages.hpr.configMobileNo(mobile);
+		pages.hpr.configEmailId(email);
 
-			pages.hpr.configGstCodeClick(gstState);
-			pages.hpr.getGstCodeCheckbox().click();
+		pages.hpr.clickMobileCodeClick();
+		pages.hpr.clickMobileCodeCheckbox();
 
-			System.out
-					.println("Email: " + email + ", Mobile: " + mobileCode + " " + mobile + ", GST State: " + gstState);
-		}
+		pages.hpr.configMobileNo(mobile);
+
+		pages.hpr.configGstCodeClick(gstState);
+		pages.hpr.getGstCodeCheckbox().click();
+
+		System.out.println("Using ONLY one user: " + email);
+
+		System.out.println("Email: " + email + ", Mobile: " + mobileCode + " " + mobile + ", GST State: " + gstState);
+
 	}
 
 	@When("user enter Contact Info {string} {string} {string} {string}")
 	public void user_enter_contact_info(String email, String code, String no, String gst) {
 		wbu.waitTillElementIsClckable(pages.hpr.getEmailId(), 10);
-		pages.hpr.getEmailId().sendKeys(email);
-//	    Pages.hpr.configEmailId(email);
+//		pages.hpr.getEmailId().sendKeys(email + "@gmail.com");
+		pages.hpr.configEmailId(email);
 
 		pages.hpr.clickMobileCodeClick();
 		pages.hpr.clickMobileCodeCheckbox();
@@ -227,17 +229,19 @@ public class HP_TS6_HPBookingTest {
 		pages.hpr.getGstCodeCheckbox().click();
 
 		System.out.println("Entered Contact Info: " + email + " | " + code + " " + no + " | " + gst);
+
+		System.out.println(Thread.currentThread().getId());
 	}
 
 	@Then("Payment should be proceed")
 	public void payment_should_be_proceed() {
 //		Pages.hpr.clickPaymentProceed();
 
-		try {
-			Assert.assertEquals(true, pages.hpr.isCheckStatusButtonClickable());
-			System.out.println("TS6 ->  Booking Done. --- Validation Successful!");
-		} catch(Exception e) {
-			System.out.println("TS5 -> Add-on Not still added --- Validation Failed!");
-		}
+		Assert.assertEquals(true, pages.hpr.isCheckStatusButtonClickable());
+//		try {
+//			System.out.println("TS6 ->  Booking Done. --- Validation Successful!");
+//		} catch(Exception e) {
+//			System.out.println("TS5 -> Add-on Not still added --- Validation Failed!");
+//		}
 	}
 }

@@ -9,19 +9,62 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">11,386</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Default test</a></td><td class="num">4</td><td class="num">0</td><td class="num">0</td><td class="num attn">4</td><td class="num">168,246</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">testRunner.TestRunnerIO</td><td><a href="#m0">runScenario</a></td><td rowspan="1">1776355052652</td><td rowspan="1">10805</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="4">testRunner.TestRunnerIO</td><td><a href="#m0">runScenario</a></td><td rowspan="4">1777211779461</td><td rowspan="4">107413</td></tr><tr class="failedeven"><td><a href="#m1">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m2">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m3">runScenario</a></td></tr><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="4">testRunner.TestRunnerIO</td><td><a href="#m4">runScenario</a></td><td rowspan="4">1777211779460</td><td rowspan="4">133981</td></tr><tr class="passedeven"><td><a href="#m5">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m6">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m7">runScenario</a></td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify user can search and select a train with valid details&quot;</td><td>&quot;Train Search and Booking&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=147.0.7727.56)
+<h2>Default test</h2><h3 id="m0">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Book for the HP with valid details&quot;</td><td>&quot;Booking HP for the vacation&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">org.openqa.selenium.StaleElementReferenceException: The element with the reference d1672bd4-eb8e-4b59-aef7-820e09700524 is stale; either its node document is not the active document, or it is no longer connected to the DOM
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
 Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [dbcc7296e271543bec462efaf6cb8b56, findElement {value=//span[@data-cy=&apos;bookTrainTickets&apos;], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.56, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\monic\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58919}, goog:processID: 26324, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58919/devtoo..., se:cdpVersion: 147.0.7727.56, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: dbcc7296e271543bec462efaf6cb8b56
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [037a74f1-2caa-48bf-bbe9-ffee53504f0f, clickElement {id=d1672bd4-eb8e-4b59-aef7-820e09700524}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 37712, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (037a74f1-2caa-48bf-bbe9-ffee53504f0f)] -&gt; xpath: //div[. = &apos;Goa&apos;]]
+Session ID: 037a74f1-2caa-48bf-bbe9-ffee53504f0f
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at pages.HPHomePage.clickToCity(HPHomePage.java:119)
+	at stepDefinition.HP_TS6_HPBookingTest.user_searches_hp_activities(HP_TS6_HPBookingTest.java:65)
+	at ✽.User searches HP activities as &quot;Chennai&quot; &quot;Goa&quot; &quot;Thu May 21 2026&quot;(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS6_HPBooking.feature:20)
+</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Book for the HP with invalid details&quot;</td><td>&quot;Booking HP for the vacation&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: expected [false] but found [true]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1079)
+	at org.testng.Assert.assertEquals(Assert.java:1043)
+	at org.testng.Assert.assertEquals(Assert.java:1089)
+	at stepDefinition.HP_TS6_HPBookingTest.payment_should_be_proceed(HP_TS6_HPBookingTest.java:240)
+	at ✽.Payment should be proceed(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS6_HPBooking.feature:10)
+</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;View and edit Activity Info&quot;</td><td>&quot;Update the Package Activity&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: [[FirefoxDriver: firefox on windows (d641208d-0fe5-4352-a15b-e3e303d821f4)] -&gt; xpath: //div[@id = &apos;modalpopup&apos;]//span[@class=&apos;close closeIcon&apos;]] (tried for 10 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at util.WebDriver_Utility.waitTillElementIsClckable(WebDriver_Utility.java:123)
+	at stepDefinition.HP_TS3_ActivityTest.user_applies_all_required_filters(HP_TS3_ActivityTest.java:80)
+	at ✽.User applies all required filters(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS3_PackageActivity.feature:7)
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: //div[@id = &apos;modalpopup&apos;]//span[@class=&apos;close closeIcon&apos;]
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [d641208d-0fe5-4352-a15b-e3e303d821f4, findElement {value=//div[@id = &apos;modalpopup&apos;]//span[@class=&apos;close closeIcon&apos;], using=xpath}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 20488, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Session ID: d641208d-0fe5-4352-a15b-e3e303d821f4
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -40,10 +83,49 @@ Session ID: dbcc7296e271543bec462efaf6cb8b56
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at jdk.proxy2/jdk.proxy2.$Proxy23.click(Unknown Source)
-	at pages.TrainSearchPage.clickBookTrainTickets(TrainSearchPage.java:55)
-	at stepDefinition.trainSearchStepDefinition.the_user_is_on_the_train_booking_page(trainSearchStepDefinition.java:23)
-	at ✽.the user is on the train booking page(file:///C:/Users/monic/git/MakeMyTrip_Sprint1/MakeMyTrip_Sprint/./src/test/resources/features/trainSearch.feature:4)
+	at jdk.proxy2/jdk.proxy2.$Proxy27.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:308)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:294)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:291)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:662)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:658)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	... 3 more
 </div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Book for the HP with invalid details&quot;</td><td>&quot;Booking HP for the vacation&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">org.openqa.selenium.ElementClickInterceptedException: Element &lt;span class=&quot;primaryBtn fill btn btn-primary btn-sm borderRadius8 padding13  &quot;&gt; is not clickable at point (1213,709) because another element &lt;div class=&quot;closeBtnWrapper&quot;&gt; obscures it
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [ff151913-b0a7-4cbc-b555-b9e3bbfd5487, clickElement {id=02e993c2-af0b-46bd-bd55-54f9bf3ea621}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 9960, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (ff151913-b0a7-4cbc-b555-b9e3bbfd5487)] -&gt; xpath: //span[. = &apos;PROCEED TO PAYMENT&apos;]]
+Session ID: ff151913-b0a7-4cbc-b555-b9e3bbfd5487
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at jdk.internal.reflect.GeneratedMethodAccessor117.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at jdk.proxy2/jdk.proxy2.$Proxy27.click(Unknown Source)
+	at pages.HPActivityInfoPage.clickProceedPayment(HPActivityInfoPage.java:119)
+	at stepDefinition.HP_TS6_HPBookingTest.user_proceeds_to_review_page(HP_TS6_HPBookingTest.java:156)
+	at ✽.User proceeds to Review page(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS6_HPBooking.feature:8)
+</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Add Insurance for the HP is added&quot;</td><td>&quot;AddOns For the Package HP&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Add all the Traveller with valid fields&quot;</td><td>&quot;Add Traveller Details  in HP&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Apply filters and select HoneyMoon package without flight&quot;</td><td>&quot;Filter and Select HPs&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">testRunner.TestRunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Search for HP with valid details&quot;</td><td>&quot;Holiday Package Search&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>
