@@ -84,6 +84,109 @@ public class TrainAddPassengerPage {
     private WebElement checkBtn;
    
 
+    public WebElement getRefundBox() {
+        return wait.until(ExpectedConditions.visibilityOf(refundBox));
+    }
+     
+    public WebElement getRefundOption() {
+        return wait.until(ExpectedConditions.visibilityOf(refundOption));
+    }
+     
+    public WebElement getAddTravellerBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(addTravellerBtn));
+    }
+     
+    public WebElement getAddTravellerForm() {
+        return wait.until(ExpectedConditions.visibilityOf(addTravellerForm));
+    }
+     
+    public WebElement getTravellerName() {
+        return wait.until(ExpectedConditions.visibilityOf(travellerName));
+    }
+     
+    public WebElement getTravellerAge() {
+        return wait.until(ExpectedConditions.visibilityOf(travellerAge));
+    }
+     
+    public WebElement getAddBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(addBtn));
+    }
+     
+    public WebElement getGenderDropdown() {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//label[contains(.,'Gender')]/..//p")));
+    }
+     
+    public WebElement getGenderOption(String gender) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[text()='" + gender + "']")));
+    }
+     
+    public WebElement getBerthDropdown() {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//label[contains(.,'Berth')]/..//p")));
+    }
+     
+    public WebElement getBerthOption(String berth) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//li//span[text()='" + berth + "']")));
+    }
+     
+    public WebElement getIrctcBox() {
+        return wait.until(ExpectedConditions.visibilityOf(irctcBox));
+    }
+     
+    public WebElement getIrctcInput() {
+        return wait.until(ExpectedConditions.elementToBeClickable(irctcInput));
+    }
+     
+    public WebElement getIrctcModal() {
+        return wait.until(ExpectedConditions.visibilityOf(irctcModal));
+    }
+     
+    public WebElement getIrctcUsername() {
+        return wait.until(ExpectedConditions.visibilityOf(irctcUsername));
+    }
+     
+    public WebElement getCheckBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(checkBtn));
+    }
+     
+    public WebElement getPasswordCheckbox() {
+        return wait.until(ExpectedConditions.elementToBeClickable(passwordCheckbox));
+    }
+     
+    public WebElement getSaveAndCloseBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(saveAndCloseBtn));
+    }
+     
+    public WebElement getEmailField() {
+        return wait.until(ExpectedConditions.visibilityOf(emailField));
+    }
+     
+    public WebElement getMobileField() {
+        return wait.until(ExpectedConditions.visibilityOf(mobileField));
+    }
+     
+    public WebElement getStateInput() {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//p[text()='Select the State']/..//input")));
+    }
+     
+    public WebElement getStateOption(String state) {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//li[text()='" + state + "']")));
+    }
+     
+    public WebElement getBillingConfirmCheckbox() {
+        return wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//p[text()='Confirm and save billing details to your profile']")));
+    }
+     
+    public WebElement getBookNowBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(bookNowBtn));
+    }
+     
     // ===========================
     // Methods
     // ===========================

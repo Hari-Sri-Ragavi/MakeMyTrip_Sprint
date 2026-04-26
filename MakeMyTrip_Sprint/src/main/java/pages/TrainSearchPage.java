@@ -46,6 +46,35 @@ public class TrainSearchPage {
 
     @FindBy(xpath = "//span[@data-cy='bookTrainTickets']")
     private WebElement bookTrainTickets;
+    
+    public WebElement getTrainsMenu() {
+        return wait.until(ExpectedConditions.visibilityOf(trainsMenu));
+    }
+     
+    public WebElement getBookTrainTickets() {
+        return wait.until(ExpectedConditions.visibilityOf(bookTrainTickets));
+    }
+     
+    public WebElement getFromCityLabel() {
+        return wait.until(ExpectedConditions.visibilityOf(fromCityLabel));
+    }
+     
+    public WebElement getFromInput() {
+        return wait.until(ExpectedConditions.visibilityOf(fromInput));
+    }
+     
+    public WebElement getToInput() {
+        return wait.until(ExpectedConditions.visibilityOf(toInput));
+    }
+     
+    public WebElement getNextMonthBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(nextMonthBtn));
+    }
+     
+    public WebElement getSearchBtn() {
+        return wait.until(ExpectedConditions.elementToBeClickable(searchBtn));
+    }
+     
 
     public void clickTrainsMenu() {
         trainsMenu.click();
