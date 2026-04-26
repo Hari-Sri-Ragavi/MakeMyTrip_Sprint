@@ -2,7 +2,7 @@
  @HP
  Scenario: Apply filters and select HoneyMoon package without flight
  Given Open the browser and Navigate to Application
- When Enter search details in HP as "Chennai" "Dubai" "Thu Apr 23 2026"
+ When Enter search details in HP as "Chennai" "Dubai" "Thu May 21 2026"
  And Click on Search button
  Then User is on filter page
  When Apply City filter as "Dubai"

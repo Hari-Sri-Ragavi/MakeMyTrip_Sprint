@@ -80,16 +80,16 @@ public class HP_TS5_AddInsuranceTest {
 		wbu.waitTillElementIsClckable(pages.hpf.getCloseQuote(), 10);
 		jsu.clickForceTheElement(pages.hpf.getCloseQuote());
 
-		wbu.waitTillElementIsVisible(pages.hpf.getFilterCities(), 10);
-//		wbu.waitForElementload(10);
-		pages.hpf.configFilterCities(place);
-//		wbu.waitTillElementIsClckable(Pages.hpf.getFilterCitiesCheckbox(city), 10);
+//		wbu.waitTillElementIsVisible(pages.hpf.getFilterCities(), 10);
+////		wbu.waitForElementload(10);
+//		pages.hpf.configFilterCities(place);
+////		wbu.waitTillElementIsClckable(Pages.hpf.getFilterCitiesCheckbox(city), 10);
 		wbu.waitForElementload(5);
-		jsu.clickForceTheElement(pages.hpf.getFilterCitiesCheckbox(place));
+//		jsu.clickForceTheElement(pages.hpf.getFilterCitiesCheckbox(place));
 
 		pages.hpf.getSelectPackage().click();
 
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
 		try {
 			wbu.waitTillElementIsClckable(pages.hpf.getFilterFlightPackage(), 10);
@@ -118,14 +118,12 @@ public class HP_TS5_AddInsuranceTest {
 				jsu.clickForceTheElement(pages.hpa.getSkipGuide());
 			}
 		} catch (Exception e) {
-			System.out.println("Ad popup not present");
 		}
 
 		try {
 			wbu.waitTillElementIsClckable(pages.hpa.getCloseQuote(), 10);
 			jsu.clickForceTheElement(pages.hpa.getCloseQuote());
 		} catch (Exception e) {
-			System.out.println("Skip button not present");
 		}
 
 	}
