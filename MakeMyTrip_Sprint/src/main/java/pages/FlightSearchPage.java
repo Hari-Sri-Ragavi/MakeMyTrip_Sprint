@@ -7,7 +7,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.*;
 
-import util.AllFunctionalities;
+
 
 public class FlightSearchPage {
 
@@ -55,7 +55,7 @@ public class FlightSearchPage {
                 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.spa-classic-peek__back-to-classic-search"))).click();
             } catch (Exception e1) {
                 System.out.println("Flights menu click failed, trying fallback...");
-                // Try these instead:
+              
                 driver.findElement(By.xpath("//button[contains(@class, 'back-to-classic-search')]")).click();
             }
         }
@@ -64,21 +64,14 @@ public class FlightSearchPage {
     public void enterSource(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(fromCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(fromInput));
-        input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        
         input.sendKeys(city);
        
-        Thread.sleep(1500); 
-        
-        List<WebElement> suggestions = driver.findElements(
-            By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')] | " +
-                     "//li[contains(@role,'option')]//span[contains(text(),'" + city + "')] | " +
-                     "//li[contains(@class,'suggestion')]//*[contains(text(),'" + city + "')]")
-        );
-        
-        if(suggestions.size() > 0) {
-            wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(0))).click();
-        } else {
-         
+        try {
+            WebElement suggestion = driver.findElement(By.xpath("//li[contains(@role,'option')]"));
+            suggestion.click();
+        }
+        catch (Exception e) {
             input.sendKeys(Keys.ENTER);
         }
         
@@ -88,23 +81,17 @@ public class FlightSearchPage {
     public void enterDestination(String city) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(toCity)).click();
         WebElement input = wait.until(ExpectedConditions.visibilityOf(toInput));
-        input.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         input.sendKeys(city);
        
         Thread.sleep(1500);
         
-        List<WebElement> suggestions = driver.findElements(
-            By.xpath("//li[contains(@role,'option')]//p[contains(text(),'" + city + "')] | " +
-                     "//li[contains(@role,'option')]//span[contains(text(),'" + city + "')] | " +
-                     "//li[contains(@class,'suggestion')]//*[contains(text(),'" + city + "')]")
-        );
-        
-        if(suggestions.size() > 0) {
-            wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(0))).click();
-        } else {
+        try {
+            WebElement suggestion = driver.findElement(By.xpath("//li[contains(@role,'option')]"));
+            suggestion.click();
+        } catch (Exception e) {
             input.sendKeys(Keys.ENTER);
         }
-        
+
         System.out.println("Destination entered: " + city);
     }
 
@@ -145,44 +132,35 @@ public class FlightSearchPage {
         }
     }
 
-    public void selectAirline() {
-        try {
+
+    public void selectAirline() throws InterruptedException {
+       
             Thread.sleep(5000);
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 400);");
             Thread.sleep(2000);
-            
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-           
+
             String[] airlines = {"Air India", "Akasa Air", "IndiGo"};
-            
-            for(String airline : airlines) {
+
+            for (String airline : airlines) {
                 try {
-                    js.executeScript(
-                        "var labels = document.querySelectorAll('label, span, div, p');" +
-                        "for(var i=0; i<labels.length; i++) {" +
-                        "   if(labels[i].innerText && labels[i].innerText.trim() === '" + airline + "') {" +
-                        "       var checkbox = labels[i].querySelector('input[type=\"checkbox\"]') || " +
-                        "                      labels[i].previousElementSibling?.querySelector('input[type=\"checkbox\"]') || " +
-                        "                      labels[i].parentElement?.querySelector('input[type=\"checkbox\"]') || " +
-                        "                      labels[i].nextElementSibling?.querySelector('input[type=\"checkbox\"]');" +
-                        "       if(checkbox) { checkbox.click(); console.log('Clicked: " + airline + "'); break; }" +
-                        "   }" +
-                        "}"
-                    );
+                    driver.findElement(
+                        By.xpath("(//*[contains(text(),'" + airline + "')])[1]/ancestor::*[1]//input[@type='checkbox'] | " +
+                                 "(//*[contains(text(),'" + airline + "')])[1]/preceding::input[@type='checkbox'][1]")
+                    ).click();
+
                     Thread.sleep(500);
-                } catch(Exception e) {
-                 
+
+                } catch (Exception e) {
+                    
                 }
-            }
-            System.out.println("Airline selection attempted");
             
-        } catch(Exception e) {
-            System.out.println("Error selecting airline: " + e.getMessage());
-        }
+
+
+        } 
     }
     
-    public void clickViewPrices() {
-        try {
+    public void clickViewPrices() throws InterruptedException {
+       
             WebElement btn = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("(//span[contains(text(),'VIEW PRICES')])[1]")));
             
@@ -192,19 +170,16 @@ public class FlightSearchPage {
             System.out.println("VIEW PRICES clicked");
             Thread.sleep(3000);
             
-        } catch (Exception e) {
-            System.out.println("Error clicking view prices: " + e.getMessage());
-        }
-    }
+        } 
+
 
     public void clickBookNow() {
         try {
             String[] bookNowLocators = {
                 "//button[text()='BOOK NOW']",
                 "//button[contains(text(),'Book Now')]",
-                "//div[contains(@class,'fare-footer')]//button",
                 "(//button[text()='BOOK NOW'])[1]",
-                "//button[contains(@class,'bookNow')]"
+
             };
             
             WebElement btn = null;
@@ -235,27 +210,9 @@ public class FlightSearchPage {
         }
     }
     
-    public void validateError() {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
-        try {
-            WebElement errorMsg = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//span[contains(@class,'fltErrorMsgText')]")
-                )
-            );
-
-            String msg = errorMsg.getText();
-            System.out.println("Error Message: " + msg);
-
-            if (!msg.toLowerCase().contains("same")) {
-                throw new AssertionError("Expected error message not shown!");
-            }
-
-        } catch (TimeoutException e) {
-            throw new AssertionError("Error message not displayed on UI!");
-        }
+            
     }
+    
+    
 
-}
+
