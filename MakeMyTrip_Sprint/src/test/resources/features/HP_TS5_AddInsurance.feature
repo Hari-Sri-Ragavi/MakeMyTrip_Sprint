@@ -1,3 +1,4 @@
+@HolidayPackageModule
  Feature:AddOns For the Package HP
  
  @HP

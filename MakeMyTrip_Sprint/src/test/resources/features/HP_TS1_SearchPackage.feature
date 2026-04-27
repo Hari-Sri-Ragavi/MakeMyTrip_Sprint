@@ -1,3 +1,4 @@
+@HolidayPackageModule
 Feature:Holiday Package Search
 
 #@HP

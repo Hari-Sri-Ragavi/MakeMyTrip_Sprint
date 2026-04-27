@@ -1,3 +1,4 @@
+@GiftCardsModule
 Feature:MakeMyTrip Gift Cards - Browse, Select and Purchase
 
 Background:

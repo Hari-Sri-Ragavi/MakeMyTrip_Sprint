@@ -1,3 +1,4 @@
+@FlightsModule
 Feature: MakeMyTrip Flight Tracker
 
 Scenario: Track flight with valid flight number

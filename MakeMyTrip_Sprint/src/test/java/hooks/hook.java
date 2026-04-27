@@ -91,7 +91,8 @@ public class hook {
             e.printStackTrace();
 
         } finally {
-             b.quitDriver();
+            b.quitDriver();
+            
             ExtentReportUtility.flushReport();
         }
     }

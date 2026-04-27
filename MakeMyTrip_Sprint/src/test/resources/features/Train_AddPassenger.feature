@@ -1,3 +1,4 @@
+  @TrainModule
   Feature: Train Add Passengers
   
   Scenario: Verify user can complete passenger information after filtering and selecting a train

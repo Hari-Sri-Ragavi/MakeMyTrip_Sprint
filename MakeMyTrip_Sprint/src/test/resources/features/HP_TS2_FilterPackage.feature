@@ -1,3 +1,4 @@
+@HolidayPackageModule
  Feature: Filter and Select HPs
  @HP
  Scenario: Apply filters and select HoneyMoon package without flight

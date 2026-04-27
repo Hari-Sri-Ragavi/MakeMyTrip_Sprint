@@ -1,3 +1,4 @@
+@HotelModule
 Feature: Hotel Negative Search
 
 Scenario Outline: Verify hotel search with invalid or empty location

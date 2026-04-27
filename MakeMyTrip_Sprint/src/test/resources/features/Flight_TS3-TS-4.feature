@@ -1,3 +1,4 @@
+@FlightsModule
 Feature:Flight Search, Booking and Status Tracker on MakeMyTrip
  @Positive @TS-03
   Scenario: Choose airline from search results

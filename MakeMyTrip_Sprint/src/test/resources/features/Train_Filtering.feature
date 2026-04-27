@@ -1,3 +1,4 @@
+@TrainModule
 Feature: Train Filtering
 Scenario: Verify train results are displayed and filters work correctly
 

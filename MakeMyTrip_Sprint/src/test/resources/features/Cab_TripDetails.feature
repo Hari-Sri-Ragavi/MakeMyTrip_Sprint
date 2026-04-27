@@ -1,3 +1,4 @@
+@CabsModule
 Feature:MakeMyTrip Cab Booking - Outstation One Way
 
 Background:

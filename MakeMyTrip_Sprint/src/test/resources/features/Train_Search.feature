@@ -1,3 +1,4 @@
+@TrainModule
 Feature: Train Search
 
 Scenario Outline: Verify user can search and select a train with valid details

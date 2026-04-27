@@ -1,3 +1,4 @@
+@TrainModule
 Feature: Train Add Multiple Passengers
 
   Scenario: Verify user can complete booking by adding multiple passengers using DataTable

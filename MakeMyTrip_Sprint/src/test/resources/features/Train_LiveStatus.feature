@@ -1,3 +1,4 @@
+@TrainModule
 Feature: Live Train Status Validation
 
   Scenario Outline: Verify user can check live train status successfully
