@@ -89,17 +89,17 @@ public class FlightSearchSteps {
 	}
 
 	@When("the user selects a specific airline from the search results")
-	public void airline() {
+	public void airline() throws InterruptedException {
 		pages.fp.selectAirline();
 	}
 
 	@When("the user views the price details for the selected flight")
-	public void price() {
+	public void price() throws InterruptedException {
 		pages.fp.clickViewPrices();
 	}
 
 	@When("the user clicks on {string} button")
-	public void button(String value) {
+	public void button(String value) throws InterruptedException {
 		if (value.equalsIgnoreCase("Book Now")) {
 			pages.fp.clickBookNow();
 		}
@@ -107,7 +107,7 @@ public class FlightSearchSteps {
 
 	@Then("the user should be navigated to the review booking page")
 	public void nav() {
-//		assertTrue(true);
+
 		WebDriver driver = b.getDriver();
 		WebDriverWait wait = new WebDriverWait(b.getDriver(), Duration.ofSeconds(25));
 
@@ -158,10 +158,10 @@ public class FlightSearchSteps {
 	    );
 
 	    String actual = error.getText();
-	    String expected = "From & To airports cannot be the same";
+	    String expected = "From  To airports cannot be the same";
 
 	    System.out.println("Error text: " + actual);
 
-	    Assert.assertEquals(actual.trim(), expected.trim());
+	    Assert.assertEquals(actual, expected);
 	}
 }

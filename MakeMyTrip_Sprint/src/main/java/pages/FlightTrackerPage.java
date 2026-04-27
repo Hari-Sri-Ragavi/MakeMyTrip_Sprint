@@ -3,6 +3,8 @@ package pages;
 import java.time.Duration;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
 public class FlightTrackerPage {
@@ -13,16 +15,20 @@ public class FlightTrackerPage {
     public FlightTrackerPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        PageFactory.initElements(driver, this);
     }
 
-    private final By flightTrackerOption = By.xpath("//span[text()='Flight Tracker']");
-    private final By flightNumberInput = By.xpath("//input[@placeholder='E.g. 6E413']");
-    private final By searchButton = By.xpath("//button[contains(@class,'search')]");
+    @FindBy(xpath = "//span[text()='Flight Tracker']")
+    private WebElement flightTrackerOption;
 
+    @FindBy(xpath = "//input[@placeholder='E.g. 6E413']")
+    private WebElement flightNumberInput;
 
+    @FindBy(xpath = "//button[contains(@class,'search')]")
+    private WebElement searchButton;
 
-    private final By noFlightMessage =
-            By.xpath("//*[contains(text(),'Flights could not be found')]");
+    @FindBy(xpath = "//*[contains(text(),'Flights could not be found')]")
+    private WebElement noFlightMessage;
 
     public void clickFlightTrackerOption() {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(flightTrackerOption));
@@ -31,7 +37,7 @@ public class FlightTrackerPage {
     }
 
     public void waitForFlightTrackerPopup() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(flightNumberInput));
+    	wait.until(ExpectedConditions.visibilityOf(flightNumberInput));
     }
 
     public void enterFlightNumber(String flightNumber) {
@@ -50,23 +56,22 @@ public class FlightTrackerPage {
     public String getDerivedFlightStatus() {
 
         try {
-          
-            wait.until(driver ->
-                    driver.findElements(noFlightMessage).size() > 0 ||
-                    driver.getPageSource().length() > 0
-            );
 
-          
-            if (!driver.findElements(noFlightMessage).isEmpty()) {
-                System.out.println("Invalid Flight detected");
+            // wait for either result or timeout
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.visibilityOf(searchButton),
+                    ExpectedConditions.visibilityOf(noFlightMessage)
+            ));
+
+            if (noFlightMessage.isDisplayed()) {
+                
                 return "Invalid Flight";
             }
 
-            
-            System.out.println(" Valid Flight (no error message)");
             return "Valid Flight";
 
         } catch (Exception e) {
+
             System.out.println("Fallback check");
 
             String page = driver.getPageSource().toLowerCase();
