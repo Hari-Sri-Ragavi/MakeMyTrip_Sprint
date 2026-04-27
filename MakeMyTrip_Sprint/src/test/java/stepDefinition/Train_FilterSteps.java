@@ -12,12 +12,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import util.ExcelReader;
 
-public class trainFilterSteps {
+public class Train_FilterSteps {
 
     private BaseClass b;
     private Pages pages;
 
-    public trainFilterSteps(BaseClass b, Pages pages) {
+    public Train_FilterSteps(BaseClass b, Pages pages) {
         this.b = b;
         this.pages = pages;
     }

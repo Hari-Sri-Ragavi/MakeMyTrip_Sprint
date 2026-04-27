@@ -8,12 +8,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class trainSearchStepDefinition {
+public class Train_SearchStepDefinition {
 
     private BaseClass b;
     private Pages pages;
 
-    public trainSearchStepDefinition(BaseClass b,Pages pages) {
+    public Train_SearchStepDefinition(BaseClass b,Pages pages) {
         this.b = b;
         this.pages = pages;
         System.out.println("Driver in StepDef: " + b.getDriver());

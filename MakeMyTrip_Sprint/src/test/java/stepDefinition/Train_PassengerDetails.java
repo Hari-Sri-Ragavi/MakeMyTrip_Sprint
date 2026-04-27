@@ -8,12 +8,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class trainPassengerDetails {
+public class Train_PassengerDetails {
 
     private Pages pages;
 
 
-    public trainPassengerDetails(BaseClass b, Pages pages) {
+    public Train_PassengerDetails(BaseClass b, Pages pages) {
         this.pages = pages;
     }
 
