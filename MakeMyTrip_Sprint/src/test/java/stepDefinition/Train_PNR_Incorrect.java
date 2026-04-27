@@ -8,11 +8,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class trainPNRIncorrect {
+public class Train_PNR_Incorrect {
 
     private Pages pages;
     
-    public trainPNRIncorrect(BaseClass b, Pages pages) {
+    public Train_PNR_Incorrect(BaseClass b, Pages pages) {
        
         this.pages = pages;
     }

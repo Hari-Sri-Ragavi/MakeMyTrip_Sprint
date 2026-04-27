@@ -12,12 +12,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class trainPnr {
+public class Train_PNR {
 
     private BaseClass b;
     private Pages pages;
 
-    public trainPnr(BaseClass b, Pages pages) {
+    public Train_PNR(BaseClass b, Pages pages) {
         this.b = b;
         this.pages = pages;
         System.out.println("Driver in StepDef: " + b.getDriver());
