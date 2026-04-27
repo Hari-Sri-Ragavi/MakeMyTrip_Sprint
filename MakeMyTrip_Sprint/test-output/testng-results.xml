@@ -1,61 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="1" failed="1" skipped="0">
+<testng-results ignored="0" total="8" passed="4" failed="4" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-18T12:56:56 IST" name="Default suite" finished-at="2026-04-18T13:01:23 IST" duration-ms="266714">
+  <suite started-at="2026-04-26T19:26:18 IST" name="Default suite" finished-at="2026-04-26T19:29:06 IST" duration-ms="168246">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@c0c2f8d]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-04-18T12:56:56 IST" name="Default test" finished-at="2026-04-18T13:01:23 IST" duration-ms="266714">
+    <test started-at="2026-04-26T19:26:18 IST" name="Default test" finished-at="2026-04-26T19:29:06 IST" duration-ms="168246">
       <class name="testRunner.TestRunnerIO">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:testRunner.TestRunnerIO@77f1baf5]" started-at="2026-04-18T12:56:56 IST" name="setUpClass" finished-at="2026-04-18T12:56:57 IST" duration-ms="579" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:18 IST" name="setUpClass" finished-at="2026-04-26T19:26:19 IST" duration-ms="1297" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@3daa82be]]>
+                <![CDATA[org.testng.TestRunner@5d332969]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@77f1baf5]" started-at="2026-04-18T12:56:57 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-18T12:58:07 IST" duration-ms="70179" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:33 IST" duration-ms="133981" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Search Outstation One Way cab"]]>
+                <![CDATA["Add Insurance for the HP is added"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["MakeMyTrip Cab Booking - Outstation One Way"]]>
+                <![CDATA["AddOns For the Package HP"]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.NoSuchWindowException">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:37 IST" duration-ms="137564" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Apply filters and select HoneyMoon package without flight"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Filter and Select HPs"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:07 IST" duration-ms="108225" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Search for HP with valid details"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Holiday Package Search"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:07 IST" duration-ms="107940" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["View and edit Activity Info"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Update the Package Activity"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=147.0.7727.56)
-Build info: version: '4.38.0', revision: '6b412e825c*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [dbcc7296e271543bec462efaf6cb8b56, findElement {value=//span[@data-cy='bookTrainTickets'], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.56, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\monic\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58919}, goog:processID: 26324, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58919/devtoo..., se:cdpVersion: 147.0.7727.56, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: dbcc7296e271543bec462efaf6cb8b56]]>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: [[FirefoxDriver: firefox on windows (d641208d-0fe5-4352-a15b-e3e303d821f4)] -> xpath: //div[@id = 'modalpopup']//span[@class='close closeIcon']] (tried for 10 second(s) with 500 milliseconds interval)]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=147.0.7727.56)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: [[FirefoxDriver: firefox on windows (d641208d-0fe5-4352-a15b-e3e303d821f4)] -> xpath: //div[@id = 'modalpopup']//span[@class='close closeIcon']] (tried for 10 second(s) with 500 milliseconds interval)
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at util.WebDriver_Utility.waitTillElementIsClckable(WebDriver_Utility.java:123)
+at stepDefinition.HP_TS3_ActivityTest.user_applies_all_required_filters(HP_TS3_ActivityTest.java:80)
+at ✽.User applies all required filters(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS3_PackageActivity.feature:7)
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: //div[@id = 'modalpopup']//span[@class='close closeIcon']
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [dbcc7296e271543bec462efaf6cb8b56, findElement {value=//span[@data-cy='bookTrainTickets'], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.56, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\monic\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58919}, goog:processID: 26324, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58919/devtoo..., se:cdpVersion: 147.0.7727.56, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: dbcc7296e271543bec462efaf6cb8b56
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [d641208d-0fe5-4352-a15b-e3e303d821f4, findElement {value=//div[@id = 'modalpopup']//span[@class='close closeIcon'], using=xpath}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 20488, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Session ID: d641208d-0fe5-4352-a15b-e3e303d821f4
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -74,57 +119,190 @@ at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:3
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
 at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at jdk.proxy2/jdk.proxy2.$Proxy23.click(Unknown Source)
-at pages.TrainSearchPage.clickBookTrainTickets(TrainSearchPage.java:55)
-at stepDefinition.trainSearchStepDefinition.the_user_is_on_the_train_booking_page(trainSearchStepDefinition.java:23)
-at ✽.the user is on the train booking page(file:///C:/Users/monic/git/MakeMyTrip_Sprint1/MakeMyTrip_Sprint/./src/test/resources/features/trainSearch.feature:4)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@77f1baf5]" started-at="2026-04-18T12:58:08 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-18T13:01:23 IST" duration-ms="195114" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify filter and Review Booking page"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["MakeMyTrip Cab Booking - Outstation One Way"]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //span[text()='Hatchback'] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '4.38.0', revision: '6b412e825c*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 149.0.2, moz:accessibilityChecks: false, moz:buildID: 20260403140140, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 30808, moz:profile: C:\Users\vilva\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
-Session ID: df061424-8335-4fd8-8aeb-7153559f5ad1]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //span[text()='Hatchback'] (tried for 20 second(s) with 500 milliseconds interval)
-Build info: version: '4.38.0', revision: '6b412e825c*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 149.0.2, moz:accessibilityChecks: false, moz:buildID: 20260403140140, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 30808, moz:profile: C:\Users\vilva\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
-Session ID: df061424-8335-4fd8-8aeb-7153559f5ad1
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-at pages.SelectCabpage.clickFilter(SelectCabpage.java:27)
-at stepDefinition.CabBookingSteps.user_filters_cab_type_from_the_filter_panel(CabBookingSteps.java:85)
-at ✽.user filters cab type from the filter panel(file:///C:/Users/vilva/git/MakeMyTrip_Sprint/MakeMyTrip_Sprint/src/test/resources/features/CabTripDetails.feature:18)
+at jdk.proxy2/jdk.proxy2.$Proxy27.isDisplayed(Unknown Source)
+at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:308)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:294)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:291)
+at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:662)
+at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:658)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+... 3 more
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:testRunner.TestRunnerIO@77f1baf5]" started-at="2026-04-18T13:01:23 IST" name="tearDownClass" finished-at="2026-04-18T13:01:23 IST" duration-ms="22" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:29:06 IST" duration-ms="166752" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Add all the Traveller with valid fields"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Add Traveller Details  in HP"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:06 IST" duration-ms="107413" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Book for the HP with valid details"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Booking HP for the vacation"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.StaleElementReferenceException">
+            <message>
+              <![CDATA[The element with the reference d1672bd4-eb8e-4b59-aef7-820e09700524 is stale; either its node document is not the active document, or it is no longer connected to the DOM
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [037a74f1-2caa-48bf-bbe9-ffee53504f0f, clickElement {id=d1672bd4-eb8e-4b59-aef7-820e09700524}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 37712, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (037a74f1-2caa-48bf-bbe9-ffee53504f0f)] -> xpath: //div[. = 'Goa']]
+Session ID: 037a74f1-2caa-48bf-bbe9-ffee53504f0f]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.StaleElementReferenceException: The element with the reference d1672bd4-eb8e-4b59-aef7-820e09700524 is stale; either its node document is not the active document, or it is no longer connected to the DOM
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [037a74f1-2caa-48bf-bbe9-ffee53504f0f, clickElement {id=d1672bd4-eb8e-4b59-aef7-820e09700524}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 37712, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (037a74f1-2caa-48bf-bbe9-ffee53504f0f)] -> xpath: //div[. = 'Goa']]
+Session ID: 037a74f1-2caa-48bf-bbe9-ffee53504f0f
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+at pages.HPHomePage.clickToCity(HPHomePage.java:119)
+at stepDefinition.HP_TS6_HPBookingTest.user_searches_hp_activities(HP_TS6_HPBookingTest.java:65)
+at ✽.User searches HP activities as "Chennai" "Goa" "Thu May 21 2026"(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS6_HPBooking.feature:20)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:27 IST" duration-ms="127921" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Book for the HP with invalid details"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Booking HP for the vacation"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [false] but found [true]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [false] but found [true]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+at org.testng.Assert.assertEquals(Assert.java:132)
+at org.testng.Assert.assertEquals(Assert.java:1079)
+at org.testng.Assert.assertEquals(Assert.java:1043)
+at org.testng.Assert.assertEquals(Assert.java:1089)
+at stepDefinition.HP_TS6_HPBookingTest.payment_should_be_proceed(HP_TS6_HPBookingTest.java:240)
+at ✽.Payment should be proceed(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS6_HPBooking.feature:10)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:26:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-26T19:28:19 IST" duration-ms="120140" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Book for the HP with invalid details"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Booking HP for the vacation"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.ElementClickInterceptedException">
+            <message>
+              <![CDATA[Element <span class="primaryBtn fill btn btn-primary btn-sm borderRadius8 padding13  "> is not clickable at point (1213,709) because another element <div class="closeBtnWrapper"> obscures it
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [ff151913-b0a7-4cbc-b555-b9e3bbfd5487, clickElement {id=02e993c2-af0b-46bd-bd55-54f9bf3ea621}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 9960, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (ff151913-b0a7-4cbc-b555-b9e3bbfd5487)] -> xpath: //span[. = 'PROCEED TO PAYMENT']]
+Session ID: ff151913-b0a7-4cbc-b555-b9e3bbfd5487]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.ElementClickInterceptedException: Element <span class="primaryBtn fill btn btn-primary btn-sm borderRadius8 padding13  "> is not clickable at point (1213,709) because another element <div class="closeBtnWrapper"> obscures it
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [ff151913-b0a7-4cbc-b555-b9e3bbfd5487, clickElement {id=02e993c2-af0b-46bd-bd55-54f9bf3ea621}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 150.0, moz:accessibilityChecks: false, moz:buildID: 20260415192539, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 9960, moz:profile: C:\Users\monic\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (ff151913-b0a7-4cbc-b555-b9e3bbfd5487)] -> xpath: //span[. = 'PROCEED TO PAYMENT']]
+Session ID: ff151913-b0a7-4cbc-b555-b9e3bbfd5487
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+at jdk.internal.reflect.GeneratedMethodAccessor117.invoke(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+at jdk.proxy2/jdk.proxy2.$Proxy27.click(Unknown Source)
+at pages.HPActivityInfoPage.clickProceedPayment(HPActivityInfoPage.java:119)
+at stepDefinition.HP_TS6_HPBookingTest.user_proceeds_to_review_page(HP_TS6_HPBookingTest.java:156)
+at ✽.User proceeds to Review page(file:///C:/Users/monic/git/MakeMyTrip_Sprint3/MakeMyTrip_Sprint/./src/test/resources/features/HP_TS6_HPBooking.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.ElementClickInterceptedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:testRunner.TestRunnerIO@20d525]" started-at="2026-04-26T19:29:06 IST" name="tearDownClass" finished-at="2026-04-26T19:29:06 IST" duration-ms="104" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

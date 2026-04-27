@@ -92,6 +92,7 @@ public class hook {
 
         } finally {
             b.quitDriver();
+            
             ExtentReportUtility.flushReport();
         }
     }

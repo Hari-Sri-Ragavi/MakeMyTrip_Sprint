@@ -137,7 +137,7 @@ public class WebDriver_Utility {
 	
 	//takes time to apply filters
 	public void waitForLoaderToDisappear() {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
 
 	    wait.until(driver -> {
 	        try {
