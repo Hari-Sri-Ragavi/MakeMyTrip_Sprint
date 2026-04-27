@@ -1,3 +1,4 @@
+@HotelModule
 Feature: Hotel Search
 
 Scenario Outline: Verify hotel booking with multiple data

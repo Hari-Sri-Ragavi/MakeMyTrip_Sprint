@@ -1,3 +1,4 @@
+@HolidayPackageModule
 Feature: Add Traveller Details  in HP
 
 @HP

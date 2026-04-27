@@ -1,3 +1,4 @@
+@HolidayPackageModule
 Feature:Booking HP for the vacation 
   
   @HP

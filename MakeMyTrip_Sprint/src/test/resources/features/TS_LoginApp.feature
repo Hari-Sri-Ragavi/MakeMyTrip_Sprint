@@ -1,3 +1,4 @@
+@LoginModule
 Feature: Login MakeMyTrip Application
 
 Scenario:Login with valid creditionals

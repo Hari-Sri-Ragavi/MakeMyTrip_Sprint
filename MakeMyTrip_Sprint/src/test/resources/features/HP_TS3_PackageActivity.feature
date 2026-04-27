@@ -1,3 +1,4 @@
+@HolidayPackageModule
 Feature:Update the Package Activity
  
  @HP

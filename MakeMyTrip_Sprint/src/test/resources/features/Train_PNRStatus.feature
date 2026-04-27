@@ -1,3 +1,4 @@
+@TrainModule
 Feature: PNR Status Enquiry
 
   As a user

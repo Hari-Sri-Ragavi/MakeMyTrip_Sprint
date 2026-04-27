@@ -1,3 +1,4 @@
+@HotelModule
 Feature: Hotel Booking Flow
 
 Scenario: Complete hotel booking flow

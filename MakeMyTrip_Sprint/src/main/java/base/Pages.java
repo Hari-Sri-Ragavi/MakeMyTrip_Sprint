@@ -3,7 +3,7 @@ package base;
 import org.openqa.selenium.WebDriver;
 
 import pages.*;
-import util.AllFunctionalities;
+//import util.AllFunctionalities;
 
 public class Pages {
 	
@@ -38,7 +38,7 @@ public class Pages {
 	 public SelectGiftCardPage sgcp;
 	 public  SelectOccasionPage sop;
 	 public  GiftCardBookingPage gbp;
-	 public AllFunctionalities all;
+	 
 	 
 	
 
@@ -71,7 +71,7 @@ public class Pages {
 		sgcp=new SelectGiftCardPage(driver);
 		sop=new SelectOccasionPage(driver);
 		gbp=new GiftCardBookingPage(driver);
-		all=new AllFunctionalities(driver);
+		
 		
 		//train
 		tp = new TrainSearchPage(driver);

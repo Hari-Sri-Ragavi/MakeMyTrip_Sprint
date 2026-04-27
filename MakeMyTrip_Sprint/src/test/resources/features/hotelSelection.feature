@@ -1,3 +1,4 @@
+@HotelModule
 Feature: Hotel Selection using Filters
 
 Scenario Outline: Verify user can select hotel using filters
