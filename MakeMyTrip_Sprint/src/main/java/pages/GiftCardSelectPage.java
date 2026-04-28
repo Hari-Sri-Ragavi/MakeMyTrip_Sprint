@@ -6,41 +6,58 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.*;
 
-public class SelectGiftCardPage {
+public class GiftCardSelectPage {
 
     WebDriver driver;
     WebDriverWait wait;
 
-    public SelectGiftCardPage(WebDriver driver) {
+    public GiftCardSelectPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(driver, this);
     }
 
+    // ---------------- WEBELEMENTS ----------------
+
     @FindBy(xpath = "//li[contains(@class,'menu_More')]")
-    WebElement moreMenu;
+    private WebElement moreMenu;
 
     @FindBy(xpath = "//a[@data-cy='submenu_Giftcards']")
-    WebElement giftCards;
+    private WebElement giftCards;
 
-    // ----------HOVER (MANDATORY for MMT UI)-------------
+
+    // ---------------- GETTERS ----------------
+
+    public WebElement getMoreMenu() {
+        return moreMenu;
+    }
+
+    public WebElement getGiftCards() {
+        return giftCards;
+    }
+
+
+    // ---------------- ACTION METHODS ----------------
+
+    // Hover on More menu
     public void hoverMoreMenu() {
 
         Actions actions = new Actions(driver);
 
         WebElement more = wait.until(
-                ExpectedConditions.visibilityOf(moreMenu)
+                ExpectedConditions.visibilityOf(getMoreMenu())
         );
 
         actions.moveToElement(more).pause(Duration.ofSeconds(1)).perform();
 
         System.out.println("More menu hovered");
     }
-//----------To click the giftcard---------------------------
+
+    // Click Gift Cards
     public void clickGiftCards() {
 
         WebElement gift = wait.until(
-                ExpectedConditions.elementToBeClickable(giftCards)
+                ExpectedConditions.elementToBeClickable(getGiftCards())
         );
 
         gift.click();
@@ -48,7 +65,9 @@ public class SelectGiftCardPage {
         System.out.println("Gift Cards clicked");
     }
 
+    // Verify page opened
     public boolean isGiftPageOpened() {
+
         return driver.getCurrentUrl().contains("gift-cards");
     }
 }

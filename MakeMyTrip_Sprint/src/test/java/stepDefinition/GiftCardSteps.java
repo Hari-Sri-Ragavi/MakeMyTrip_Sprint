@@ -16,15 +16,6 @@ public class GiftCardSteps {
         this.b = b;
         this.pages = pages;
     }
-
-    @Given("user opens the browser for gift cards")
-    public void user_opens_browser_for_gift_cards() {
-
-       this. pages.loadAllPages(b.getDriver());
-
-        System.out.println("Pages initialized");
-    }
-
     @When("user clicks on the More menu from the results page")
     public void user_clicks_on_more_menu_from_results_page() {
 
@@ -104,6 +95,7 @@ public class GiftCardSteps {
         pages.gbp.enterMobile();
         System.out.println("Mobile entered");
     }
+    //verify user entered details using Assert
     @Then("verify entered")
     public void verify_entered() {
 

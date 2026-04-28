@@ -7,49 +7,64 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.*;
 
-public class SelectOccasionPage {
+public class GiftcardSelectOccasionPage {
 
     WebDriver driver;
     WebDriverWait wait;
 
-    public SelectOccasionPage(WebDriver driver) {
+    public GiftcardSelectOccasionPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(driver, this);
     }
 
+    // ---------------- WEBELEMENTS ----------------
+
     @FindBy(xpath = "//p[text()='Occasions']")
-    WebElement occasionTab;
+    private WebElement occasionTab;
 
     @FindBy(xpath = "//h3[contains(@class,'lato-black')]")
-    List<WebElement> giftCardsList;
+    private List<WebElement> giftCardsList;
 
-    // click occasion
+
+    // ---------------- GETTERS ----------------
+
+    public WebElement getOccasionTab() {
+        return occasionTab;
+    }
+
+    public List<WebElement> getGiftCardsList() {
+        return giftCardsList;
+    }
+
+
+    // ---------------- ACTION METHODS ----------------
+
+    // Click Occasion tab
     public void selectGiftOccasion() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(occasionTab)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(getOccasionTab())).click();
 
         System.out.println("Occasion selected");
     }
 
-    // -----------------select gift card----------------------------
+    // Select first gift card
     public void selectGiftCard() {
 
         WebDriverWait localWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         List<WebElement> cards = localWait.until(
-                ExpectedConditions.visibilityOfAllElements(giftCardsList)
+                ExpectedConditions.visibilityOfAllElements(getGiftCardsList())
         );
 
         System.out.println("Total gift cards found: " + cards.size());
 
-        // click FIRST card 
-        cards.get(0).click();
+        cards.get(0).click();   //  first card click
 
         System.out.println("Gift card selected");
     }
 
-    // validate detail page
+    // Verify detail page
     public boolean isGiftDetailPageDisplayed() {
 
         return driver.getCurrentUrl().contains("gift-card");

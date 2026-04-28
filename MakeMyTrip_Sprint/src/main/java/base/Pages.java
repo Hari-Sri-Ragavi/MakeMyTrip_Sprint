@@ -32,13 +32,13 @@ public class Pages {
 	//Cab Module
 	 public  Homepagecab hpc;
 	 public  CabPage cp;
-	 public CABS_SearchPage csp;
-	 public SelectCabpage scp;
-	 public  ReviewBookingPage rbp;
-	 public SelectGiftCardPage sgcp;
-	 public  SelectOccasionPage sop;
+	 public CABS_DetailsSelectPage csp;
+	 public CabSearchPage scp;
+	 public  CabReviewBookingPage rbp;
+	 public GiftCardSelectPage sgcp;
+	 public  GiftcardSelectOccasionPage sop;
 	 public  GiftCardBookingPage gbp;
-	 public AllFunctionalities all;
+     public CabAddStopPage cas;
 	 
 	
 
@@ -65,13 +65,14 @@ public class Pages {
 		//cab
 		hpc=new Homepagecab(driver);
 		cp=new CabPage(driver);
-		csp=new CABS_SearchPage(driver);
-		scp=new SelectCabpage(driver);
-		rbp=new ReviewBookingPage(driver);
-		sgcp=new SelectGiftCardPage(driver);
-		sop=new SelectOccasionPage(driver);
+		csp=new CABS_DetailsSelectPage(driver);
+		scp=new CabSearchPage(driver);
+		rbp=new CabReviewBookingPage(driver);
+		sgcp=new GiftCardSelectPage(driver);
+		sop=new GiftcardSelectOccasionPage(driver);
 		gbp=new GiftCardBookingPage(driver);
-		all=new AllFunctionalities(driver);
+		cas=new CabAddStopPage(driver);
+	
 		
 		//train
 		tp = new TrainSearchPage(driver);

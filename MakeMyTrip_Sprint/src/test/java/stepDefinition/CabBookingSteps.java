@@ -23,8 +23,6 @@ import util.ExcelReader;
 public class CabBookingSteps {
 
     private BaseClass b;
-    Homepagecab home;
-    CabPage cab;
     private Pages pages;
 
     public CabBookingSteps(BaseClass b, Pages pages) {
@@ -33,47 +31,25 @@ public class CabBookingSteps {
     }
     @Given("open the browser")
     public void open_the_browser() {
-    home = new Homepagecab(b.getDriver());
-    cab = new CabPage(b.getDriver());
-     //   trip = new TripDetailsPage(b.driver);
-    System.out.println("Browser handled by Hooks");
+     System.out.println("Browser handled by Hooks");
     }
-    // IMPORTANT
+
     @And("load the application URL")
     public void load_the_application_url() {
-       // TL Hook already opened URL
+   
         System.out.println("URL already opened by Hooks");
     }
 
     @And("click on Cabs menu")
     public void click_on_cabs_menu() throws InterruptedException {
-
-//        home.closePopup();
-//        Thread.sleep(2000);// popup close
-        home.clickCabs();    // click cabs
+        pages.hpc.clickCabs(); 
     }
 
     @And("select Outstation trip type")
     public void select_outstation_trip_type() {
-    cab.selectOutstation();
+    	 pages.cp.selectOutstation(); 
     }
-//-------------------------------------------------------------
-///////Without scenario outline////////////////////////////
-//    @When("user enters valid trip details")
-//    public void user_enters_valid_trip_details() throws EncryptedDocumentException, IOException {
-//    	//ExcelReader excel=new ExcelReader();
-//    	//excel.loadExcelFile("./src/test/resources/testdata/MakeMyTripExcelData.xlsx", "Cab");
-//   	 //String fromStation = excel.getDataFromSingleCell(7, 0) ; // Row 1 Col 0
-//       // pages.csp.selectFromCity(fromStation);
-//    	
-//
-//       //pages.csp.selectFromCity("Delhi");
-//      // pages.csp.selectToCity("Bangalore");
-//     //// pages.csp.selectDate("June", "1");
-//      // pages.csp.selectDate("May", "9");
-//       //pages.csp.selectClass("First Class");
-//       System.out.println("Trip details entered");
-//    }
+
 //--------------------------------------------------------------
 // using Scenario outline
     @Given("the user enters source for cab {string}")
@@ -88,20 +64,29 @@ public class CabBookingSteps {
         System.out.println("Trip details entered");
         pages.csp.selectTodayDate();
     }
-    //search button
+    @And("user select the date")
+    public void user_select_the_date () {
+    	  pages.csp.selectTodayDate();
+    
+    }
+   
+   //search button
     @When("click on Search button")
     public void click_on_search_button() {
-    	b.getDriver().findElement(By.xpath("//a[contains(@data-cy,'Outstation')]")).click();
-    }
-    @When("user clicks on search cabs button")
-    public void user_clicks_on_search_button() {
+    	 pages.csp.clickSearchButton();
+         System.out.println("Search button clicked");
         
+       
+    }
+    @And("clicks OK if no cabs popup appears to proceed with available cabs")
+    public void clicks_OK_if_no_cabs_popup_appears_to_proceed_with_available_cabs() {
+    	 pages.csp. handlePopup();
+    	
     }
     //Using Assert
    @Then("validate cab results are displayed")
     public void validate_cab_results_are_displayed() {
 
-        //System.out.println("SUCCESS → Navigated to results page");
 
         WebDriverWait wait = new WebDriverWait(b.getDriver(), Duration.ofSeconds(25));
 
@@ -115,7 +100,8 @@ public class CabBookingSteps {
                     By.xpath("//div[contains(@class,'listing')]")
                 )
             );
-
+        
+	        //TRUE ->PASS -> System.out.println() runs ->message NOT shown
             Assert.assertTrue(urlCheck && result.isDisplayed(),
                     "Cab results NOT displayed");
 
@@ -143,43 +129,34 @@ public class CabBookingSteps {
    public void user_selects_a_cab_from_the_filtered_results() {
        pages.scp.clickSelectCab();
    }
-//   @Then("user should be navigated to the Review Booking page")
-//   public void user_should_be_navigated_to_the_review_booking_page() {
-//
-//       String actualUrl = b.getDriver().getCurrentUrl();
-//
-//       if(actualUrl.contains("review")) {
-//           System.out.println("Navigation successful to Review Booking page");
-//       } else {
-//           throw new AssertionError("Not navigated to Review Booking page. URL: " + actualUrl);
-//       }
-//   }
 
-//-------------------SCENARIO 3-----------------------------------------------------------------------------------
    @Then("user should be navigated to the Review Booking page")
    public void user_should_be_navigated_to_the_review_booking_page() {
+     //Without using Assert
+//       if (b.getDriver().getCurrentUrl().contains("review")) {
+//           System.out.println("Review Page opened");
+//       }
 
-       if (b.getDriver().getCurrentUrl().contains("review")) {
-           System.out.println("Review Page opened");
-       }
+	   WebDriverWait wait = new WebDriverWait(b.getDriver(), Duration.ofSeconds(15));
 
-//	   WebDriverWait wait = new WebDriverWait(b.getDriver(), Duration.ofSeconds(15));
-//
-//	    try {
-//	        WebElement element = wait.until(
-//	                ExpectedConditions.visibilityOfElementLocated(
-//	                        By.xpath("//div[contains(text(),'Review')] | //span[contains(text(),'Traveller')] | //button[contains(text(),'Pay')]")
-//	                )
-//	        );
-//
-//	        Assert.assertTrue(element.isDisplayed(), "Summary NOT visible");
-//
-//	        System.out.println("Summary visible");
-//
-//	    } catch (Exception e) {
-//	        Assert.fail("Summary elements not loaded properly");
-//	    }
+	    try {
+	        WebElement element = wait.until(
+	                ExpectedConditions.visibilityOfElementLocated(
+	                        By.xpath("//div[contains(text(),'Review')] | //span[contains(text(),'Traveller')] | //button[contains(text(),'Pay')]")
+	                )
+	        );
+	        
+	        //TRUE ->PASS -> System.out.println() runs ->message NOT shown
+
+	        Assert.assertTrue(element.isDisplayed(), "Summary NOT visible");
+
+	        System.out.println("Summary visible");
+
+	    } catch (Exception e) {
+	        Assert.fail("Summary elements not loaded properly");
+	    }
    }
+ //-------------------SCENARIO 3-----------------------------------------------------------------------------------
 
    @Then("cab booking summary details should be displayed on the Review Booking page")
    public void cab_booking_summary_details_should_be_displayed_on_the_review_booking_page() {
@@ -203,8 +180,8 @@ public class CabBookingSteps {
 //       
 //   }
 //--------------------using Data Table-------------------   
-   @When("user enters mobile numbers in traveller details")
-   public void user_enters_mobile_numbers_in_traveller_details(DataTable dataTable) {
+   @When("user enters invalid mobile numbers in traveller details")
+   public void user_enters_invalid_mobile_numbers_in_traveller_details(DataTable dataTable) {
 	   List<String> mobiles = dataTable.asList();
 
 	    for (String mobile : mobiles) {
@@ -213,8 +190,8 @@ public class CabBookingSteps {
 	    }
    }
   
-   @When("user enters email in traveller details")
-   public void user_enters_email_in_traveller_details(DataTable dataTable) {
+   @When("user enters invalid email in traveller details")
+   public void user_enters_invalid_email_in_traveller_details(DataTable dataTable) {
 
 	    List<String> emails = dataTable.asList();
 
@@ -233,13 +210,13 @@ public class CabBookingSteps {
 
 @Then("verify Shows Error Message")
 public void verify_shows_error_message() {
-	//  String pageText = b.getDriver().getPageSource();
+	  String pageText = b.getDriver().getPageSource();
+	  // failure 
+    Assert.assertTrue(
+	            pageText.contains("correct mobile") || pageText.contains("correct email"),
+	            "Error message NOT displayed"
+    );
 
-//	    Assert.assertTrue(
-//	            pageText.contains("Invalid mobile") || pageText.contains("Invalid email"),
-//	            "Error message NOT displayed"
-//	    );
-//
 	    System.out.println("Error message displayed");
 	    //without assert
 //	   WebDriverWait wait = new WebDriverWait(b.getDriver(), Duration.ofSeconds(15));
@@ -252,38 +229,9 @@ public void verify_shows_error_message() {
 //	    }
 }
 
-  }
+}
 
-//   //--------------------------------SCENARIO 4------------------------------------------------------------------------
-//   @Given("user selects Airport Transfers trip type")
-//   public void user_selects_airport_transfers_trip_type() {
-//       pages.cap.clickAirportTab();
-//   }
-//
-//   @When("user enters the same location in both From and To fields")
-//   public void user_enters_the_same_location_in_both_from_and_to_fields() {
-//	   
-//	   
-////	   pages.csp.selectFromCity("Delhi");
-////       pages.csp.selectToCity("Delhi");
-//       pages.cap.enterSameLocation("Terminal 3, Indira Gandhi International Airport, Delhi");
-//       
-//      // pages.cap.clickSearch();
-//   }}
-//
-//   @Then("system should display an error message")
-//   public void system_should_display_an_error_message() {
-//
-//       String result = pages.cap.getResult();
-//
-//       System.out.println(result);
-//
-//       Assert.assertTrue(
-//           result.toLowerCase().contains("same")
-//           || result.toLowerCase().contains("cab"),
-//           "Validation failed"
-//       );
-//   }
+
 
 
     
