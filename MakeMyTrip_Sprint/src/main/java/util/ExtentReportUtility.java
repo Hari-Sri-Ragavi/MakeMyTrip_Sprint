@@ -11,6 +11,7 @@ public class ExtentReportUtility {
     public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
     public static ThreadLocal<ExtentTest> step = new ThreadLocal<>();
     public static ThreadLocal<Scenario> currentScenario = new ThreadLocal<>();
+    public static ThreadLocal<byte[]> failedStepScreenshot = new ThreadLocal<>();
 
     public static synchronized void initReport(String tester, String browser, String env) {
         if (extent == null) {

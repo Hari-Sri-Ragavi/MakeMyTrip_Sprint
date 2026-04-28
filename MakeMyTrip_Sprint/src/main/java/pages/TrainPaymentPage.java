@@ -18,7 +18,7 @@ public class TrainPaymentPage {
         PageFactory.initElements(driver, this);
     }
      
-     @FindBy(xpath="//h3[text()='Scan to Pay']")
+     @FindBy(xpath="//div[contains(@class,'upiQRLanding__upiQr')]/..//h3[text()='Scan to Pay']")
      private WebElement scanToPayHeader;
      
      public WebElement getScanToPayHeader() {
