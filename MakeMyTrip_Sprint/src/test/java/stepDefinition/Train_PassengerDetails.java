@@ -105,6 +105,6 @@ public class Train_PassengerDetails {
     @Then("the passenger information should be submitted successfully")
     public void the_passenger_information_should_be_submitted_successfully() {
     	pages.tap.clickBookNow();
-Assert.assertTrue(pages.tpp.getScanToPayHeader().isDisplayed());
+Assert.assertTrue(pages.tpp.verifyPaymentPage());
     }
 }

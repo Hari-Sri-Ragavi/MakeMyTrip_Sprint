@@ -19,9 +19,12 @@ Feature: Train Add Multiple Passengers
     And the user navigates to the passenger details screen
     And the user enters multiple passenger details using DataTable
   	| Name    	| Age | Gender    | Berth Preference |
+  	| Ragav 	| 20  | Male       | Side Upper                |
   	| Rita    	| 22  	|Female 	| Lower                 |
-  	| Preethi   	| 24  | Female    | Side Lower          |
-  	| Ragav 	| 20  | Male       | Upper                 |
+  #	| Preethi   	| 24  | Female    | Side Lower          |
+  	| Ragav	| 20  | Male       | Side Upper              |
+  	
+  	
     And the user enters a valid IRCTC username
     And the user provides a valid mobile number and valid email
     And the user selects all additional preferences

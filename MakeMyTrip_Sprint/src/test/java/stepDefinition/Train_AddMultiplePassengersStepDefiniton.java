@@ -156,7 +156,7 @@ public class Train_AddMultiplePassengersStepDefiniton {
 	@Then("the passenger details for all travellers should be submitted successfully")
 	public void the_passenger_details_for_all_travellers_should_be_submitted_successfully() {
 		pages.tap.clickBookNow();
-	Assert.assertTrue(pages.tpp.getScanToPayHeader().isDisplayed());
+	Assert.assertTrue(pages.tpp.verifyPaymentPage());
 	   
 	}
 

@@ -10,6 +10,7 @@ import base.Pages;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import util.Actions_Helper;
+import util.ConfigReader;
 import util.JavaScriptExceutor_Utility;
 import util.WebDriver_Utility;
 
@@ -46,7 +47,10 @@ public class TS_LoginTest {
 			childWindowHandle = ele;
 
 		}
+		
 		b.getDriver().switchTo().window(childWindowHandle);
+		String title=ConfigReader.getProperty("title");
+		System.out.println(title);
 	}
 
 	@When("enters Email ID as {string}")
@@ -79,6 +83,7 @@ public class TS_LoginTest {
 		
 		String verifyText = pages.lp.getVerifyLogin().getText();
 		String text = "T";
+		
 		
 		Assert.assertEquals(verifyText, text);
 		
