@@ -3,7 +3,7 @@ package base;
 import org.openqa.selenium.WebDriver;
 
 import pages.*;
-//import util.AllFunctionalities;
+
 
 public class Pages {
 	
@@ -12,8 +12,8 @@ public class Pages {
 	public HotelSearchPage hsp;
 	
 	//Flight Module
-	public FlightSearchPage fp; // Added
-	public FlightTrackerPage ftp; // Add this
+	public FlightSearchPage fp; 
+	public FlightTrackerPage ftp; 
 	
 	//Train Module
 	public TrainSearchPage tp;

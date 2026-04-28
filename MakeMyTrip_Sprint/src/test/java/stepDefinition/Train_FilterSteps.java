@@ -16,7 +16,7 @@ public class Train_FilterSteps {
 
     private BaseClass b;
     private Pages pages;
-
+    int rowno;
     public Train_FilterSteps(BaseClass b, Pages pages) {
         this.b = b;
         this.pages = pages;
@@ -32,22 +32,23 @@ public class Train_FilterSteps {
     @When("the user provides departure station details from excel")
     public void the_user_provides_departure_station_details_from_excel() throws EncryptedDocumentException, IOException {
     	excel.loadExcelFile("./src/test/resources/testdata/MakeMyTripExcelData.xlsx", "Train");
-    	 String fromStation = excel.getDataFromSingleCell(1, 0) ; // Row 1 Col 0
+    	rowno=1;
+    	 String fromStation = excel.getDataFromSingleCell(rowno, 0) ; 
          pages.tp.selectFromCity(fromStation);
     	
        
     }
     @When("the user provides arrival station details from excel")
     public void the_user_provides_arrival_station_details_from_excel() {
-    	String toStation=excel.getDataFromSingleCell(1, 1);
+    	String toStation=excel.getDataFromSingleCell(rowno, 1);
     	pages.tp.selectToCity(toStation);
         
     }
     @When("the user chooses a journey schedule date from excel")
     public void the_user_chooses_a_journey_schedule_date_from_excel() {
 
-    	String day = excel.getDataFromSingleCell(1, 3).trim();      
-	    String month = excel.getDataFromSingleCell(1, 2).trim(); 
+    	String day = excel.getDataFromSingleCell(rowno, 3).trim();      
+	    String month = excel.getDataFromSingleCell(rowno, 2).trim(); 
 	    pages.tp.selectDate(month, day);
     	}
     	
@@ -55,7 +56,7 @@ public class Train_FilterSteps {
     
     @When("the user picks a preferred coach category from excel")
     public void the_user_picks_a_preferred_coach_category_from_excel() {
-    	String coach=excel.getDataFromSingleCell(1, 4);
+    	String coach=excel.getDataFromSingleCell(rowno,4);
     	pages.tp.selectClass(coach);
         
     }
@@ -71,7 +72,7 @@ public class Train_FilterSteps {
     }
     @When("the user sets an arrival timing filter from excel")
     public void the_user_sets_an_arrival_timing_filter_from_excel() {
-    	 String arrivalTime = excel.getDataFromSingleCell(1, 5);   // 12 AM - 6 AM
+    	 String arrivalTime = excel.getDataFromSingleCell(rowno, 5);   // 12 AM - 6 AM
 
         arrivalTime = arrivalTime
                         .replace(" AM", "am")
@@ -87,7 +88,7 @@ public class Train_FilterSteps {
     }
     @When("the user sets a departure timing filter from excel")
     public void the_user_sets_a_departure_timing_filter_from_excel() {
-    	String departureTime = excel.getDataFromSingleCell(1, 6);   // 12 AM - 6 AM
+    	String departureTime = excel.getDataFromSingleCell(rowno, 6);   // 12 AM - 6 AM
 
         departureTime = departureTime
                         .replace(" AM", "am")
@@ -104,7 +105,7 @@ public class Train_FilterSteps {
     }
     @When("the user applies a train type preference from excel")
     public void the_user_applies_a_train_type_preference_from_excel() {
-    	String trainType=excel.getDataFromSingleCell(1, 7);
+    	String trainType=excel.getDataFromSingleCell(rowno, 7);
   
     	pages.tfp.selectTrainType(trainType);
         

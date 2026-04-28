@@ -3,6 +3,7 @@ package pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -248,12 +249,25 @@ public class TrainAddPassengerPage {
         WebElement berthDropdown = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.xpath("//label[contains(.,'Berth')]/..//p")));
+
         berthDropdown.click();
 
+        By optionPath = By.xpath("//label[contains(text(),'Berth')]/..//ul//li//span[text()='"+berth+"']");
+
         WebElement option = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//li//span[text()='" + berth + "']")));
-        option.click();
+                ExpectedConditions.elementToBeClickable(optionPath));
+
+        //wait.until(ExpectedConditions.elementToBeClickable(option));
+
+        try {
+            option.click();
+        } catch (ElementClickInterceptedException e) {
+
+            // small wait for overlay/animation
+            wait.until(ExpectedConditions.elementToBeClickable(option));
+
+            option.click();
+        }
     }
 
     public void enterIRCTCUsername(String username) {

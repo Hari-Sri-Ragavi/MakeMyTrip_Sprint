@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TrainPaymentPage {
@@ -20,9 +21,18 @@ public class TrainPaymentPage {
      @FindBy(xpath="//h3[text()='Scan to Pay']")
      private WebElement scanToPayHeader;
      
-	 public WebElement getScanToPayHeader() {
-		 return scanToPayHeader;
-	 }
+     public WebElement getScanToPayHeader() {
+         wait.until(ExpectedConditions.visibilityOf(scanToPayHeader));
+         return scanToPayHeader;
+     }
+     
+     public boolean verifyPaymentPage() {
+    	    return wait.until(
+    	        ExpectedConditions.visibilityOf	(
+    	           scanToPayHeader
+    	        )
+    	    ).isDisplayed();
+    	}
 
 	 
      
