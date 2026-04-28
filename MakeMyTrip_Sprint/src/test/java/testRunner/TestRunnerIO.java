@@ -4,7 +4,7 @@ import org.testng.annotations.DataProvider;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = "./src/test/resources/features/Train_Search.feature", 
+@CucumberOptions(features = "./src/test/resources/features/Train_AddMultiplePassenger.feature", 
         glue = { "stepDefinition", "hooks", "listener" }, 
         dryRun = false, 
 		monochrome = false, 

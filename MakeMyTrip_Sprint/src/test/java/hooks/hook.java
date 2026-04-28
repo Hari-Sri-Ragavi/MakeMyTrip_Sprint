@@ -2,14 +2,13 @@ package hooks;
 
 import java.io.IOException;
 import java.time.Duration;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.aventstack.extentreports.MediaEntityBuilder;
+
 
 import base.BaseClass;
 import base.Pages;
@@ -39,10 +38,10 @@ public class hook {
 
         ExtentReportUtility.initReport(tester, browser, env);
 
-        // Store scenario reference for step-level screenshot attachment
+        
         ExtentReportUtility.currentScenario.set(scenario);
 
-        // Create Parent Scenario Node
+        
         ExtentReportUtility.test.set(
                 ExtentReportUtility.extent.createTest(scenario.getName())
         );
@@ -63,8 +62,10 @@ public class hook {
         else {
             b.setDriver(new ChromeDriver());
         }
+        scenario.log("Browser launched");
 
         b.getDriver().manage().window().maximize();
+        scenario.log("Browser maximized");
         b.getDriver().manage().timeouts()
                 .implicitlyWait(Duration.ofSeconds(timeout));
         b.getDriver().get(url + "/flights");
@@ -81,20 +82,14 @@ public class hook {
     public void tearDown(Scenario scenario) {
         try {
             if (scenario.isFailed()) {
-                
-               
-                byte[] screenshotBytes = ((TakesScreenshot) b.getDriver())
-                        .getScreenshotAs(OutputType.BYTES);
-                scenario.attach(screenshotBytes, "image/png", scenario.getName());
 
               
-                String base64Screenshot = ((TakesScreenshot) b.getDriver())
-                        .getScreenshotAs(OutputType.BASE64);
-                ExtentReportUtility.test.get()
-                        .fail("Scenario Failed",
-                                MediaEntityBuilder
-                                    .createScreenCaptureFromBase64String(base64Screenshot)
-                                    .build());
+                byte[] screenshotBytes = ExtentReportUtility.failedStepScreenshot.get();
+                if (screenshotBytes != null) {
+                    scenario.attach(screenshotBytes, "image/png", "Failed Step Screenshot");
+                }
+
+                ExtentReportUtility.test.get().fail("Scenario Failed");
 
             } else {
                 ExtentReportUtility.test.get().pass("Scenario Passed");
@@ -102,6 +97,7 @@ public class hook {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            ExtentReportUtility.failedStepScreenshot.remove(); 
             b.quitDriver();
             ExtentReportUtility.flushReport();
             ExtentReportUtility.currentScenario.remove();

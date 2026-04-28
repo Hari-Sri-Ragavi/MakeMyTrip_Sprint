@@ -1,6 +1,5 @@
 package util;
 
-import io.cucumber.java.Scenario;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.*;
 import org.openqa.selenium.OutputType;
@@ -35,21 +34,19 @@ public class ExtentCucumberListener implements ConcurrentEventListener {
                     ExtentReportUtility.step.get().pass("Step Passed");
                 }
                 else if (status.name().equals("FAILED")) {
-                    // Capture screenshot file for Extent Report
+                   
                     String path = new ScreenshotUtility()
                             .capture(BaseClass.getCurrentDriver(), "FailedStep");
 
                     ExtentReportUtility.step.get()
                             .fail(event.getResult().getError())
                             .addScreenCaptureFromPath(path);
+ 
+                    byte[] screenshotBytes = ((TakesScreenshot) BaseClass.getCurrentDriver())
+                            .getScreenshotAs(OutputType.BYTES);
+                    ExtentReportUtility.failedStepScreenshot.set(screenshotBytes);
 
-                    // Attach screenshot bytes to Cucumber Report
-                    Scenario scenario = ExtentReportUtility.currentScenario.get();
-                    if (scenario != null) {
-                        byte[] screenshotBytes = ((TakesScreenshot) BaseClass.getCurrentDriver())
-                                .getScreenshotAs(OutputType.BYTES);
-                        scenario.attach(screenshotBytes, "image/png", "Failed Step Screenshot");
-                    }
+                   
                 }
                 else if (status.name().equals("SKIPPED")) {
                     ExtentReportUtility.step.get().skip("Step Skipped");
